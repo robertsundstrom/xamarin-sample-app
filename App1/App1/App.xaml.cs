@@ -1,9 +1,7 @@
-﻿using System;
+﻿using App1.Services;
+
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using App1.Services;
-using App1.Views;
 
 namespace App1
 {
@@ -21,9 +19,14 @@ namespace App1
             InitializeComponent();
 
             if (UseMockDataStore)
+            {
                 DependencyService.Register<MockDataStore>();
+            }
             else
+            {
                 DependencyService.Register<AzureDataStore>();
+            }
+
             MainPage = new AppShell();
         }
 

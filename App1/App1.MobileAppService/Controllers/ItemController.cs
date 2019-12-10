@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using App1.Models;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using App1.Models;
 
 namespace App1.Controllers
 {
@@ -30,10 +32,12 @@ namespace App1.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Item> GetItem(string id)
         {
-            Item item = ItemRepository.Get(id);
+            var item = ItemRepository.Get(id);
 
             if (item == null)
+            {
                 return NotFound();
+            }
 
             return item;
         }
@@ -68,10 +72,12 @@ namespace App1.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Delete(string id)
         {
-            Item item = ItemRepository.Remove(id);
+            var item = ItemRepository.Remove(id);
 
             if (item == null)
+            {
                 return NotFound();
+            }
 
             return Ok();
         }

@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-using Xamarin.Forms;
-
 using App1.Models;
 using App1.Views;
+
+using Xamarin.Forms;
 
 namespace App1.ViewModels
 {
@@ -29,10 +29,12 @@ namespace App1.ViewModels
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
+            {
                 return;
+            }
 
             IsBusy = true;
 

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 using App1.Models;
 
 namespace App1.ViewModels

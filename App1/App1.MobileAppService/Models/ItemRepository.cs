@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace App1.Models
 {
     public class ItemRepository : IItemRepository
     {
-        private static ConcurrentDictionary<string, Item> items =
+        private static readonly ConcurrentDictionary<string, Item> items =
             new ConcurrentDictionary<string, Item>();
 
         public ItemRepository()
@@ -29,13 +29,13 @@ namespace App1.Models
 
         public Item Get(string id)
         {
-            items.TryGetValue(id, out Item item);
+            items.TryGetValue(id, out var item);
             return item;
         }
 
         public Item Remove(string id)
         {
-            items.TryRemove(id, out Item item);
+            items.TryRemove(id, out var item);
             return item;
         }
 

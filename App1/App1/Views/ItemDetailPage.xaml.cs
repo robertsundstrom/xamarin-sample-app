@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using System.ComponentModel;
 
 using App1.Models;
 using App1.ViewModels;
+
+using Xamarin.Forms;
 
 namespace App1.Views
 {
@@ -13,7 +12,7 @@ namespace App1.Views
     [DesignTimeVisible(false)]
     public partial class ItemDetailPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        private readonly ItemDetailViewModel viewModel;
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {

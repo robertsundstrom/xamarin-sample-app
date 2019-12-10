@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Xamarin.Essentials;
+
 using App1.Models;
+
+using Newtonsoft.Json;
+
+using Xamarin.Essentials;
 
 namespace App1.Services
 {
     public class AzureDataStore : IDataStore<Item>
     {
-        HttpClient client;
-        IEnumerable<Item> items;
+        private readonly HttpClient client;
+        private IEnumerable<Item> items;
 
         public AzureDataStore()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            client = new HttpClient
+            {
+                BaseAddress = new Uri($"{App.AzureBackendUrl}/")
+            };
 
             items = new List<Item>();
         }
 
-        bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
+        private bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && IsConnected)
@@ -48,7 +53,9 @@ namespace App1.Services
         public async Task<bool> AddItemAsync(Item item)
         {
             if (item == null || !IsConnected)
+            {
                 return false;
+            }
 
             var serializedItem = JsonConvert.SerializeObject(item);
 
@@ -60,7 +67,9 @@ namespace App1.Services
         public async Task<bool> UpdateItemAsync(Item item)
         {
             if (item == null || item.Id == null || !IsConnected)
+            {
                 return false;
+            }
 
             var serializedItem = JsonConvert.SerializeObject(item);
             var buffer = Encoding.UTF8.GetBytes(serializedItem);
@@ -74,7 +83,9 @@ namespace App1.Services
         public async Task<bool> DeleteItemAsync(string id)
         {
             if (string.IsNullOrEmpty(id) && !IsConnected)
+            {
                 return false;
+            }
 
             var response = await client.DeleteAsync($"api/item/{id}");
 

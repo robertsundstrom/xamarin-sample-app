@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace App1.Models
+﻿namespace App1.Models
 {
     public class Item
     {
