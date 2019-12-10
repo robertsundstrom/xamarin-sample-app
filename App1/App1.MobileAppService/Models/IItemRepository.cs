@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace App1.Models
 {
     public interface IItemRepository
     {
-        void Add(Item item);
-        void Update(Item item);
-        Item Remove(string key);
-        Item Get(string id);
-        IEnumerable<Item> GetAll();
+        Task AddAsync(Item item);
+        Task UpdateAsync(Item item);
+        Task<Item> RemoveAsync(string key);
+        Task<Item> GetAsync(string id);
+        Task<IEnumerable<Item>> GetAllAsync();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using App1.Models;
 
@@ -22,17 +23,18 @@ namespace App1.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<Item>> List()
+        public async Task<ActionResult<IEnumerable<Item>>> List()
         {
-            return ItemRepository.GetAll().ToList();
+            var items = await ItemRepository.GetAllAsync();
+            return items.ToList();
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Item> GetItem(string id)
+        public async Task<ActionResult<Item>> GetItem(string id)
         {
-            var item = ItemRepository.Get(id);
+            var item = await ItemRepository.GetAsync(id);
 
             if (item == null)
             {
@@ -45,20 +47,20 @@ namespace App1.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Item> Create([FromBody]Item item)
+        public async Task<ActionResult<Item>> Create([FromBody]Item item)
         {
-            ItemRepository.Add(item);
+            await ItemRepository.AddAsync(item);
             return CreatedAtAction(nameof(GetItem), new { item.Id }, item);
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Edit([FromBody] Item item)
+        public async Task<ActionResult> Edit([FromBody] Item item)
         {
             try
             {
-                ItemRepository.Update(item);
+                await ItemRepository.UpdateAsync(item);
             }
             catch (Exception)
             {
@@ -70,9 +72,9 @@ namespace App1.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            var item = ItemRepository.Remove(id);
+            var item = await ItemRepository.RemoveAsync(id);
 
             if (item == null)
             {
