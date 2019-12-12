@@ -1,56 +1,51 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+
+using App1.MobileAppService.Data;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace App1.Models
 {
     public class ItemRepository : IItemRepository
     {
-        private static readonly ConcurrentDictionary<string, Item> items =
-            new ConcurrentDictionary<string, Item>();
+        private readonly ApplicationContext db;
 
-        public ItemRepository()
+        public ItemRepository(ApplicationContext db)
         {
-            Add(new Item { Id = Guid.NewGuid().ToString(), Text = "Item 1", Description = "This is an item description." });
-            Add(new Item { Id = Guid.NewGuid().ToString(), Text = "Item 2", Description = "This is an item description." });
-            Add(new Item { Id = Guid.NewGuid().ToString(), Text = "Item 3", Description = "This is an item description." });
+            this.db = db;
         }
 
-        public Task<IEnumerable<Item>> GetAllAsync()
+        public async Task<IEnumerable<Item>> GetAllAsync()
         {
-            return Task.FromResult(items.Values.AsEnumerable());
+            return await db.Items.ToListAsync();
         }
 
-        public Task AddAsync(Item item)
-        {
-            Add(item);
-            return Task.CompletedTask;
-        }
-
-        public Task<Item> GetAsync(string id)
-        {
-            items.TryGetValue(id, out var item);
-            return Task.FromResult(item);
-        }
-
-        public Task<Item> RemoveAsync(string id)
-        {
-            items.TryRemove(id, out var item);
-            return Task.FromResult(item);
-        }
-
-        public Task UpdateAsync(Item item)
-        {
-            items[item.Id] = item;
-            return Task.CompletedTask;
-        }
-
-        private static void Add(Item item)
+        public async Task AddAsync(Item item)
         {
             item.Id = Guid.NewGuid().ToString();
-            items[item.Id] = item;
+            await db.Items.AddAsync(item);
+            await db.SaveChangesAsync();
+        }
+
+        public async Task<Item> GetAsync(string id)
+        {
+            return await db.Items.FindAsync(id);
+        }
+
+        public async Task<Item> RemoveAsync(string id)
+        {
+            var item = await db.Items.FindAsync(id);
+            db.Items.Remove(item);
+            await db.SaveChangesAsync();
+            return item;
+        }
+
+        public async Task UpdateAsync(Item item)
+        {
+            db.Items.Update(item);
+            await db.SaveChangesAsync();
         }
     }
 }
