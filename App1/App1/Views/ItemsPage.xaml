@@ -14,29 +14,29 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <ListView
-            x:Name="ItemsListView"
-            CachingStrategy="RecycleElement"
-            HasUnevenRows="true"
-            IsPullToRefreshEnabled="true"
-            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-            ItemSelected="OnItemSelected"
-            ItemsSource="{Binding Items}"
-            RefreshCommand="{Binding LoadItemsCommand}"
-            VerticalOptions="FillAndExpand">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Fourth Item</x:String>
-                    <x:String>Fifth Item</x:String>
-                    <x:String>Sixth Item</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
+        <RefreshView
+            Command="{Binding LoadItemsCommand}"
+            IsEnabled="true"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+            <CollectionView
+                x:Name="ItemsListView"
+                ItemSizingStrategy="MeasureFirstItem"
+                ItemsSource="{Binding Items}"
+                SelectionChanged="OnItemSelected"
+                SelectionMode="Single"
+                VerticalOptions="FillAndExpand">
+                <d:ListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>First Item</x:String>
+                        <x:String>Second Item</x:String>
+                        <x:String>Third Item</x:String>
+                        <x:String>Fourth Item</x:String>
+                        <x:String>Fifth Item</x:String>
+                        <x:String>Sixth Item</x:String>
+                    </x:Array>
+                </d:ListView.ItemsSource>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
                         <StackLayout Padding="10">
                             <Label
                                 d:Text="{Binding .}"
@@ -51,10 +51,10 @@
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 Text="{Binding Description}" />
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
 
 </ContentPage>

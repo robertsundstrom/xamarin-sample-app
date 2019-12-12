@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 
 using App1.Models;
 using App1.ViewModels;
@@ -22,9 +23,9 @@ namespace App1.Views
             BindingContext = viewModel = new ItemsViewModel();
         }
 
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
-            var item = args.SelectedItem as Item;
+            var item = e.CurrentSelection.FirstOrDefault() as Item;
             if (item == null)
             {
                 return;
