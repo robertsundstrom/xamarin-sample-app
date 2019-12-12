@@ -9,8 +9,16 @@
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="Cancel_Clicked" Text="Cancel" />
-        <ToolbarItem Clicked="Save_Clicked" Text="Save" />
+        <ToolbarItem
+            Clicked="Save_Clicked"
+            Order="Primary"
+            Priority="0"
+            Text="Save" />
+        <ToolbarItem
+            Clicked="Cancel_Clicked"
+            Order="Primary"
+            Priority="1"
+            Text="Cancel" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
