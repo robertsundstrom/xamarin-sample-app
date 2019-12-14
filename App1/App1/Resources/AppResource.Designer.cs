@@ -61,11 +61,11 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to App1.
+        ///   Looks up a localized string similar to Sample App.
         /// </summary>
-        public static string AppTitle {
+        public static string AppName {
             get {
-                return ResourceManager.GetString("AppTitle", resourceCulture);
+                return ResourceManager.GetString("AppName", resourceCulture);
             }
         }
         

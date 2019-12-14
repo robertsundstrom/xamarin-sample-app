@@ -7,7 +7,7 @@
     xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:validation="clr-namespace:App1.Behaviors"
-    Title="{markup:Translate SectionNewItemTitle}"
+    Title="{markup:LocalizedString SectionNewItemTitle}"
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
@@ -17,32 +17,32 @@
             IsEnabled="{Binding CanSubmit}"
             Order="Primary"
             Priority="0"
-            Text="{markup:Translate SectionNewItemSaveButton}" />
+            Text="{markup:LocalizedString SectionNewItemSaveButton}" />
         <ToolbarItem
             Clicked="Cancel_Clicked"
             Order="Primary"
             Priority="1"
-            Text="{markup:Translate SectionNewItemCancelButton}" />
+            Text="{markup:LocalizedString SectionNewItemCancelButton}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout Padding="15" Spacing="20">
-            <Label FontSize="Medium" Text="{markup:Translate SectionNewItemTextLabel}" />
+            <Label FontSize="Medium" Text="{markup:LocalizedString SectionNewItemTextLabel}" />
             <Entry
                 d:Text="Item name"
                 FontSize="Small"
-                Placeholder="{markup:Translate SectionNewItemTextPlaceholder}"
+                Placeholder="{markup:LocalizedString SectionNewItemTextPlaceholder}"
                 Text="{Binding Text}">
                 <Entry.Behaviors>
                     <validation:EntryValidationBehavior PropertyName="Text" />
                 </Entry.Behaviors>
             </Entry>
-            <Label FontSize="Medium" Text="{markup:Translate SectionNewItemDescriptionLabel}" />
+            <Label FontSize="Medium" Text="{markup:LocalizedString SectionNewItemDescriptionLabel}" />
             <Editor
                 Margin="0"
                 d:Text="Item description"
                 FontSize="Small"
-                Placeholder="{markup:Translate SectionNewItemDescriptionPlaceholder}"
+                Placeholder="{markup:LocalizedString SectionNewItemDescriptionPlaceholder}"
                 Text="{Binding Description}">
                 <Editor.Behaviors>
                     <validation:EntryValidationBehavior PropertyName="Description" />

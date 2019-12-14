@@ -11,18 +11,18 @@ using Xamarin.Forms.Xaml;
 namespace App1.Markup
 {
     [ContentProperty("Text")]
-    public class TranslateExtension : IMarkupExtension
+    public class LocalizedStringExtension : IMarkupExtension
     {
         private static readonly bool _initialized = false;
         private static readonly ILocalizationService _localizationService = null;
 
-        static TranslateExtension()
+        static LocalizedStringExtension()
         {
             _initialized = true;
             _localizationService = App.ServiceProvider.GetRequiredService<ILocalizationService>();
         }
 
-        public TranslateExtension()
+        public LocalizedStringExtension()
         {
 
         }
@@ -33,7 +33,7 @@ namespace App1.Markup
         {
             if (!_initialized)
             {
-                throw new NullReferenceException($"{nameof(TranslateExtension)} can not be called as it was not initialized. You must call Init() first.");
+                throw new NullReferenceException($"{nameof(LocalizedStringExtension)} can not be called as it was not initialized. You must call Init() first.");
             }
 
             if (Text == null)

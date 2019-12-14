@@ -11,16 +11,16 @@
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="Delete_Clicked" Text="{markup:Translate SectionItemDetailsDeleteButton}" />
+        <ToolbarItem Clicked="Delete_Clicked" Text="{markup:LocalizedString SectionItemDetailsDeleteButton}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="15" Spacing="20">
-        <Label FontSize="Medium" Text="{markup:Translate SectionItemDetailsTextLabel}" />
+        <Label FontSize="Medium" Text="{markup:LocalizedString SectionItemDetailsTextLabel}" />
         <Label
             d:Text="Item name"
             FontSize="Small"
             Text="{Binding Item.Text}" />
-        <Label FontSize="Medium" Text="{markup:Translate SectionItemDetailsDescriptionLabel}" />
+        <Label FontSize="Medium" Text="{markup:LocalizedString SectionItemDetailsDescriptionLabel}" />
         <Label
             d:Text="Item description"
             FontSize="Small"

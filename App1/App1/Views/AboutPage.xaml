@@ -7,7 +7,7 @@
     xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:App1.ViewModels"
-    Title="{markup:Translate SectionAboutTitle}"
+    Title="{markup:LocalizedString SectionAboutTitle}"
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     BindingContext="{Binding ., Source={x:Static vm:ViewModelLocator.About}}"
     mc:Ignorable="d">
@@ -53,7 +53,7 @@
                                 <Span
                                     FontAttributes="Bold"
                                     FontSize="22"
-                                    Text="AppName" />
+                                    Text="{markup:LocalizedString AppName}" />
                                 <Span Text=" " />
                                 <Span ForegroundColor="{StaticResource LightTextColor}" Text="1.0" />
                             </FormattedString.Spans>
@@ -89,7 +89,7 @@
                     Margin="0,10,0,0"
                     BackgroundColor="{StaticResource AccentColor}"
                     Command="{Binding OpenWebCommand}"
-                    Text="{markup:Translate SectionAboutLearnMoreButton}"
+                    Text="{markup:LocalizedString SectionAboutLearnMoreButton}"
                     TextColor="White" />
             </StackLayout>
         </ScrollView>
