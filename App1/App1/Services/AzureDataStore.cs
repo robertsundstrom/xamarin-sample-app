@@ -17,12 +17,9 @@ namespace App1.Services
         private readonly HttpClient client;
         private IEnumerable<Item> items;
 
-        public AzureDataStore()
+        public AzureDataStore(HttpClient client)
         {
-            client = new HttpClient
-            {
-                BaseAddress = new Uri($"{App.AzureBackendUrl}/")
-            };
+            this.client = client;
 
             items = new List<Item>();
         }

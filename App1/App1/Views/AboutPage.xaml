@@ -8,11 +8,8 @@
     xmlns:vm="clr-namespace:App1.ViewModels"
     Title="{Binding Title}"
     BackgroundColor="{DynamicResource PageBackgroundColor}"
+    BindingContext="{Binding ., Source={x:Static vm:ViewModelLocator.About}}"
     mc:Ignorable="d">
-
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <ResourceDictionary>

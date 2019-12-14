@@ -14,13 +14,11 @@ namespace App1.Views
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
-        private readonly ItemsViewModel viewModel;
+        private ItemsViewModel ViewModel => (ItemsViewModel)BindingContext;
 
         public ItemsPage()
         {
             InitializeComponent();
-
-            BindingContext = viewModel = new ItemsViewModel();
         }
 
         private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
@@ -46,9 +44,9 @@ namespace App1.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (ViewModel.Items.Count == 0)
             {
-                viewModel.LoadItemsCommand.Execute(null);
+                ViewModel.LoadItemsCommand.Execute(null);
             }
         }
     }

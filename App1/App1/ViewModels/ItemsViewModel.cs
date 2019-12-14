@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 
 using App1.Models;
+using App1.Services;
 using App1.Views;
 
 using Xamarin.Forms;
@@ -12,28 +13,34 @@ namespace App1.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
+        private readonly IDataStore<Item> dataStore;
+        private readonly INativeCalls nativeCalls;
+
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(IDataStore<Item> dataStore, INativeCalls nativeCalls)
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
+            this.dataStore = dataStore;
+            this.nativeCalls = nativeCalls;
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Item;
                 try
                 {
-                    if (await DataStore.AddItemAsync(newItem))
+                    if (await dataStore.AddItemAsync(newItem))
                     {
                         Items.Add(newItem);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    Debug.WriteLine(ex);
+                    nativeCalls.OpenToast(ex.Message);
                 }
             });
 
@@ -43,14 +50,15 @@ namespace App1.ViewModels
 
                 try
                 {
-                    if (await DataStore.DeleteItemAsync(newItem.Id))
+                    if (await dataStore.DeleteItemAsync(newItem.Id))
                     {
                         Items.Remove(newItem);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    Debug.WriteLine(ex);
+                    nativeCalls.OpenToast(ex.Message);
                 }
             });
         }
@@ -67,7 +75,7 @@ namespace App1.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await dataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -76,6 +84,7 @@ namespace App1.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                nativeCalls.OpenToast(ex.Message);
             }
             finally
             {
