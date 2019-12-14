@@ -9,6 +9,10 @@
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="Delete_Clicked" Text="Delete" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout Padding="15" Spacing="20">
         <Label FontSize="Medium" Text="Text:" />
         <Label

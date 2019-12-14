@@ -34,5 +34,14 @@ namespace App1.Views
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
         }
+
+        private async void Delete_Clicked(object sender, System.EventArgs e)
+        {
+            if (await DisplayAlert("Are you sure you want to delete this item?", string.Empty, "Yes", "No"))
+            {
+                MessagingCenter.Send(this, "DeleteItem", viewModel.Item);
+                await Navigation.PopAsync();
+            }
+        }
     }
 }

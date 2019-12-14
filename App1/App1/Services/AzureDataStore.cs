@@ -60,6 +60,10 @@ namespace App1.Services
             var serializedItem = JsonConvert.SerializeObject(item);
 
             var response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+            var str = await response.Content.ReadAsStringAsync();
+            var responseItem = JsonConvert.DeserializeObject<Item>(str);
+
+            item.Id = responseItem.Id;
 
             return response.IsSuccessStatusCode;
         }
