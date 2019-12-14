@@ -6,6 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:validation="clr-namespace:App1.Behaviors"
     Title="{markup:Translate SectionNewItemTitle}"
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
@@ -13,6 +14,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Clicked="Save_Clicked"
+            IsEnabled="{Binding CanSubmit}"
             Order="Primary"
             Priority="0"
             Text="{markup:Translate SectionNewItemSaveButton}" />
@@ -30,14 +32,22 @@
                 d:Text="Item name"
                 FontSize="Small"
                 Placeholder="{markup:Translate SectionNewItemTextPlaceholder}"
-                Text="{Binding Item.Text}" />
+                Text="{Binding Text}">
+                <Entry.Behaviors>
+                    <validation:EntryValidationBehavior PropertyName="Text" />
+                </Entry.Behaviors>
+            </Entry>
             <Label FontSize="Medium" Text="{markup:Translate SectionNewItemDescriptionLabel}" />
             <Editor
                 Margin="0"
                 d:Text="Item description"
                 FontSize="Small"
                 Placeholder="{markup:Translate SectionNewItemDescriptionPlaceholder}"
-                Text="{Binding Item.Description}" />
+                Text="{Binding Description}">
+                <Editor.Behaviors>
+                    <validation:EntryValidationBehavior PropertyName="Description" />
+                </Editor.Behaviors>
+            </Editor>
         </StackLayout>
     </ContentPage.Content>
 

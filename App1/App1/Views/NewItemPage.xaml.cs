@@ -2,6 +2,7 @@
 using System.ComponentModel;
 
 using App1.Models;
+using App1.ViewModels;
 
 using Xamarin.Forms;
 
@@ -12,21 +13,27 @@ namespace App1.Views
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        private NewItemViewModel ViewModel => (NewItemViewModel)BindingContext;
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item();
-
-            BindingContext = this;
+            BindingContext = new NewItemViewModel();
         }
 
         private async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
-            await Navigation.PopModalAsync();
+            if (ViewModel.CanSubmit)
+            {
+                var newItem = new Item()
+                {
+                    Text = ViewModel.Text,
+                    Description = ViewModel.Description
+                };
+                MessagingCenter.Send(this, "AddItem", newItem);
+                await Navigation.PopModalAsync();
+            }
         }
 
         private async void Cancel_Clicked(object sender, EventArgs e)
