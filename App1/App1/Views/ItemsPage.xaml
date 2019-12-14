@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="BrowseItemsPage"
     Title="{Binding Title}"
+    BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
@@ -20,6 +21,7 @@
             IsRefreshing="{Binding IsBusy, Mode=OneWay}">
             <CollectionView
                 x:Name="ItemsListView"
+                BackgroundColor="Transparent"
                 ItemSizingStrategy="MeasureFirstItem"
                 ItemsSource="{Binding Items}"
                 SelectionChanged="OnItemSelected"

@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:App1.ViewModels"
     Title="{Binding Title}"
+    BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
     <ContentPage.BindingContext>

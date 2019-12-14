@@ -6,5 +6,8 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Application.Resources />
+    <Application.Resources>
+        <ResourceDictionary Source="Styles/CoreStyle.xaml" />
+        <ResourceDictionary Source="Styles/LightTheme.xaml" />
+    </Application.Resources>
 </Application>
