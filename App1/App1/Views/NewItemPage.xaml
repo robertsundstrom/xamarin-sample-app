@@ -4,8 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="New Item"
+    Title="{markup:Translate SectionNewItemTitle}"
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
@@ -14,26 +15,28 @@
             Clicked="Save_Clicked"
             Order="Primary"
             Priority="0"
-            Text="Save" />
+            Text="{markup:Translate SectionNewItemSaveButton}" />
         <ToolbarItem
             Clicked="Cancel_Clicked"
             Order="Primary"
             Priority="1"
-            Text="Cancel" />
+            Text="{markup:Translate SectionNewItemCancelButton}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout Padding="15" Spacing="20">
-            <Label FontSize="Medium" Text="Text" />
+            <Label FontSize="Medium" Text="{markup:Translate SectionNewItemTextLabel}" />
             <Entry
                 d:Text="Item name"
                 FontSize="Small"
+                Placeholder="{markup:Translate SectionNewItemTextPlaceholder}"
                 Text="{Binding Item.Text}" />
-            <Label FontSize="Medium" Text="Description" />
+            <Label FontSize="Medium" Text="{markup:Translate SectionNewItemDescriptionLabel}" />
             <Editor
                 Margin="0"
                 d:Text="Item description"
                 FontSize="Small"
+                Placeholder="{markup:Translate SectionNewItemDescriptionPlaceholder}"
                 Text="{Binding Item.Description}" />
         </StackLayout>
     </ContentPage.Content>

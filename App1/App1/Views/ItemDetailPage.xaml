@@ -4,26 +4,27 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding Title}"
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="Delete_Clicked" Text="Delete" />
+        <ToolbarItem Clicked="Delete_Clicked" Text="{markup:Translate SectionItemDetailsDeleteButton}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="15" Spacing="20">
-        <Label FontSize="Medium" Text="Text:" />
+        <Label FontSize="Medium" Text="{markup:Translate SectionItemDetailsTextLabel}" />
         <Label
             d:Text="Item name"
             FontSize="Small"
             Text="{Binding Item.Text}" />
-        <Label FontSize="Medium" Text="Description:" />
+        <Label FontSize="Medium" Text="{markup:Translate SectionItemDetailsDescriptionLabel}" />
         <Label
             d:Text="Item description"
             FontSize="Small"
             Text="{Binding Item.Description}" />
     </StackLayout>
-
+    
 </ContentPage>

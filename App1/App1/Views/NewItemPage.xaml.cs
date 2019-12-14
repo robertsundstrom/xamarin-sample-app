@@ -18,11 +18,7 @@ namespace App1.Views
         {
             InitializeComponent();
 
-            Item = new Item
-            {
-                Text = "Item name",
-                Description = "This is an item description."
-            };
+            Item = new Item();
 
             BindingContext = this;
         }

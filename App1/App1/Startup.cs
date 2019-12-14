@@ -59,6 +59,7 @@ namespace App1
             services.AddTransient<AppShell>();
             services.AddSingleton<App>();
 
+            services.AddTransient<ILocalizationService, LocalizationService>();
 
             if (App.UseMockDataStore)
             {

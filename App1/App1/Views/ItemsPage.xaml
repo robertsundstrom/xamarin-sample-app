@@ -4,16 +4,17 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:App1.ViewModels"
     x:Name="BrowseItemsPage"
-    Title="{Binding Title}"
+    Title="{markup:Translate SectionBrowseTitle}"
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     BindingContext="{Binding ., Source={x:Static vm:ViewModelLocator.Items}}"
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="AddItem_Clicked" Text="Add" />
+        <ToolbarItem Clicked="AddItem_Clicked" Text="{markup:Translate SectionBrowseAddButton}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>

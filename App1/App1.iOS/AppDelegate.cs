@@ -1,4 +1,9 @@
 ﻿
+using System.Reflection;
+using System.Resources;
+
+using App1.Resources;
+
 using Foundation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +38,8 @@ namespace App1.iOS
         private void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
             services.AddSingleton<INativeCalls, NativeCalls>();
+
+            services.AddSingleton<IResourceContainer>(sp => new ResourceContainer(new ResourceManager(ResourceContainer.ResourceId, typeof(AppResource).GetTypeInfo().Assembly), new Localize()));
         }
     }
 }
