@@ -3,7 +3,7 @@ using App1.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace App1.DataAnnotations
+namespace App1.Validation
 {
     public sealed class RequiredAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute
     {

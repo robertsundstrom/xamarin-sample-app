@@ -1,5 +1,5 @@
-﻿using App1.DataAnnotations;
-using App1.Resources;
+﻿using App1.Resources;
+using App1.Validation;
 
 namespace App1.ViewModels
 {
