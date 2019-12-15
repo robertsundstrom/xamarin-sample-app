@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Sample App</value>
   </data>
+  <data name="RequiredInputFieldXMessageText" xml:space="preserve">
+    <value>{0} es obligatorio.</value>
+  </data>
   <data name="SectionAboutLearnMoreButton" xml:space="preserve">
     <value>Aprenda más</value>
   </data>

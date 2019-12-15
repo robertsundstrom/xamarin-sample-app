@@ -70,6 +70,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The field {0} is required..
+        /// </summary>
+        public static string RequiredInputFieldXMessageText {
+            get {
+                return ResourceManager.GetString("RequiredInputFieldXMessageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Learn more.
         /// </summary>
         public static string SectionAboutLearnMoreButton {

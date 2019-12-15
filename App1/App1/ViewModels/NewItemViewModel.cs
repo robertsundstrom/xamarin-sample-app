@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App1.DataAnnotations;
 
 namespace App1.ViewModels
 {
@@ -8,7 +8,7 @@ namespace App1.ViewModels
         private string description;
         private bool isClean = true;
 
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredInputFieldXMessageText")]
         public string Text
         {
             get => text;
