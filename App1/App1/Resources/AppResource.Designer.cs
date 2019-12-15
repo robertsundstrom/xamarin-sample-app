@@ -115,6 +115,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string SectionBrowseItemDeleteButton {
+            get {
+                return ResourceManager.GetString("SectionBrowseItemDeleteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse.
         /// </summary>
         public static string SectionBrowseTitle {

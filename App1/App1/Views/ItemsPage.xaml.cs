@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 
 using App1.Models;
+using App1.Services;
 using App1.ViewModels;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using Xamarin.Forms;
 
@@ -14,16 +16,20 @@ namespace App1.Views
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
+        private readonly ILocalizationService localizationService;
+
         private ItemsViewModel ViewModel => (ItemsViewModel)BindingContext;
 
         public ItemsPage()
         {
             InitializeComponent();
+
+            localizationService = App.ServiceProvider.GetRequiredService<ILocalizationService>();
         }
 
-        private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = e.CurrentSelection.FirstOrDefault() as Item;
+            var item = args.SelectedItem as Item;
             if (item == null)
             {
                 return;
@@ -47,6 +53,20 @@ namespace App1.Views
             if (ViewModel.Items.Count == 0)
             {
                 ViewModel.LoadItemsCommand.Execute(null);
+            }
+        }
+
+        private async void DeleteItem_Clicked(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+
+            if (await DisplayAlert(
+                localizationService.GetString("SectionItemDetailsDeleteConfirmationText"),
+                string.Empty,
+                localizationService.GetString("SectionItemDetailsDeleteConfirmationTextYes"),
+                localizationService.GetString("SectionItemDetailsDeleteConfirmationTextNo")))
+            {
+                MessagingCenter.Send(this, "DeleteItem", (Item)mi.CommandParameter);
             }
         }
     }

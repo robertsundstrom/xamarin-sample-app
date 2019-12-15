@@ -24,7 +24,7 @@ namespace App1.Views
 
             BindingContext = this.viewModel = viewModel;
 
-            localizationService = App.ServiceProvider.GetService<ILocalizationService>();
+            localizationService = App.ServiceProvider.GetRequiredService<ILocalizationService>();
         }
 
         public ItemDetailPage()

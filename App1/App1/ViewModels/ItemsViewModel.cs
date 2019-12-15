@@ -44,23 +44,33 @@ namespace App1.ViewModels
                 }
             });
 
+            MessagingCenter.Subscribe<ItemsPage, Item>(this, "DeleteItem", async (obj, item) =>
+            {
+                await DeleteItem(dataStore, nativeCalls, item);
+            });
+
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", async (obj, item) =>
             {
-                var newItem = item as Item;
-
-                try
-                {
-                    if (await dataStore.DeleteItemAsync(newItem.Id))
-                    {
-                        Items.Remove(newItem);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    nativeCalls.OpenToast(ex.Message);
-                }
+                await DeleteItem(dataStore, nativeCalls, item);
             });
+        }
+
+        private async Task DeleteItem(IDataStore<Item> dataStore, INativeCalls nativeCalls, Item item)
+        {
+            var newItem = item as Item;
+
+            try
+            {
+                if (await dataStore.DeleteItemAsync(newItem.Id))
+                {
+                    Items.Remove(newItem);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                nativeCalls.OpenToast(ex.Message);
+            }
         }
 
         private async Task ExecuteLoadItemsCommand()

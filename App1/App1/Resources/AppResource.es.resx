@@ -135,6 +135,9 @@
   <data name="SectionBrowseAddButton" xml:space="preserve">
     <value>Añadir</value>
   </data>
+  <data name="SectionBrowseItemDeleteButton" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
   <data name="SectionBrowseTitle" xml:space="preserve">
     <value>Navegar</value>
   </data>
