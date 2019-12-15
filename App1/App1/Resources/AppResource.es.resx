@@ -145,7 +145,7 @@
     <value>Eliminar</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationText" xml:space="preserve">
-    <value>¿Estás seguro que quieres eliminar este objeto?</value>
+    <value>¿Estás seguro de que quieres eliminar este objeto?</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationTextNo" xml:space="preserve">
     <value>No</value>
