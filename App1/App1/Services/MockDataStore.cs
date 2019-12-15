@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using App1.Models;
+using App1.MobileAppService.Client;
 
 namespace App1.Services
 {

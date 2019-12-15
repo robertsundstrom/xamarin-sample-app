@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-using App1.Models;
-
-using Newtonsoft.Json;
+using App1.MobileAppService.Client;
 
 using Xamarin.Essentials;
 
@@ -14,10 +10,10 @@ namespace App1.Services
 {
     public class AzureDataStore : IDataStore<Item>
     {
-        private readonly HttpClient client;
-        private IEnumerable<Item> items;
+        private readonly IItemClient client;
+        private readonly IEnumerable<Item> items;
 
-        public AzureDataStore(HttpClient client)
+        public AzureDataStore(IItemClient client)
         {
             this.client = client;
 
@@ -29,8 +25,7 @@ namespace App1.Services
         {
             if (forceRefresh && IsConnected)
             {
-                var json = await client.GetStringAsync($"api/item");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+                return await client.ListAsync();
             }
 
             return items;
@@ -40,8 +35,7 @@ namespace App1.Services
         {
             if (id != null && IsConnected)
             {
-                var json = await client.GetStringAsync($"api/item/{id}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
+                return await client.GetItemAsync(id);
             }
 
             throw new Exception("Item was not found");
@@ -54,15 +48,11 @@ namespace App1.Services
                 return false;
             }
 
-            var serializedItem = JsonConvert.SerializeObject(item);
-
-            var response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
-            var str = await response.Content.ReadAsStringAsync();
-            var responseItem = JsonConvert.DeserializeObject<Item>(str);
+            var responseItem = await client.CreateAsync(item);
 
             item.Id = responseItem.Id;
 
-            return response.IsSuccessStatusCode;
+            return true;
         }
 
         public async Task<bool> UpdateItemAsync(Item item)
@@ -72,13 +62,9 @@ namespace App1.Services
                 return false;
             }
 
-            var serializedItem = JsonConvert.SerializeObject(item);
-            var buffer = Encoding.UTF8.GetBytes(serializedItem);
-            var byteContent = new ByteArrayContent(buffer);
+            await client.EditAsync(item);
 
-            var response = await client.PutAsync(new Uri($"api/item/{item.Id}"), byteContent);
-
-            return response.IsSuccessStatusCode;
+            return true;
         }
 
         public async Task<bool> DeleteItemAsync(string id)
@@ -88,9 +74,9 @@ namespace App1.Services
                 return false;
             }
 
-            var response = await client.DeleteAsync($"api/item/{id}");
+            await client.DeleteAsync(id);
 
-            return response.IsSuccessStatusCode;
+            return true;
         }
     }
 }

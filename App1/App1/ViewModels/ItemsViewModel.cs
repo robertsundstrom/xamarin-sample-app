@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-using App1.Models;
+using App1.MobileAppService.Client;
 using App1.Services;
 using App1.Views;
 

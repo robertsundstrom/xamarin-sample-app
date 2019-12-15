@@ -1,5 +1,5 @@
 ﻿
-using App1.Models;
+using App1.MobileAppService.Client;
 
 namespace App1.ViewModels
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-using App1.Models;
+using App1.MobileAppService.Client;
 using App1.Services;
 using App1.ViewModels;
 

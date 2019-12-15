@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\App1.MobileAppService.Client\App1.MobileAppService.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources\AppResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

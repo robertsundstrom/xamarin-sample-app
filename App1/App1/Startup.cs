@@ -2,7 +2,7 @@
 using System.IO;
 
 using App1.Helpers;
-using App1.Models;
+using App1.MobileAppService.Client;
 using App1.Services;
 using App1.ViewModels;
 
@@ -67,10 +67,12 @@ namespace App1
             }
             else
             {
-                services.AddHttpClient<IDataStore<Item>, AzureDataStore>(client =>
+                services.AddHttpClient<IItemClient, ItemClient>(client =>
                 {
                     client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
                 });
+
+                services.AddSingleton<IDataStore<Item>, AzureDataStore>();
             }
 
 #if DEBUG

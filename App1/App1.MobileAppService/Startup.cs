@@ -22,10 +22,13 @@ namespace App1.MobileAppService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson();
 
             services.AddDbContext<ApplicationContext>
               (options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSwaggerDocument();
 
             services.AddScoped<IItemRepository, ItemRepository>();
         }
@@ -44,6 +47,9 @@ namespace App1.MobileAppService
             {
                 endpoints.MapControllers();
             });
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
         }
     }
 }
