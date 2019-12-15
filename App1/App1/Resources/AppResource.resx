@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Sample App</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="RequiredInputFieldXMessageText" xml:space="preserve">
     <value>The field {0} is required.</value>
   </data>
@@ -173,5 +176,8 @@
   </data>
   <data name="SectionNewItemTitle" xml:space="preserve">
     <value>New Item</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
   </data>
 </root>
