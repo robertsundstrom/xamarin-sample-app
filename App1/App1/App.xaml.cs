@@ -16,13 +16,13 @@ namespace App1
             DeviceInfo.Platform == DevicePlatform.Android ? "https://192.168.1.83:5001" : "https://192.168.1.83:5001";
         public static bool UseMockDataStore = false;
 
-        public static IServiceProvider ServiceProvider { get; internal set; }
+        public static IServiceProvider? ServiceProvider { get; internal set; }
 
         public App()
         {
             InitializeComponent();
 
-            MainPage = ServiceProvider.GetService<AppShell>();
+            MainPage = ServiceProvider.GetRequiredService<AppShell>();
         }
 
         protected override void OnStart()

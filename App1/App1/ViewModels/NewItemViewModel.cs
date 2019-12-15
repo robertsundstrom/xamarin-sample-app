@@ -5,12 +5,12 @@ namespace App1.ViewModels
 {
     internal class NewItemViewModel : BaseViewModel
     {
-        private string text;
-        private string description;
+        private string? text;
+        private string? description;
         private bool isClean = true;
 
         [Required(ErrorMessageResourceName = nameof(AppResource.RequiredInputFieldXMessageText))]
-        public string Text
+        public string? Text
         {
             get => text;
             set
@@ -23,7 +23,7 @@ namespace App1.ViewModels
         }
 
         [Required]
-        public string Description
+        public string? Description
         {
             get => description;
             set

@@ -44,7 +44,7 @@ namespace App1.Services
                 return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
             }
 
-            return null;
+            throw new Exception("Item was not found");
         }
 
         public async Task<bool> AddItemAsync(Item item)

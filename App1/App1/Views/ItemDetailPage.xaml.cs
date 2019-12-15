@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 
-using App1.Models;
 using App1.Services;
 using App1.ViewModels;
 
@@ -25,20 +24,6 @@ namespace App1.Views
             BindingContext = this.viewModel = viewModel;
 
             localizationService = App.ServiceProvider.GetRequiredService<ILocalizationService>();
-        }
-
-        public ItemDetailPage()
-        {
-            InitializeComponent();
-
-            var item = new Item
-            {
-                Text = "Item 1",
-                Description = "This is an item description."
-            };
-
-            viewModel = new ItemDetailViewModel(item);
-            BindingContext = viewModel;
         }
 
         private async void Delete_Clicked(object sender, System.EventArgs e)

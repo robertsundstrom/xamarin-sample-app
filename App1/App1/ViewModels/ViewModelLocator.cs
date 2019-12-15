@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
 
-using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace App1.ViewModels
 {
     internal static class ViewModelLocator
     {
-        public static IServiceProvider ServiceProvider { get; internal set; }
+        public static IServiceProvider? ServiceProvider { get; internal set; }
 
         public static ItemsViewModel Items => ServiceProvider.GetRequiredService<ItemsViewModel>();
 

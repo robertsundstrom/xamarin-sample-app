@@ -13,32 +13,27 @@ namespace App1.Markup
     [ContentProperty("Text")]
     public class LocalizedStringExtension : IMarkupExtension
     {
-        private static readonly bool _initialized = false;
-        private static readonly ILocalizationService _localizationService = null;
+        private static readonly ILocalizationService _localizationService;
 
         static LocalizedStringExtension()
         {
-            _initialized = true;
             _localizationService = App.ServiceProvider.GetRequiredService<ILocalizationService>();
         }
 
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public LocalizedStringExtension()
+#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         {
-
+            // Default constructor is required by Xamarin.Forms
         }
 
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (!_initialized)
-            {
-                throw new NullReferenceException($"{nameof(LocalizedStringExtension)} can not be called as it was not initialized. You must call Init() first.");
-            }
-
             if (Text == null)
             {
-                return "";
+                return string.Empty;
             }
 
             var translation = _localizationService.GetString(Text);

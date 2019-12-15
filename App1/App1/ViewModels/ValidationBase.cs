@@ -64,8 +64,13 @@ namespace App1.ViewModels
             return !HasErrors;
         }
 
-        protected virtual void ValidateProperty(object value, [CallerMemberName] string propertyName = null)
+        protected virtual void ValidateProperty<T>(T value, [CallerMemberName] string? propertyName = null)
         {
+            if (propertyName == null)
+            {
+                throw new NullReferenceException(nameof(propertyName));
+            }
+
             var validationContext = new ValidationContext(this, null)
             {
                 MemberName = propertyName

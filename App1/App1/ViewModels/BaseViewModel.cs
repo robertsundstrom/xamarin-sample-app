@@ -9,8 +9,8 @@
             set => SetProperty(ref isBusy, value);
         }
 
-        private string title = string.Empty;
-        public string Title
+        private string? title = string.Empty;
+        public string? Title
         {
             get => title;
             set => SetProperty(ref title, value);

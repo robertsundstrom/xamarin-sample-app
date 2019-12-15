@@ -9,8 +9,8 @@ namespace App1.Validation
 {
     public class InputViewValidationBehavior : Behavior<InputView>
     {
-        private InputView _associatedObject;
-        private Label validationLabel;
+        private InputView? _associatedObject;
+        private Label? validationLabel;
 
         protected override void OnAttachedTo(InputView bindable)
         {
@@ -23,7 +23,7 @@ namespace App1.Validation
 
         private void _associatedObject_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (_associatedObject.BindingContext is ValidationBase source && !string.IsNullOrEmpty(PropertyName))
+            if (_associatedObject?.BindingContext is ValidationBase source && !string.IsNullOrEmpty(PropertyName))
             {
                 Process(source);
             }
@@ -31,6 +31,11 @@ namespace App1.Validation
 
         private void Process(ValidationBase source)
         {
+            if (_associatedObject == null || validationLabel == null)
+            {
+                return;
+            }
+
             if (validationLabel == null)
             {
                 validationLabel = new Label
@@ -41,11 +46,14 @@ namespace App1.Validation
                 };
 
                 var layout = _associatedObject.Parent as StackLayout;
-                var index = layout.Children.IndexOf(_associatedObject);
-                layout.Children.Insert(index + 1, validationLabel);
+                if (layout != null)
+                {
+                    var index = layout.Children.IndexOf(_associatedObject);
+                    layout.Children.Insert(index + 1, validationLabel);
+                }
             }
 
-            var errors = source.GetErrors(PropertyName).Cast<string>();
+            var errors = source.GetErrors(PropertyName!).Cast<string>();
             if (errors != null && errors.Any())
             {
                 var borderEffect = _associatedObject.Effects.FirstOrDefault(eff => eff is BorderEffect);
@@ -74,6 +82,11 @@ namespace App1.Validation
 
         protected override void OnDetachingFrom(InputView bindable)
         {
+            if (_associatedObject == null || validationLabel == null)
+            {
+                return;
+            }
+
             base.OnDetachingFrom(bindable);
 
             _associatedObject.TextChanged -= _associatedObject_TextChanged;
@@ -81,6 +94,6 @@ namespace App1.Validation
             _associatedObject = null;
         }
 
-        public string PropertyName { get; set; }
+        public string? PropertyName { get; set; }
     }
 }

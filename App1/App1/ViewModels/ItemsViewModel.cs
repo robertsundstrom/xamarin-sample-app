@@ -57,19 +57,20 @@ namespace App1.ViewModels
 
         private async Task DeleteItem(IDataStore<Item> dataStore, INativeCalls nativeCalls, Item item)
         {
-            var newItem = item as Item;
-
-            try
+            if (item is Item newItem)
             {
-                if (await dataStore.DeleteItemAsync(newItem.Id))
+                try
                 {
-                    Items.Remove(newItem);
+                    if (await dataStore.DeleteItemAsync(newItem.Id!))
+                    {
+                        Items.Remove(newItem);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                nativeCalls.OpenToast(ex.Message);
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    nativeCalls.OpenToast(ex.Message);
+                }
             }
         }
 
