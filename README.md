@@ -10,7 +10,7 @@ A Xamarin.Forms sample app that contains the most of what you need when developi
 ## Features
 * Dark Mode theme
 * Localization
-* ASP.NET Core 3.1 backend
+* ASP.NET Core 3.1 backend with Open API
 
 ## Screenshot
 
@@ -24,6 +24,5 @@ A Xamarin.Forms sample app that contains the most of what you need when developi
 * CollectionView instead of ListView.
 
 ## Futures
-* Open API support
 * UITests
 * IntegrationTests
