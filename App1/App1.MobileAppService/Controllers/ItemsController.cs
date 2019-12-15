@@ -10,13 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace App1.Controllers
 {
-    [Route("api/item")]
+    [Route("api/items")]
     [ApiController]
-    public class ItemController : ControllerBase
+    public class ItemsController : ControllerBase
     {
         private readonly IItemRepository ItemRepository;
 
-        public ItemController(IItemRepository itemRepository)
+        public ItemsController(IItemRepository itemRepository)
         {
             ItemRepository = itemRepository;
         }

@@ -15,7 +15,7 @@ namespace App1.MobileAppService.Client
     using System = global::System;
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.6.0 (NJsonSchema v10.0.28.0 (Newtonsoft.Json v12.0.0.0))")]
-    public partial interface IItemClient
+    public partial interface IItemsClient
     {
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Item>> ListAsync();
@@ -55,12 +55,12 @@ namespace App1.MobileAppService.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.6.0 (NJsonSchema v10.0.28.0 (Newtonsoft.Json v12.0.0.0))")]
-    public partial class ItemClient : IItemClient
+    public partial class ItemsClient : IItemsClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
     
-        public ItemClient(System.Net.Http.HttpClient httpClient)
+        public ItemsClient(System.Net.Http.HttpClient httpClient)
         {
             _httpClient = httpClient; 
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
@@ -89,7 +89,7 @@ namespace App1.MobileAppService.Client
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Item>> ListAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/item");
+            urlBuilder_.Append("api/items");
     
             var client_ = _httpClient;
             try
@@ -154,7 +154,7 @@ namespace App1.MobileAppService.Client
         public async System.Threading.Tasks.Task<Item> CreateAsync(Item item, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/item");
+            urlBuilder_.Append("api/items");
     
             var client_ = _httpClient;
             try
@@ -228,7 +228,7 @@ namespace App1.MobileAppService.Client
         public async System.Threading.Tasks.Task EditAsync(Item item, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/item");
+            urlBuilder_.Append("api/items");
     
             var client_ = _httpClient;
             try
@@ -298,7 +298,7 @@ namespace App1.MobileAppService.Client
         public async System.Threading.Tasks.Task<Item> GetItemAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/item/{id}");
+            urlBuilder_.Append("api/items/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -370,7 +370,7 @@ namespace App1.MobileAppService.Client
         public async System.Threading.Tasks.Task DeleteAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/item/{id}");
+            urlBuilder_.Append("api/items/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;

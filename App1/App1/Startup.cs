@@ -67,7 +67,7 @@ namespace App1
             }
             else
             {
-                services.AddHttpClient<IItemClient, ItemClient>(client =>
+                services.AddHttpClient<IItemsClient, ItemsClient>(client =>
                 {
                     client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
                 });

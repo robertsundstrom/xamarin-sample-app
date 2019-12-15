@@ -10,10 +10,10 @@ namespace App1.Services
 {
     public class AzureDataStore : IDataStore<Item>
     {
-        private readonly IItemClient client;
+        private readonly IItemsClient client;
         private readonly IEnumerable<Item> items;
 
-        public AzureDataStore(IItemClient client)
+        public AzureDataStore(IItemsClient client)
         {
             this.client = client;
 
