@@ -1,16 +1,20 @@
 # Xamarin.Forms sample app
 
-A Xamarin.Forms sample app that contains the most of what you need when developing a mbile app from scratch, including a backend project.
+A Xamarin.Forms sample app that contains the most of what you need when developing a mobile app from scratch, including a backend project.
 
 ## Objectives
 * Include everything that is needed for a production-grade mobile app.
 * Make it to add or change functionality.
-* Stay true to the original Xamarin.Forms template.
+* Stay as true as possible to the original Xamarin.Forms template.
 
 ## Features
-* Web Backend
 * Dark Mode theme
 * Localization
+* ASP.NET Core 3.1 backend
+
+## Screenshot
+
+<img src="Screenshots/Browse.png" width="400" alt="Browse items">
 
 ## Technology
 
