@@ -145,13 +145,13 @@
     <value>Delete</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationText" xml:space="preserve">
-    <value>Are you sure that you want to delete this item?</value>
+    <value>Do you really want to delete this item?</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationTextNo" xml:space="preserve">
-    <value>No</value>
+    <value>Cancel</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationTextYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Delete</value>
   </data>
   <data name="SectionItemDetailsDescriptionLabel" xml:space="preserve">
     <value>Description: </value>

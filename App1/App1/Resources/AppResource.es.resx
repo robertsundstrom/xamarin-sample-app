@@ -127,7 +127,7 @@
     <value>{0} es obligatorio.</value>
   </data>
   <data name="SectionAboutLearnMoreButton" xml:space="preserve">
-    <value>Aprenda más</value>
+    <value>Aprender más</value>
   </data>
   <data name="SectionAboutTitle" xml:space="preserve">
     <value>Acerca</value>
@@ -145,19 +145,19 @@
     <value>Eliminar</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationText" xml:space="preserve">
-    <value>¿Estás seguro de que quieres eliminar este objeto?</value>
+    <value>¿Eliminar este objeto?</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationTextNo" xml:space="preserve">
-    <value>No</value>
+    <value>Cancelar</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationTextYes" xml:space="preserve">
-    <value>Sí</value>
+    <value>Eliminar</value>
   </data>
   <data name="SectionItemDetailsDescriptionLabel" xml:space="preserve">
-    <value>Descripción</value>
+    <value>Descripción:</value>
   </data>
   <data name="SectionItemDetailsTextLabel" xml:space="preserve">
-    <value>Texto</value>
+    <value>Texto:</value>
   </data>
   <data name="SectionNewItemCancelButton" xml:space="preserve">
     <value>Cancelar</value>

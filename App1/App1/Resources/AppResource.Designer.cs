@@ -142,7 +142,7 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to delete this item?.
+        ///   Looks up a localized string similar to Do you really want to delete this item?.
         /// </summary>
         public static string SectionItemDetailsDeleteConfirmationText {
             get {
@@ -151,7 +151,7 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string SectionItemDetailsDeleteConfirmationTextNo {
             get {
@@ -160,7 +160,7 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string SectionItemDetailsDeleteConfirmationTextYes {
             get {
