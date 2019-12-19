@@ -4,11 +4,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
     xmlns:validation="clr-namespace:App1.Validation"
-    Title="{markup:LocalizedString SectionNewItemTitle}"
-    BackgroundColor="{DynamicResource PageBackgroundColor}"
+    Title="{x:Static resources:AppResources.SectionNewItemTitle}"
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
@@ -17,32 +16,32 @@
             IsEnabled="{Binding CanSubmit}"
             Order="Primary"
             Priority="0"
-            Text="{markup:LocalizedString SectionNewItemSaveButton}" />
+            Text="{x:Static resources:AppResources.SectionNewItemSaveButton}" />
         <ToolbarItem
             Clicked="Cancel_Clicked"
             Order="Primary"
             Priority="1"
-            Text="{markup:LocalizedString SectionNewItemCancelButton}" />
+            Text="{x:Static resources:AppResources.SectionNewItemCancelButton}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout Padding="15" Spacing="20">
-            <Label FontSize="Medium" Text="{markup:LocalizedString SectionNewItemTextLabel}" />
+            <Label FontSize="Medium" Text="{x:Static resources:AppResources.SectionNewItemTextLabel}" />
             <Entry
                 d:Text="Item name"
                 FontSize="Small"
-                Placeholder="{markup:LocalizedString SectionNewItemTextPlaceholder}"
+                Placeholder="{x:Static resources:AppResources.SectionNewItemTextPlaceholder}"
                 Text="{Binding Text}">
                 <Entry.Behaviors>
                     <validation:InputViewValidationBehavior PropertyName="Text" />
                 </Entry.Behaviors>
             </Entry>
-            <Label FontSize="Medium" Text="{markup:LocalizedString SectionNewItemDescriptionLabel}" />
+            <Label FontSize="Medium" Text="{x:Static resources:AppResources.SectionNewItemDescriptionLabel}" />
             <Editor
                 Margin="0"
                 d:Text="Item description"
                 FontSize="Small"
-                Placeholder="{markup:LocalizedString SectionNewItemDescriptionPlaceholder}"
+                Placeholder="{x:Static resources:AppResources.SectionNewItemDescriptionPlaceholder}"
                 Text="{Binding Description}">
                 <Editor.Behaviors>
                     <validation:InputViewValidationBehavior PropertyName="Description" />

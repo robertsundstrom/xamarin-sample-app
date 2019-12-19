@@ -5,28 +5,19 @@ using Xamarin.Forms;
 
 namespace App1.Services
 {
-    public class SettingsService
+    public sealed class SettingsService : ISettingsService
     {
         private const string AccessToken = "access_token";
-        private const string IdToken = "id_token";
         private const string IdAppServiceBase = "url_app_service";
 
         private readonly string AccessTokenDefault = string.Empty;
-        private readonly string IdTokenDefault = string.Empty;
 
         private readonly string UrlAppServiceBaseDefault = string.Empty;
 
-
-        public string AuthAccessToken
+        public string? AuthAccessToken
         {
             get => GetValueOrDefault(AccessToken, AccessTokenDefault);
-            set => AddOrUpdateValue(AccessToken, value);
-        }
-
-        public string AuthIdToken
-        {
-            get => GetValueOrDefault(IdToken, IdTokenDefault);
-            set => AddOrUpdateValue(IdToken, value);
+            set => AddOrUpdateValue(AccessToken, value!);
         }
 
         public string IdAppServiceEndpointBase

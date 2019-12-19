@@ -3,13 +3,13 @@ using App1.Validation;
 
 namespace App1.ViewModels
 {
-    internal class NewItemViewModel : BaseViewModel
+    internal class NewItemViewModel : ViewModelBase
     {
         private string? text;
         private string? description;
         private bool isClean = true;
 
-        [Required(ErrorMessageResourceName = nameof(AppResource.RequiredInputFieldXMessageText))]
+        [Required(ErrorMessageResourceName = nameof(AppResources.RequiredInputFieldMessageText))]
         public string? Text
         {
             get => text;

@@ -22,14 +22,14 @@ namespace App1.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AppResource {
+    public class AppResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResource() {
+        internal AppResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace App1.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App1.Resources.AppResource", typeof(AppResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App1.Resources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,11 +79,146 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to foo@somewhere.com.
+        /// </summary>
+        public static string EmailPlaceholder {
+            get {
+                return ResourceManager.GetString("EmailPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to John.
+        /// </summary>
+        public static string FirstNamePlaceholder {
+            get {
+                return ResourceManager.GetString("FirstNamePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smith.
+        /// </summary>
+        public static string LastNamePlaceholder {
+            get {
+                return ResourceManager.GetString("LastNamePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string LoginPageLoginButton {
+            get {
+                return ResourceManager.GetString("LoginPageLoginButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required to login again..
+        /// </summary>
+        public static string LoginPageLoginNotice {
+            get {
+                return ResourceManager.GetString("LoginPageLoginNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string LoginPageTitle {
+            get {
+                return ResourceManager.GetString("LoginPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string LoginPageTitleSignUpButton {
+            get {
+                return ResourceManager.GetString("LoginPageTitleSignUpButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log out.
+        /// </summary>
+        public static string LogoutButton {
+            get {
+                return ResourceManager.GetString("LogoutButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string PasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string RegistrationPageButton {
+            get {
+                return ResourceManager.GetString("RegistrationPageButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string RegistrationPageTitle {
+            get {
+                return ResourceManager.GetString("RegistrationPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The field {0} is required..
         /// </summary>
-        public static string RequiredInputFieldXMessageText {
+        public static string RequiredInputFieldMessageText {
             get {
-                return ResourceManager.GetString("RequiredInputFieldXMessageText", resourceCulture);
+                return ResourceManager.GetString("RequiredInputFieldMessageText", resourceCulture);
             }
         }
         

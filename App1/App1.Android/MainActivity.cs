@@ -1,13 +1,8 @@
 ﻿
-using System.Reflection;
-using System.Resources;
-
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-
-using App1.Resources;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -42,7 +37,7 @@ namespace App1.Droid
         {
             services.AddSingleton<INativeCalls, NativeCalls>();
 
-            services.AddSingleton<IResourceContainer>(sp => new ResourceContainer(new ResourceManager(ResourceContainer.ResourceId, typeof(AppResource).GetTypeInfo().Assembly), new Localize()));
+            services.AddSingleton<ILocalize, Localize>();
         }
     }
 }

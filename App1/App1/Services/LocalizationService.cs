@@ -2,7 +2,7 @@
 
 namespace App1.Services
 {
-    internal class LocalizationService : ILocalizationService
+    public class LocalizationService : ILocalizationService
     {
         private readonly IResourceContainer resourceContainer;
 

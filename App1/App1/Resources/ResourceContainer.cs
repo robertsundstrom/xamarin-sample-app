@@ -1,18 +1,22 @@
 ﻿using System.Globalization;
+using System.Reflection;
 using System.Resources;
 
 namespace App1.Resources
 {
     public class ResourceContainer : IResourceContainer
     {
-        public static string ResourceId = "App1.Resources.AppResource"; // The namespace and name of your Resources file
         private readonly CultureInfo _cultureInfo;
         private readonly ResourceManager _resourceManager;
 
-        public ResourceContainer(ResourceManager manager, ILocalize localize)
+        public ResourceContainer(ILocalize localize)
         {
             _cultureInfo = localize.GetCurrentCultureInfo();
-            _resourceManager = manager;
+
+            var assembly = typeof(AppResources).GetTypeInfo().Assembly;
+            var resourceId = assembly.FullName;
+
+            _resourceManager = new ResourceManager(resourceId, assembly);
         }
 
         public string GetString(string key)

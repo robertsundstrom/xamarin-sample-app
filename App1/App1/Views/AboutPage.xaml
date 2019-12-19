@@ -4,11 +4,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
     xmlns:vm="clr-namespace:App1.ViewModels"
-    Title="{markup:LocalizedString SectionAboutTitle}"
-    BackgroundColor="{DynamicResource PageBackgroundColor}"
+    Title="{x:Static resources:AppResources.SectionAboutTitle}"
     BindingContext="{Binding ., Source={x:Static vm:ViewModelLocator.About}}"
     mc:Ignorable="d">
 
@@ -53,7 +52,7 @@
                                 <Span
                                     FontAttributes="Bold"
                                     FontSize="22"
-                                    Text="{markup:LocalizedString AppName}" />
+                                    Text="{x:Static resources:AppResources.AppName}" />
                                 <Span Text=" " />
                                 <Span ForegroundColor="{StaticResource LightTextColor}" Text="1.0" />
                             </FormattedString.Spans>
@@ -89,7 +88,7 @@
                     Margin="0,10,0,0"
                     BackgroundColor="{StaticResource AccentColor}"
                     Command="{Binding OpenWebCommand}"
-                    Text="{markup:LocalizedString SectionAboutLearnMoreButton}"
+                    Text="{x:Static resources:AppResources.SectionAboutLearnMoreButton}"
                     TextColor="White" />
             </StackLayout>
         </ScrollView>

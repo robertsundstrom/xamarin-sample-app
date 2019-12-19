@@ -1,17 +1,26 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Resources;
 
 using App1.Helpers;
 using App1.MobileAppService.Client;
+using App1.Resources;
 using App1.Services;
 using App1.ViewModels;
+using App1.Views;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using Polly;
+
 using Xamarin.Essentials;
+
+[assembly: NeutralResourcesLanguage("en-US")]
 
 namespace App1
 {
@@ -53,12 +62,25 @@ namespace App1
                 var world = ctx.Configuration["Hello"];
             }
 
+            services.AddSingleton<ISettingsService, SettingsService>();
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IIdentityService, IdentityService>();
+
+            services.AddTransient<AppShellViewModel>();
+
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<ViewModels.RegistrationViewModel>();
+
             services.AddTransient<ItemsViewModel>();
             services.AddTransient<AboutViewModel>();
 
-            services.AddTransient<AppShell>();
+            services.AddSingleton<LoginPage>();
+            services.AddSingleton<RegistrationPage>();
+
+            services.AddSingleton<AppShell>();
             services.AddSingleton<App>();
 
+            services.AddTransient<IResourceContainer, ResourceContainer>();
             services.AddTransient<ILocalizationService, LocalizationService>();
 
             if (App.UseMockDataStore)
@@ -67,10 +89,32 @@ namespace App1
             }
             else
             {
-                services.AddHttpClient<IItemsClient, ItemsClient>(client =>
-                {
-                    client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
-                });
+                services.AddHttpClient<IRegistrationClient, RegistrationClient>(CreateClientDelegate)
+                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                    {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                    }));
+
+                services.AddHttpClient<ITokenClient, TokenClient>(CreateClientDelegate)
+                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                    {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                    }));
+
+                services.AddHttpClient<IItemsClient, ItemsClient>(CreateClientDelegate)
+                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                    {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                    }));
 
                 services.AddSingleton<IDataStore<Item>, AzureDataStore>();
             }
@@ -88,5 +132,29 @@ namespace App1
 #endif
         }
 
+        private static void CreateClientDelegate(IServiceProvider sp, HttpClient client)
+        {
+            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sp.GetRequiredService<ISettingsService>().AuthAccessToken);
+        }
+
+        public static HttpClientHandler GetClientHandler()
+        {
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+                {
+                    //if (cert.Issuer.Equals("CN=localhost"))
+                    //{
+                    //    return true;
+                    //}
+
+                    //return errors == System.Net.Security.SslPolicyErrors.None;
+
+                    return true;
+                }
+            };
+            return handler;
+        }
     }
 }

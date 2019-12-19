@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App1.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
+    xmlns:validation="clr-namespace:App1.Validation"
+    Title="{x:Static resources:AppResources.LoginPageTitle}"
+    mc:Ignorable="d">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding NavigateToRegistrationPageCommand}" Text="{x:Static resources:AppResources.LoginPageTitleSignUpButton}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Margin="10" VerticalOptions="StartAndExpand">
+            <Label IsVisible="{Binding ShowLoginNoticeVisible}" Text="{x:Static resources:AppResources.LoginPageLoginNotice}" />
+            <Label Text="{x:Static resources:AppResources.Email}" />
+            <Entry
+                x:Name="emailEntry"
+                Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                Text="{Binding Email, Mode=TwoWay}">
+                <Entry.Behaviors>
+                    <validation:InputViewValidationBehavior PropertyName="Email" />
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{x:Static resources:AppResources.Password}" />
+            <Entry
+                x:Name="passwordEntry"
+                IsPassword="true"
+                Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
+                Text="{Binding Password, Mode=TwoWay}">
+                <Entry.Behaviors>
+                    <validation:InputViewValidationBehavior PropertyName="Password" />
+                </Entry.Behaviors>
+            </Entry>
+            <Button
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding IsSubmitEnabled}"
+                Text="{x:Static resources:AppResources.LoginPageLoginButton}" />
+            <Label x:Name="messageLabel" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

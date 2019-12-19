@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 
-using Microsoft.Extensions.DependencyInjection;
+using App1.Services;
 
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -22,11 +23,16 @@ namespace App1
         {
             InitializeComponent();
 
-            MainPage = ServiceProvider.GetRequiredService<AppShell>();
+            MainPage = new ContentPage();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
+            base.OnStart();
+
+            await InitNavigation();
+
+            base.OnResume();
         }
 
         protected override void OnSleep()
@@ -35,6 +41,12 @@ namespace App1
 
         protected override void OnResume()
         {
+        }
+
+        private Task InitNavigation()
+        {
+            var navigationService = (INavigationService)ServiceProvider!.GetService(typeof(INavigationService));
+            return navigationService.InitializeAsync();
         }
     }
 }

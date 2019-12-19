@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 using App1.Models;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App1.Controllers
 {
+    [Authorize]
     [Route("api/items")]
     [ApiController]
     public class ItemsController : ControllerBase

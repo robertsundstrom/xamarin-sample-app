@@ -7,7 +7,7 @@ namespace App1.Validation
 {
     public sealed class RequiredAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute
     {
-        private const string DefaultResourceKey = nameof(AppResource.RequiredInputFieldXMessageText);
+        private const string DefaultResourceKey = nameof(AppResources.RequiredInputFieldMessageText);
 
         public override string FormatErrorMessage(string name)
         {

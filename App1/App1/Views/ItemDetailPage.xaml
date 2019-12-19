@@ -4,23 +4,22 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
     Title="{Binding Title}"
-    BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="Delete_Clicked" Text="{markup:LocalizedString SectionItemDetailsDeleteButton}" />
+        <ToolbarItem Clicked="Delete_Clicked" Text="{x:Static resources:AppResources.SectionItemDetailsDeleteButton}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="15" Spacing="20">
-        <Label FontSize="Medium" Text="{markup:LocalizedString SectionItemDetailsTextLabel}" />
+        <Label FontSize="Medium" Text="{x:Static resources:AppResources.SectionItemDetailsTextLabel}" />
         <Label
             d:Text="Item name"
             FontSize="Small"
             Text="{Binding Item.Text}" />
-        <Label FontSize="Medium" Text="{markup:LocalizedString SectionItemDetailsDescriptionLabel}" />
+        <Label FontSize="Medium" Text="{x:Static resources:AppResources.SectionItemDetailsDescriptionLabel}" />
         <Label
             d:Text="Item description"
             FontSize="Small"

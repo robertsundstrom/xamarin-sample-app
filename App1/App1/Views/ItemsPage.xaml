@@ -4,17 +4,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:markup="clr-namespace:App1.Markup"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
     xmlns:vm="clr-namespace:App1.ViewModels"
     x:Name="BrowseItemsPage"
-    Title="{markup:LocalizedString SectionBrowseTitle}"
-    BackgroundColor="{DynamicResource PageBackgroundColor}"
+    Title="{x:Static resources:AppResources.SectionBrowseTitle}"
     BindingContext="{Binding ., Source={x:Static vm:ViewModelLocator.Items}}"
     mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="AddItem_Clicked" Text="{markup:LocalizedString SectionBrowseAddButton}" />
+        <ToolbarItem Clicked="AddItem_Clicked" Text="{x:Static resources:AppResources.SectionBrowseAddButton}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>
@@ -46,7 +45,7 @@
                                 Clicked="DeleteItem_Clicked"
                                 CommandParameter="{Binding .}"
                                 IsDestructive="True"
-                                Text="{markup:LocalizedString SectionBrowseItemDeleteButton}" />
+                                Text="{x:Static resources:AppResources.SectionBrowseItemDeleteButton}" />
                         </ViewCell.ContextActions>
                         <StackLayout Padding="10">
                             <Label

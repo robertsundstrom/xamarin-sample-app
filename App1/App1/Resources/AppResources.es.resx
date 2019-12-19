@@ -121,66 +121,111 @@
     <value>Sample App</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Descripción</value>
   </data>
-  <data name="RequiredInputFieldXMessageText" xml:space="preserve">
-    <value>The field {0} is required.</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailPlaceholder" xml:space="preserve">
+    <value>foo@somewhere.com</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FirstNamePlaceholder" xml:space="preserve">
+    <value>Juan</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LastNamePlaceholder" xml:space="preserve">
+    <value>Pérez</value>
+  </data>
+  <data name="LoginPageLoginButton" xml:space="preserve">
+    <value>Entrar</value>
+  </data>
+  <data name="LoginPageLoginNotice" xml:space="preserve">
+    <value>Por favor, entrar de nuevo.</value>
+  </data>
+  <data name="LoginPageTitle" xml:space="preserve">
+    <value>Entrar</value>
+  </data>
+  <data name="LoginPageTitleSignUpButton" xml:space="preserve">
+    <value>Registrar</value>
+  </data>
+  <data name="LogoutButton" xml:space="preserve">
+    <value>Disconectar</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="PasswordPlaceholder" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="RegistrationPageButton" xml:space="preserve">
+    <value>Registrar</value>
+  </data>
+  <data name="RegistrationPageTitle" xml:space="preserve">
+    <value>Registrar</value>
+  </data>
+  <data name="RequiredInputFieldMessageText" xml:space="preserve">
+    <value>{0} es obligatorio.</value>
   </data>
   <data name="SectionAboutLearnMoreButton" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Aprender más</value>
   </data>
   <data name="SectionAboutTitle" xml:space="preserve">
-    <value>About</value>
+    <value>Acerca</value>
   </data>
   <data name="SectionBrowseAddButton" xml:space="preserve">
-    <value>Add</value>
+    <value>Añadir</value>
   </data>
   <data name="SectionBrowseItemDeleteButton" xml:space="preserve">
-    <value>Delete</value>
+    <value>Eliminar</value>
   </data>
   <data name="SectionBrowseTitle" xml:space="preserve">
-    <value>Browse</value>
+    <value>Navegar</value>
   </data>
   <data name="SectionItemDetailsDeleteButton" xml:space="preserve">
-    <value>Delete</value>
+    <value>Eliminar</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationText" xml:space="preserve">
-    <value>Do you really want to delete this item?</value>
+    <value>¿Eliminar este objeto?</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationTextNo" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="SectionItemDetailsDeleteConfirmationTextYes" xml:space="preserve">
-    <value>Delete</value>
+    <value>Eliminar</value>
   </data>
   <data name="SectionItemDetailsDescriptionLabel" xml:space="preserve">
-    <value>Description: </value>
+    <value>Descripción:</value>
   </data>
   <data name="SectionItemDetailsTextLabel" xml:space="preserve">
-    <value>Text: </value>
+    <value>Texto:</value>
   </data>
   <data name="SectionNewItemCancelButton" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="SectionNewItemDescriptionLabel" xml:space="preserve">
-    <value>Description</value>
+    <value>Descripción</value>
   </data>
   <data name="SectionNewItemDescriptionPlaceholder" xml:space="preserve">
-    <value>This is a description of this item</value>
+    <value>Una descripción de este objeto</value>
   </data>
   <data name="SectionNewItemSaveButton" xml:space="preserve">
-    <value>Save</value>
+    <value>Guardar</value>
   </data>
   <data name="SectionNewItemTextLabel" xml:space="preserve">
-    <value>Text</value>
+    <value>Texto</value>
   </data>
   <data name="SectionNewItemTextPlaceholder" xml:space="preserve">
-    <value>Item name</value>
+    <value>Nombre de objeto</value>
   </data>
   <data name="SectionNewItemTitle" xml:space="preserve">
-    <value>New Item</value>
+    <value>Nuevo objeto</value>
   </data>
   <data name="Text" xml:space="preserve">
-    <value>Text</value>
+    <value>Texto</value>
   </data>
 </root>

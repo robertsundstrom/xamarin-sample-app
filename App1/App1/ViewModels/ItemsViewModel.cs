@@ -11,15 +11,16 @@ using Xamarin.Forms;
 
 namespace App1.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel : ViewModelBase
     {
         private readonly IDataStore<Item> dataStore;
         private readonly INativeCalls nativeCalls;
+        private readonly INavigationService navigationService;
 
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel(IDataStore<Item> dataStore, INativeCalls nativeCalls)
+        public ItemsViewModel(IDataStore<Item> dataStore, INativeCalls nativeCalls, INavigationService navigationService)
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
@@ -27,6 +28,7 @@ namespace App1.ViewModels
 
             this.dataStore = dataStore;
             this.nativeCalls = nativeCalls;
+            this.navigationService = navigationService;
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Item;
@@ -91,6 +93,14 @@ namespace App1.ViewModels
                 {
                     Items.Add(item);
                 }
+            }
+            catch (ApiException ex) when (ex.Message.Contains("401"))
+            {
+
+                await navigationService.PushAsync<LoginViewModel, LoginViewModelArgs?>(new LoginViewModelArgs()
+                {
+                    HasSessionExpired = true,
+                });
             }
             catch (Exception ex)
             {

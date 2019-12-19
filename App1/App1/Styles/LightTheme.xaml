@@ -7,24 +7,11 @@
     <Color x:Key="PageBackgroundColor">White</Color>
     <Color x:Key="NavigationBarColor">#2196F3</Color>
     <Color x:Key="PrimaryColor">#2196F3</Color>
-    <Color x:Key="SecondaryColor">Black</Color>
+    <Color x:Key="SecondaryColor">#F2F2F2</Color>
     <Color x:Key="PrimaryTextColor">Black</Color>
     <Color x:Key="SecondaryTextColor">White</Color>
     <Color x:Key="TertiaryTextColor">Gray</Color>
     <Color x:Key="TransparentColor">Transparent</Color>
-
-    <Style x:Key="BaseStyle" TargetType="Element">
-        <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationBarColor}" />
-        <Setter Property="Shell.ForegroundColor" Value="White" />
-        <Setter Property="Shell.TitleColor" Value="White" />
-        <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
-        <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationBarColor}" />
-        <Setter Property="Shell.TabBarForegroundColor" Value="White" />
-        <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
-        <Setter Property="Shell.TabBarTitleColor" Value="White" />
-    </Style>
-    <Style BasedOn="{StaticResource BaseStyle}" TargetType="TabBar" />
 
     <ResourceDictionary Source="CoreStyle.xaml" />
 

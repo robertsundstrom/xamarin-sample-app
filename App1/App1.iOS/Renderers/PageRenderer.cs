@@ -19,10 +19,22 @@ namespace App1.iOS.Renderers
         {
             base.ViewWillAppear(animated);
 
+            if (NavigationController == null)
+            {
+                return;
+            }
+
             var leftNavList = new List<UIBarButtonItem>();
             var rightNavList = new List<UIBarButtonItem>();
 
             var navigationItem = NavigationController.TopViewController.NavigationItem;
+
+            // For hamburger item
+            if (navigationItem.LeftBarButtonItems?.Length > 0)
+            {
+                var LeftNavItems = navigationItem.LeftBarButtonItems[0];
+                leftNavList.Add(LeftNavItems);
+            }
 
             for (var i = 0; i < Element.ToolbarItems.Count; i++)
             {
