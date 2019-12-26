@@ -24,7 +24,6 @@ namespace App1.Tests
                 Fixture.NativeCallsMock.Object);
 
             Assert.False(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.CanSubmit);
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
@@ -41,7 +40,6 @@ namespace App1.Tests
             };
 
             Assert.True(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.CanSubmit);
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
@@ -58,7 +56,6 @@ namespace App1.Tests
             };
 
             Assert.True(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.CanSubmit);
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
@@ -75,7 +72,6 @@ namespace App1.Tests
             };
 
             Assert.True(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.CanSubmit);
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
@@ -92,7 +88,6 @@ namespace App1.Tests
             };
 
             Assert.False(loginViewModel.HasErrors);
-            Assert.True(loginViewModel.CanSubmit);
             Assert.True(loginViewModel.LoginCommand.CanExecute(null));
         }
 

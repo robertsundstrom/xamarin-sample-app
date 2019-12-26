@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using App1.Resources;
@@ -149,13 +148,7 @@ namespace App1.ViewModels
             }
         }
 
-        protected override void ValidateProperty<T>(T value, [CallerMemberName] string? propertyName = null)
-        {
-            base.ValidateProperty(value, propertyName);
 
-            OnPropertyChanged(nameof(CanSubmit));
-        }
-
-        public bool CanSubmit => !isClean && Validate();
+        private bool CanSubmit => !isClean && !HasErrors;
     }
 }

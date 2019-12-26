@@ -25,7 +25,6 @@ namespace App1.Tests
                 Fixture.NativeCallsMock.Object);
 
             Assert.False(registrationViewModel.HasErrors);
-            Assert.False(registrationViewModel.CanSubmit);
             Assert.False(registrationViewModel.RegisterCommand.CanExecute(null));
         }
 
