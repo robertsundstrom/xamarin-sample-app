@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+using App1.Resources;
 using App1.Services;
 
 using Xamarin.Forms;
@@ -20,6 +21,7 @@ namespace App1.ViewModels
         private string? password;
         private string? firstName;
         private string? lastName;
+        private string? confirmPassword;
 
         public RegistrationViewModel(IIdentityService identityService, INavigationService navigationService, INativeCalls nativeCalls)
         {
@@ -128,6 +130,19 @@ namespace App1.ViewModels
                 ValidateProperty(value);
                 isClean = false;
                 SetProperty(ref password, value);
+                RegisterCommand.ChangeCanExecute();
+            }
+        }
+
+        [Compare(nameof(Password), ErrorMessageResourceName = nameof(AppResources.ConfirmPassword), ErrorMessageResourceType = typeof(AppResources))]
+        public string? ConfirmPassword
+        {
+            get => confirmPassword;
+            set
+            {
+                ValidateProperty(value);
+                isClean = false;
+                SetProperty(ref confirmPassword, value);
                 RegisterCommand.ChangeCanExecute();
             }
         }

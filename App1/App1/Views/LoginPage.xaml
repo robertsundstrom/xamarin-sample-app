@@ -8,12 +8,19 @@
     xmlns:resources="clr-namespace:App1.Resources"
     xmlns:validation="clr-namespace:App1.Validation"
     Title="{x:Static resources:AppResources.LoginPageTitle}"
+    NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding NavigateToRegistrationPageCommand}" Text="{x:Static resources:AppResources.LoginPageTitleSignUpButton}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="10" VerticalOptions="StartAndExpand">
+        <StackLayout
+            Padding="50"
+            Spacing="20"
+            VerticalOptions="Center">
+            <Label
+                Margin="0,0,0,60"
+                FontSize="Title"
+                HorizontalTextAlignment="Center"
+                Text="{x:Static resources:AppResources.AppName}" />
+
             <Label IsVisible="{Binding ShowLoginNoticeVisible}" Text="{x:Static resources:AppResources.LoginPageLoginNotice}" />
             <Label Text="{x:Static resources:AppResources.Email}" />
             <Entry
@@ -35,7 +42,10 @@
                 </Entry.Behaviors>
             </Entry>
             <Button Command="{Binding LoginCommand}" Text="{x:Static resources:AppResources.LoginPageLoginButton}" />
-            <Label x:Name="messageLabel" />
+
+            <Button Command="{Binding NavigateToRegistrationPageCommand}" Text="{x:Static resources:AppResources.LoginPageTitleSignUpButton}" />
+            <Button Command="{Binding NavigateToAboutPageCommand}" Text="{x:Static resources:AppResources.SectionAboutTitle}" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

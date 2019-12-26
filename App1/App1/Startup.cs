@@ -80,6 +80,7 @@ namespace App1
 
             services.AddSingleton<LoginPage>();
             services.AddSingleton<RegistrationPage>();
+            services.AddSingleton<AboutPage>();
 
             services.AddSingleton<AppShell>();
             services.AddSingleton<App>();

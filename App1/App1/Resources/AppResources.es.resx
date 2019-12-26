@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Sample App</value>
   </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirma contraseña</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Descripción</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="PasswordPlaceholder" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordsAreNotEqual" xml:space="preserve">
+    <value>No es iqual de Contraseña</value>
   </data>
   <data name="RegistrationPageButton" xml:space="preserve">
     <value>Registrar</value>

@@ -9,8 +9,12 @@
     xmlns:validation="clr-namespace:App1.Validation"
     Title="{x:Static resources:AppResources.RegistrationPageTitle}"
     mc:Ignorable="d">
+
     <ContentPage.Content>
-        <StackLayout Margin="10" VerticalOptions="StartAndExpand">
+        <StackLayout
+            Padding="50"
+            Spacing="20"
+            VerticalOptions="Center">
             <Label Text="{x:Static resources:AppResources.FirstName}" />
             <Entry
                 x:Name="firstNameEntry"
@@ -48,9 +52,17 @@
                     <validation:InputViewValidationBehavior PropertyName="Password" />
                 </Entry.Behaviors>
             </Entry>
-            <Button
-                Command="{Binding RegisterCommand}"
-                Text="{x:Static resources:AppResources.RegistrationPageButton}" />
+            <Label Text="{x:Static resources:AppResources.ConfirmPassword}" />
+            <Entry
+                x:Name="confirmPasswordEntry"
+                IsPassword="true"
+                Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
+                Text="{Binding ConfirmPassword, Mode=TwoWay}">
+                <Entry.Behaviors>
+                    <validation:InputViewValidationBehavior PropertyName="ConfirmPassword" />
+                </Entry.Behaviors>
+            </Entry>
+            <Button Command="{Binding RegisterCommand}" Text="{x:Static resources:AppResources.RegistrationPageButton}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

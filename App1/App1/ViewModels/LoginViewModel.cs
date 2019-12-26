@@ -31,6 +31,7 @@ namespace App1.ViewModels
             this.nativeCalls = nativeCalls;
             LoginCommand = new Command(async () => await ExecuteLoginCommand(), () => CanSubmit);
             NavigateToRegistrationPageCommand = new Command(async () => await navigationService.PushAsync<ViewModels.RegistrationViewModel>());
+            NavigateToAboutPageCommand = new Command(async () => await _navigationService.PushAsync<AboutViewModel>());
         }
 
         public override Task InitializeAsync(LoginViewModelArgs? arg)
@@ -40,10 +41,9 @@ namespace App1.ViewModels
                 return Task.CompletedTask;
             }
 
-            return Task.Run(() =>
-            {
-                ShowLoginNoticeVisible = arg.HasSessionExpired;
-            });
+            ShowLoginNoticeVisible = arg.HasSessionExpired;
+
+            return Task.CompletedTask;
         }
 
         private async Task ExecuteLoginCommand()
@@ -73,6 +73,8 @@ namespace App1.ViewModels
         public Command LoginCommand { get; }
 
         public Command NavigateToRegistrationPageCommand { get; }
+
+        public Command NavigateToAboutPageCommand { get; }
 
         [Required]
         [EmailAddress]
