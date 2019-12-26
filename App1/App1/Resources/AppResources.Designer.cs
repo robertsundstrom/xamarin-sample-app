@@ -214,7 +214,7 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The field {0} is required..
+        ///   Looks up a localized string similar to {0} is required..
         /// </summary>
         public static string RequiredInputFieldMessageText {
             get {

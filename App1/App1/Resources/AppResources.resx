@@ -169,7 +169,7 @@
     <value>Register</value>
   </data>
   <data name="RequiredInputFieldMessageText" xml:space="preserve">
-    <value>The field {0} is required.</value>
+    <value>{0} is required.</value>
   </data>
   <data name="SectionAboutLearnMoreButton" xml:space="preserve">
     <value>Learn more</value>
