@@ -112,9 +112,9 @@ namespace App1.Services
 
         private Type GetPageTypeForViewModel(Type viewModelType)
         {
-            var viewName = viewModelType.Name.Replace("ViewModel", "Page");
-            var viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
-            var viewAssemblyName = $"App1.Views.{viewName}, {viewModelAssemblyName}";
+            string viewName = viewModelType.Name.Replace("ViewModel", "Page");
+            string viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
+            string viewAssemblyName = $"App1.Views.{viewName}, {viewModelAssemblyName}";
             return Type.GetType(viewAssemblyName);
         }
     }

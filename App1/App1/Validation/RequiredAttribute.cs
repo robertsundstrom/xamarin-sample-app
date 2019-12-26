@@ -11,9 +11,9 @@ namespace App1.Validation
 
         public override string FormatErrorMessage(string name)
         {
-            var resourceKey = ErrorMessageResourceName ?? DefaultResourceKey;
+            string resourceKey = ErrorMessageResourceName ?? DefaultResourceKey;
 
-            var localizedFieldName = App.ServiceProvider
+            string localizedFieldName = App.ServiceProvider
                 .GetService<ILocalizationService>()
                 .GetString(name);
 

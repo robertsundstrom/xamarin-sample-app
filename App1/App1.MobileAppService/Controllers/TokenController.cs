@@ -41,15 +41,15 @@ namespace App1.MobileAppService.Controllers
             }
 
             var user = await _userManager.FindByEmailAsync(email);
-            var validCredentials = await _userManager.CheckPasswordAsync(user, password);
+            bool validCredentials = await _userManager.CheckPasswordAsync(user, password);
 
             if (!validCredentials)
             {
                 return BadRequest("Username or password is incorrect");
             }
 
-            var newJwtToken = GenerateToken(email);
-            var newRefreshToken = GenerateRefreshToken();
+            string newJwtToken = GenerateToken(email);
+            string newRefreshToken = GenerateRefreshToken();
 
             user.RefreshToken = newRefreshToken;
             await _userManager.UpdateAsync(user);
@@ -66,19 +66,19 @@ namespace App1.MobileAppService.Controllers
         public async Task<ActionResult<TokenResult>> Refresh([FromForm] string token, [FromForm] string refreshToken)
         {
             var principal = _tokenService.GetPrincipalFromExpiredToken(token);
-            var email = GetEmailFromClaimsPrincipal(principal);
+            string email = GetEmailFromClaimsPrincipal(principal);
 
             var user = await _userManager.FindByEmailAsync(email);
 
-            var savedRefreshToken = user.RefreshToken;
+            string savedRefreshToken = user.RefreshToken;
 
             if (savedRefreshToken != refreshToken)
             {
                 throw new SecurityTokenException("Invalid refresh token");
             }
 
-            var newJwtToken = GenerateToken(email);
-            var newRefreshToken = GenerateRefreshToken();
+            string newJwtToken = GenerateToken(email);
+            string newRefreshToken = GenerateRefreshToken();
 
             user.RefreshToken = newRefreshToken;
             await _userManager.UpdateAsync(user);

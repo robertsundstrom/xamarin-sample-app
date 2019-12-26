@@ -7,7 +7,7 @@ namespace App1.Droid
     {
         public CultureInfo GetCurrentCultureInfo()
         {
-            Java.Util.Locale androidLocale = Java.Util.Locale.Default;
+            var androidLocale = Java.Util.Locale.Default;
             string netLanguage = androidLocale.ToString().Replace("_", "-"); // turns pt_BR into pt-BR
             return new CultureInfo(netLanguage);
         }

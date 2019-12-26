@@ -36,10 +36,10 @@ namespace App1.iOS.Renderers
                 leftNavList.Add(LeftNavItems);
             }
 
-            for (var i = 0; i < Element.ToolbarItems.Count; i++)
+            for (int i = 0; i < Element.ToolbarItems.Count; i++)
             {
-                var reorder = (Element.ToolbarItems.Count - 1);
-                var ItemPriority = Element.ToolbarItems[reorder - i].Priority;
+                int reorder = (Element.ToolbarItems.Count - 1);
+                int ItemPriority = Element.ToolbarItems[reorder - i].Priority;
 
                 if (ItemPriority == 1)
                 {

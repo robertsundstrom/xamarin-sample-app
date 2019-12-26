@@ -6,8 +6,8 @@ namespace App1.iOS
     {
         public void OpenToast(string text)
         {
-            UIViewController vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
-            UIAlertController okAlert = UIAlertController.Create(string.Empty, text, UIAlertControllerStyle.Alert);
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var okAlert = UIAlertController.Create(string.Empty, text, UIAlertControllerStyle.Alert);
             okAlert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
             vc.PresentViewController(okAlert, true, null);
         }

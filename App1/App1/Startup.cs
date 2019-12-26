@@ -26,9 +26,9 @@ namespace App1
     {
         public static App Init(Action<HostBuilderContext, IServiceCollection> nativeConfigureServices)
         {
-            var systemDir = FileSystem.CacheDirectory;
+            string systemDir = FileSystem.CacheDirectory;
             Utils.ExtractSaveResource("App1.appsettings.json", systemDir);
-            var fullConfig = Path.Combine(systemDir, "App1.appsettings.json");
+            string fullConfig = Path.Combine(systemDir, "App1.appsettings.json");
 
             var host = new HostBuilder()
                             .ConfigureHostConfiguration(c =>
@@ -57,7 +57,7 @@ namespace App1
         {
             if (ctx.HostingEnvironment.IsDevelopment())
             {
-                var world = ctx.Configuration["Hello"];
+                string world = ctx.Configuration["Hello"];
             }
 
             services.AddSingleton<ISettingsService, SettingsService>();

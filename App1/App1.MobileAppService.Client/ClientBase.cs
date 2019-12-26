@@ -16,7 +16,7 @@ namespace App1.MobileAppService.Client
 
             if (RetrieveAuthorizationToken != null)
             {
-                var token = await RetrieveAuthorizationToken();
+                string token = await RetrieveAuthorizationToken();
                 msg.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
             return msg;

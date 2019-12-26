@@ -48,7 +48,7 @@ namespace App1.Validation
                 var layout = _associatedObject.Parent as StackLayout;
                 if (layout != null)
                 {
-                    var index = layout.Children.IndexOf(_associatedObject);
+                    int index = layout.Children.IndexOf(_associatedObject);
                     layout.Children.Insert(index + 1, validationLabel);
                 }
             }

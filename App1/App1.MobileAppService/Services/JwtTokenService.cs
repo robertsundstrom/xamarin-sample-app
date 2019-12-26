@@ -51,7 +51,7 @@ namespace App1.MobileAppService.Services
 
         public string GenerateRefreshToken()
         {
-            var randomNumber = new byte[32];
+            byte[] randomNumber = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomNumber);

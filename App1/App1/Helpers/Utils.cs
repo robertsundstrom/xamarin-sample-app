@@ -7,14 +7,14 @@ namespace App1.Helpers
     {
         public static void ExtractSaveResource(string filename, string location)
         {
-            Assembly a = Assembly.GetExecutingAssembly();
-            using (Stream resFilestream = a.GetManifestResourceStream(filename))
+            var a = Assembly.GetExecutingAssembly();
+            using (var resFilestream = a.GetManifestResourceStream(filename))
             {
                 if (resFilestream != null)
                 {
                     string full = Path.Combine(location, filename);
 
-                    using (FileStream stream = File.Create(full))
+                    using (var stream = File.Create(full))
                     {
                         resFilestream.CopyTo(stream);
                     }

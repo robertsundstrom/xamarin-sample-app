@@ -59,7 +59,7 @@ namespace App1.ViewModels
         {
             try
             {
-                var response = await _identityService.AuthenticateAsync(registrationModel.Email!, registrationModel.Password!);
+                bool response = await _identityService.AuthenticateAsync(registrationModel.Email!, registrationModel.Password!);
                 if (response)
                 {
                     await _navigationService.PushAsync<AppShellViewModel>();
