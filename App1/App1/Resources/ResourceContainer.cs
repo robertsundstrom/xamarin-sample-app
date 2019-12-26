@@ -13,8 +13,9 @@ namespace App1.Resources
         {
             _cultureInfo = localize.GetCurrentCultureInfo();
 
-            var assembly = typeof(AppResources).GetTypeInfo().Assembly;
-            string resourceId = assembly.FullName;
+            var resourceType = typeof(AppResources).GetTypeInfo();
+            var assembly = resourceType.Assembly;
+            string resourceId = resourceType.FullName;
 
             _resourceManager = new ResourceManager(resourceId, assembly);
         }
