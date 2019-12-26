@@ -15,7 +15,7 @@ namespace App1.Tests
             Fixture = fixture;
         }
 
-        [Fact]
+        [Fact(DisplayName = "Cannot login when values are default")]
         public void CannotLoginWhenValuesAreDefault()
         {
             var loginViewModel = new LoginViewModel(
@@ -28,7 +28,7 @@ namespace App1.Tests
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Cannot login when inputs are invalid")]
         public void CannotLoginWhenInputsAreInvalid()
         {
             var loginViewModel = new LoginViewModel(
@@ -45,7 +45,7 @@ namespace App1.Tests
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Cannot login when email is not set")]
         public void CannotLoginWhenEmailIsNotSet()
         {
             var loginViewModel = new LoginViewModel(
@@ -62,7 +62,7 @@ namespace App1.Tests
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Cannot login when password is not set")]
         public void CannotLoginWhenPasswordIsNotSet()
         {
             var loginViewModel = new LoginViewModel(
@@ -79,7 +79,7 @@ namespace App1.Tests
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Can login when all inputs are valid")]
         public void CanLoginWhenAllInputsAreValid()
         {
             var loginViewModel = new LoginViewModel(
@@ -96,7 +96,7 @@ namespace App1.Tests
             Assert.True(loginViewModel.LoginCommand.CanExecute(null));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Login is successful when all values are valid")]
         public void LoginIsSuccessfulWhenAllValuesAreValid()
         {
             Fixture.IdentityServiceMock.Invocations.Clear();
@@ -121,7 +121,7 @@ namespace App1.Tests
             Fixture.IdentityServiceMock.Verify(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Is navigating to AppShell on successful login")]
         public void IsNavigatingToAppShellOnSuccessfulLogin()
         {
             Fixture.IdentityServiceMock.Invocations.Clear();
@@ -145,7 +145,7 @@ namespace App1.Tests
             Fixture.NavigationServiceMock.Verify(x => x.PushAsync<AppShellViewModel>(), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Is showing toast on unsuccessful login")]
         public void IsShowingToastOnUnsuccessfulLogin()
         {
             Fixture.IdentityServiceMock.Invocations.Clear();
@@ -169,8 +169,8 @@ namespace App1.Tests
             Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>()), Times.Once);
         }
 
-        [Fact]
-        public void IsNavigatingToRegistration()
+        [Fact(DisplayName = "Is navigating to registration on command executed")]
+        public void IsNavigatingToRegistrationOnCommandExecuted()
         {
             Fixture.IdentityServiceMock.Invocations.Clear();
             Fixture.NavigationServiceMock.Invocations.Clear();

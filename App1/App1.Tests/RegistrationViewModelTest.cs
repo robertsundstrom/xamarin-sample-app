@@ -16,7 +16,7 @@ namespace App1.Tests
             Fixture = fixture;
         }
 
-        [Fact]
+        [Fact(DisplayName = "Cannot register when values are default")]
         public void CannotRegisterWhenValuesAreDefault()
         {
             var registrationViewModel = new RegistrationViewModel(
@@ -30,7 +30,7 @@ namespace App1.Tests
         }
 
 
-        [Fact]
+        [Fact(DisplayName = "Is showing toast on exception")]
         public void IsShowingToastOnException()
         {
             Fixture.IdentityServiceMock.Invocations.Clear();
@@ -57,7 +57,7 @@ namespace App1.Tests
             Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>()), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Is navigating to AppShell on successful registration")]
         public void IsNavigatingToAppShellOnSuccessfulRegistration()
         {
             Fixture.IdentityServiceMock.Invocations.Clear();
