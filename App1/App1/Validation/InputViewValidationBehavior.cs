@@ -42,7 +42,8 @@ namespace App1.Validation
                 {
                     Text = string.Empty,
                     TextColor = Color.Red,
-                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label))
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                    IsVisible = false
                 };
 
                 var layout = _associatedObject.Parent as StackLayout;
@@ -65,6 +66,7 @@ namespace App1.Validation
                 _associatedObject.TextColor = Color.Red;
 
                 validationLabel.Text = errors.First();
+                validationLabel.IsVisible = true;
             }
             else
             {
@@ -77,6 +79,7 @@ namespace App1.Validation
                 _associatedObject.TextColor = Color.Black;
 
                 validationLabel.Text = string.Empty;
+                validationLabel.IsVisible = false;
             }
         }
 
