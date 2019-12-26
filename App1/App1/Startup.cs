@@ -78,11 +78,11 @@ namespace App1
             services.AddTransient<ItemsViewModel>();
             services.AddTransient<AboutViewModel>();
 
-            services.AddSingleton<LoginPage>();
-            services.AddSingleton<RegistrationPage>();
-            services.AddSingleton<AboutPage>();
+            services.AddTransient<LoginPage>();
+            services.AddTransient<RegistrationPage>();
+            services.AddTransient<AboutPage>();
 
-            services.AddSingleton<AppShell>();
+            services.AddTransient<AppShell>();
             services.AddSingleton<App>();
 
             services.AddTransient<IResourceContainer, ResourceContainer>();
