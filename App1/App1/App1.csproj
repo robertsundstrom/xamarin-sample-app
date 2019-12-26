@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.development.json" />
     <None Remove="appsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Condition="'$(Configuration)' == 'Debug' " Include="appsettings.Development.json" />
     <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
 

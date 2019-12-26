@@ -27,14 +27,20 @@ namespace App1
         public static App Init(Action<HostBuilderContext, IServiceCollection> nativeConfigureServices)
         {
             string systemDir = FileSystem.CacheDirectory;
+
             Utils.ExtractSaveResource("App1.appsettings.json", systemDir);
+            Utils.ExtractSaveResource("App1.appsettings.Development.json", systemDir);
+
             string fullConfig = Path.Combine(systemDir, "App1.appsettings.json");
+            string fullDevConfig = Path.Combine(systemDir, "App1.appsettings.Development.json");
+
 
             var host = new HostBuilder()
                             .ConfigureHostConfiguration(c =>
                             {
                                 c.AddCommandLine(new string[] { $"ContentRoot={FileSystem.AppDataDirectory}" });
                                 c.AddJsonFile(fullConfig);
+                                c.AddJsonFile(fullDevConfig, optional: true);
                             })
                             .ConfigureServices((c, x) =>
                             {
@@ -132,7 +138,10 @@ namespace App1
 
         private static void CreateClientDelegate(IServiceProvider sp, HttpClient client)
         {
-            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            var conf = sp.GetService<IConfiguration>();
+            string mobileAppServiceEndpoint = conf["MobileAppServiceEndpoint"];
+
+            client.BaseAddress = new Uri($"{mobileAppServiceEndpoint}/");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sp.GetRequiredService<ISettingsService>().AuthAccessToken);
         }
 
