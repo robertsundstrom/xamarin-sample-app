@@ -9,6 +9,8 @@ using App1.Services;
 
 using Xamarin.Forms;
 
+using RequiredAttribute = App1.Validation.RequiredAttribute;
+
 namespace App1.ViewModels
 {
     public class RegistrationViewModel : ViewModelBase

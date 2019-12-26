@@ -132,6 +132,9 @@
   <data name="EmailPlaceholder" xml:space="preserve">
     <value>foo@somewhere.com</value>
   </data>
+  <data name="FieldRequiredMessage" xml:space="preserve">
+    <value>Obligatorio</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>First Name</value>
   </data>
@@ -173,9 +176,6 @@
   </data>
   <data name="RegistrationPageTitle" xml:space="preserve">
     <value>Registrar</value>
-  </data>
-  <data name="RequiredInputFieldMessageText" xml:space="preserve">
-    <value>{0} es obligatorio.</value>
   </data>
   <data name="SectionAboutLearnMoreButton" xml:space="preserve">
     <value>Aprender más</value>

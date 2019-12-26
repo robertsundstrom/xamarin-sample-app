@@ -106,6 +106,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Required.
+        /// </summary>
+        public static string FieldRequiredMessage {
+            get {
+                return ResourceManager.GetString("FieldRequiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         public static string FirstName {
@@ -228,15 +237,6 @@ namespace App1.Resources {
         public static string RegistrationPageTitle {
             get {
                 return ResourceManager.GetString("RegistrationPageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} is required..
-        /// </summary>
-        public static string RequiredInputFieldMessageText {
-            get {
-                return ResourceManager.GetString("RequiredInputFieldMessageText", resourceCulture);
             }
         }
         

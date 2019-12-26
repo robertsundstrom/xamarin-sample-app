@@ -1,5 +1,4 @@
-﻿using App1.Resources;
-using App1.Validation;
+﻿using App1.Validation;
 
 namespace App1.ViewModels
 {
@@ -9,7 +8,7 @@ namespace App1.ViewModels
         private string? description;
         private bool isClean = true;
 
-        [Required(ErrorMessageResourceName = nameof(AppResources.RequiredInputFieldMessageText))]
+        [Required]
         public string? Text
         {
             get => text;
