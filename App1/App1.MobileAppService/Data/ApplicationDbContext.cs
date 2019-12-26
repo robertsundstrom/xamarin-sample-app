@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App1.MobileAppService.Data
 {
-    public class ApplicationContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }

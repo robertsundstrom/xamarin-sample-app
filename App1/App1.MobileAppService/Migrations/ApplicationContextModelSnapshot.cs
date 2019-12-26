@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace App1.MobileAppService.Migrations
 {
-    [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

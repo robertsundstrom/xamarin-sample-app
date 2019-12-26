@@ -10,9 +10,9 @@ namespace App1.Models
 {
     public class ItemRepository : IItemRepository
     {
-        private readonly ApplicationContext db;
+        private readonly ApplicationDbContext db;
 
-        public ItemRepository(ApplicationContext db)
+        public ItemRepository(ApplicationDbContext db)
         {
             this.db = db;
         }

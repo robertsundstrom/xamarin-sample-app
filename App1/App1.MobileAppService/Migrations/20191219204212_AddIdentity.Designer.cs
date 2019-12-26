@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace App1.MobileAppService.Migrations
 {
-    [DbContext(typeof(ApplicationContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20191219204212_AddIdentity")]
     partial class AddIdentity
     {

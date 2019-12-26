@@ -33,10 +33,10 @@ namespace App1.MobileAppService
             services.AddControllers()
                     .AddNewtonsoftJson();
 
-            services.AddDbContext<ApplicationContext>
+            services.AddDbContext<ApplicationDbContext>
               (options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")))
                   .AddIdentityCore<User>()
-                 .AddEntityFrameworkStores<ApplicationContext>();
+                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
             services.AddAuthorization(options =>
