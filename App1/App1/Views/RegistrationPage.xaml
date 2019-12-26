@@ -63,7 +63,10 @@
                         <validation:InputViewValidationBehavior PropertyName="ConfirmPassword" />
                     </Entry.Behaviors>
                 </Entry>
-                <Button Command="{Binding RegisterCommand}" Text="{x:Static resources:AppResources.RegistrationPageButton}" />
+                <Button
+                    Command="{Binding RegisterCommand}"
+                    Style="{DynamicResource PrimaryButton}"
+                    Text="{x:Static resources:AppResources.RegistrationPageButton}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -8,44 +8,58 @@
     xmlns:resources="clr-namespace:App1.Resources"
     xmlns:validation="clr-namespace:App1.Validation"
     Title="{x:Static resources:AppResources.LoginPageTitle}"
+    BackgroundColor="{DynamicResource NavigationBarColor}"
     NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
+
     <ContentPage.Content>
-        <StackLayout
-            Padding="50"
-            Spacing="20"
-            VerticalOptions="Center">
-            <Label
-                Margin="0,0,0,60"
-                FontSize="Title"
-                HorizontalTextAlignment="Center"
-                Text="{x:Static resources:AppResources.AppName}" />
+        <ScrollView>
+            <StackLayout
+                Padding="50"
+                Spacing="20"
+                VerticalOptions="Center">
+                <Label
+                    Margin="0,0,0,60"
+                    FontSize="Title"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resources:AppResources.AppName}" />
 
-            <Label IsVisible="{Binding ShowLoginNoticeVisible}" Text="{x:Static resources:AppResources.LoginPageLoginNotice}" />
-            <Label Text="{x:Static resources:AppResources.Email}" />
-            <Entry
-                x:Name="emailEntry"
-                Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
-                Text="{Binding Email, Mode=TwoWay}">
-                <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="Email" />
-                </Entry.Behaviors>
-            </Entry>
-            <Label Text="{x:Static resources:AppResources.Password}" />
-            <Entry
-                x:Name="passwordEntry"
-                IsPassword="true"
-                Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
-                Text="{Binding Password, Mode=TwoWay}">
-                <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="Password" />
-                </Entry.Behaviors>
-            </Entry>
-            <Button Command="{Binding LoginCommand}" Text="{x:Static resources:AppResources.LoginPageLoginButton}" />
+                <Label IsVisible="{Binding ShowLoginNoticeVisible}" Text="{x:Static resources:AppResources.LoginPageLoginNotice}" />
+                <Label Text="{x:Static resources:AppResources.Email}" />
+                <Entry
+                    x:Name="emailEntry"
+                    Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                    Text="{Binding Email, Mode=TwoWay}" />
+                <Label Text="{x:Static resources:AppResources.Password}" />
+                <Entry
+                    x:Name="passwordEntry"
+                    IsPassword="true"
+                    Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
+                    Text="{Binding Password, Mode=TwoWay}" />
+                <Button
+                    Command="{Binding LoginCommand}"
+                    Style="{DynamicResource PrimaryButton}"
+                    Text="{x:Static resources:AppResources.LoginPageLoginButton}" />
+                <Button
+                    Style="{DynamicResource SecondaryButton}"
+                    Command="{Binding NavigateToRegistrationPageCommand}"
+                    Text="{x:Static resources:AppResources.LoginPageTitleSignUpButton}" />
+                <Label HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="{x:Static resources:AppResources.SectionAboutTitle}"
+                                TextColor="{DynamicResource PrimaryTextColor}"
+                                TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateToAboutPageCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </ScrollView>
 
-            <Button Command="{Binding NavigateToRegistrationPageCommand}" Text="{x:Static resources:AppResources.LoginPageTitleSignUpButton}" />
-            <Button Command="{Binding NavigateToAboutPageCommand}" Text="{x:Static resources:AppResources.SectionAboutTitle}" />
-
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
