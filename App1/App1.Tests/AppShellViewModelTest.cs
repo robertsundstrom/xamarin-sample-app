@@ -1,0 +1,49 @@
+﻿
+using App1.ViewModels;
+
+using Moq;
+
+using Xunit;
+
+namespace App1.Tests
+{
+    public class AppShellViewModelTest : IClassFixture<AppShellViewModelFixture>
+    {
+        public AppShellViewModelFixture Fixture { get; }
+
+        public AppShellViewModelTest(AppShellViewModelFixture fixture)
+        {
+            Fixture = fixture;
+        }
+
+        [Fact]
+        public void IsLoggingOutOnCommand()
+        {
+            Fixture.IdentityServiceMock.Invocations.Clear();
+            Fixture.NavigationServiceMock.Invocations.Clear();
+
+            var appShellViewModel = new AppShellViewModel(
+                Fixture.IdentityServiceMock.Object,
+                Fixture.NavigationServiceMock.Object);
+
+            appShellViewModel.LogOutCommand.Execute(null);
+
+            Fixture.IdentityServiceMock.Verify(x => x.LogOutAsync(), Times.Once);
+        }
+
+        [Fact]
+        public void IsNavigatingOnLogOut()
+        {
+            Fixture.IdentityServiceMock.Invocations.Clear();
+            Fixture.NavigationServiceMock.Invocations.Clear();
+
+            var appShellViewModel = new AppShellViewModel(
+                Fixture.IdentityServiceMock.Object,
+                Fixture.NavigationServiceMock.Object);
+
+            appShellViewModel.LogOutCommand.Execute(null);
+
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<LoginViewModel, LoginViewModelArgs>(It.IsAny<LoginViewModelArgs>()), Times.Once);
+        }
+    }
+}

@@ -18,8 +18,8 @@ namespace App1.ViewModels
         private readonly INativeCalls nativeCalls;
         private string? email;
         private string? password;
-        private bool rememberMe;
         private bool showLoginNoticeVisible;
+        private bool isClean = true;
 
         public LoginViewModel(
             INavigationService navigationService,
@@ -29,7 +29,7 @@ namespace App1.ViewModels
             _navigationService = navigationService;
             this.identityService = identityService;
             this.nativeCalls = nativeCalls;
-            LoginCommand = new Command(async () => await ExecuteLoginCommand());
+            LoginCommand = new Command(async () => await ExecuteLoginCommand(), () => CanSubmit);
             NavigateToRegistrationPageCommand = new Command(async () => await navigationService.PushAsync<ViewModels.RegistrationViewModel>());
         }
 
@@ -82,7 +82,9 @@ namespace App1.ViewModels
             set
             {
                 ValidateProperty(value);
+                isClean = false;
                 SetProperty(ref email, value);
+                LoginCommand.ChangeCanExecute();
             }
         }
 
@@ -93,24 +95,20 @@ namespace App1.ViewModels
             set
             {
                 ValidateProperty(value);
+                isClean = false;
                 SetProperty(ref password, value);
+                LoginCommand.ChangeCanExecute();
             }
-        }
-
-        public bool RememberMe
-        {
-            get => rememberMe;
-            set => SetProperty(ref rememberMe, value);
         }
 
         protected override void ValidateProperty<T>(T value, [CallerMemberName] string? propertyName = null)
         {
             base.ValidateProperty(value, propertyName);
 
-            OnPropertyChanged("IsSubmitEnabled");
+            OnPropertyChanged(nameof(CanSubmit));
         }
 
-        public bool IsSubmitEnabled => !HasErrors;
+        public bool CanSubmit => !isClean && Validate();
 
         public bool ShowLoginNoticeVisible
         {

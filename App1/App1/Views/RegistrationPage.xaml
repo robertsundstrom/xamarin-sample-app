@@ -50,7 +50,6 @@
             </Entry>
             <Button
                 Command="{Binding RegisterCommand}"
-                IsEnabled="{Binding IsSubmitEnabled}"
                 Text="{x:Static resources:AppResources.RegistrationPageButton}" />
         </StackLayout>
     </ContentPage.Content>

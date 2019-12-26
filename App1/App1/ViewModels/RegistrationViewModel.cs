@@ -15,6 +15,7 @@ namespace App1.ViewModels
         private readonly IIdentityService _identityService;
         private readonly INavigationService _navigationService;
         private readonly INativeCalls nativeCalls;
+        private bool isClean = true;
         private string? email;
         private string? password;
         private string? firstName;
@@ -25,7 +26,7 @@ namespace App1.ViewModels
             _identityService = identityService;
             _navigationService = navigationService;
             this.nativeCalls = nativeCalls;
-            RegisterCommand = new Command(async () => await ExecuteRegisterCommand());
+            RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => CanSubmit);
         }
 
         private async Task ExecuteRegisterCommand()
@@ -51,7 +52,6 @@ namespace App1.ViewModels
             catch (Exception exc)
             {
                 nativeCalls.OpenToast(exc.Message);
-                nativeCalls.OpenToast("Something went wrong.");
             }
         }
 
@@ -86,7 +86,9 @@ namespace App1.ViewModels
             set
             {
                 ValidateProperty(value);
+                isClean = false;
                 SetProperty(ref firstName, value);
+                RegisterCommand.ChangeCanExecute();
             }
         }
 
@@ -97,7 +99,9 @@ namespace App1.ViewModels
             set
             {
                 ValidateProperty(value);
+                isClean = false;
                 SetProperty(ref lastName, value);
+                RegisterCommand.ChangeCanExecute();
             }
         }
 
@@ -109,7 +113,9 @@ namespace App1.ViewModels
             set
             {
                 ValidateProperty(value);
+                isClean = false;
                 SetProperty(ref email, value);
+                RegisterCommand.ChangeCanExecute();
             }
         }
 
@@ -120,7 +126,9 @@ namespace App1.ViewModels
             set
             {
                 ValidateProperty(value);
+                isClean = false;
                 SetProperty(ref password, value);
+                RegisterCommand.ChangeCanExecute();
             }
         }
 
@@ -128,9 +136,9 @@ namespace App1.ViewModels
         {
             base.ValidateProperty(value, propertyName);
 
-            OnPropertyChanged("IsSubmitEnabled");
+            OnPropertyChanged(nameof(CanSubmit));
         }
 
-        public bool IsSubmitEnabled => !HasErrors;
+        public bool CanSubmit => !isClean && Validate();
     }
 }

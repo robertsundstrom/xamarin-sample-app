@@ -34,10 +34,7 @@
                     <validation:InputViewValidationBehavior PropertyName="Password" />
                 </Entry.Behaviors>
             </Entry>
-            <Button
-                Command="{Binding LoginCommand}"
-                IsEnabled="{Binding IsSubmitEnabled}"
-                Text="{x:Static resources:AppResources.LoginPageLoginButton}" />
+            <Button Command="{Binding LoginCommand}" Text="{x:Static resources:AppResources.LoginPageLoginButton}" />
             <Label x:Name="messageLabel" />
         </StackLayout>
     </ContentPage.Content>

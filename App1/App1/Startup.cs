@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Resources;
 
 using App1.Helpers;
 using App1.MobileAppService.Client;
@@ -20,7 +19,6 @@ using Polly;
 
 using Xamarin.Essentials;
 
-[assembly: NeutralResourcesLanguage("en-US")]
 
 namespace App1
 {
