@@ -11,58 +11,60 @@
     mc:Ignorable="d">
 
     <ContentPage.Content>
-        <StackLayout
-            Padding="50"
-            Spacing="20"
-            VerticalOptions="Center">
-            <Label Text="{x:Static resources:AppResources.FirstName}" />
-            <Entry
-                x:Name="firstNameEntry"
-                Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
-                Text="{Binding FirstName, Mode=TwoWay}">
-                <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="FirstName" />
-                </Entry.Behaviors>
-            </Entry>
-            <Label Text="{x:Static resources:AppResources.LastName}" />
-            <Entry
-                x:Name="lastNameEntry"
-                Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
-                Text="{Binding LastName, Mode=TwoWay}">
-                <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="LastName" />
-                </Entry.Behaviors>
-            </Entry>
-            <Label Text="{x:Static resources:AppResources.Email}" />
-            <Entry
-                x:Name="emailEntry"
-                Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
-                Text="{Binding Email, Mode=TwoWay}">
-                <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="Email" />
-                </Entry.Behaviors>
-            </Entry>
-            <Label Text="{x:Static resources:AppResources.Password}" />
-            <Entry
-                x:Name="passwordEntry"
-                IsPassword="true"
-                Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
-                Text="{Binding Password, Mode=TwoWay}">
-                <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="Password" />
-                </Entry.Behaviors>
-            </Entry>
-            <Label Text="{x:Static resources:AppResources.ConfirmPassword}" />
-            <Entry
-                x:Name="confirmPasswordEntry"
-                IsPassword="true"
-                Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
-                Text="{Binding ConfirmPassword, Mode=TwoWay}">
-                <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="ConfirmPassword" />
-                </Entry.Behaviors>
-            </Entry>
-            <Button Command="{Binding RegisterCommand}" Text="{x:Static resources:AppResources.RegistrationPageButton}" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout
+                Padding="50"
+                Spacing="20"
+                VerticalOptions="Center">
+                <Label Text="{x:Static resources:AppResources.FirstName}" />
+                <Entry
+                    x:Name="firstNameEntry"
+                    Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
+                    Text="{Binding FirstName, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <validation:InputViewValidationBehavior PropertyName="FirstName" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="{x:Static resources:AppResources.LastName}" />
+                <Entry
+                    x:Name="lastNameEntry"
+                    Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
+                    Text="{Binding LastName, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <validation:InputViewValidationBehavior PropertyName="LastName" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="{x:Static resources:AppResources.Email}" />
+                <Entry
+                    x:Name="emailEntry"
+                    Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                    Text="{Binding Email, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <validation:InputViewValidationBehavior PropertyName="Email" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="{x:Static resources:AppResources.Password}" />
+                <Entry
+                    x:Name="passwordEntry"
+                    IsPassword="true"
+                    Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
+                    Text="{Binding Password, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <validation:InputViewValidationBehavior PropertyName="Password" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="{x:Static resources:AppResources.ConfirmPassword}" />
+                <Entry
+                    x:Name="confirmPasswordEntry"
+                    IsPassword="true"
+                    Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
+                    Text="{Binding ConfirmPassword, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <validation:InputViewValidationBehavior PropertyName="ConfirmPassword" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Button Command="{Binding RegisterCommand}" Text="{x:Static resources:AppResources.RegistrationPageButton}" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
