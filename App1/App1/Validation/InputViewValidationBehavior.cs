@@ -31,7 +31,7 @@ namespace App1.Validation
 
         private void Process(ValidationBase source)
         {
-            if (_associatedObject == null || validationLabel == null)
+            if (_associatedObject == null)
             {
                 return;
             }
