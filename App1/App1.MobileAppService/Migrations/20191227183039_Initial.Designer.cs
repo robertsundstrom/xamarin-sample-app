@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App1.MobileAppService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191219204212_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20191227183039_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,9 +38,11 @@ namespace App1.MobileAppService.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")

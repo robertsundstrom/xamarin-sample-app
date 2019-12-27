@@ -127,6 +127,7 @@ namespace App1.ViewModels
         }
 
         [Required]
+        [StringLength(8)]
         public string? Password
         {
             get => password;

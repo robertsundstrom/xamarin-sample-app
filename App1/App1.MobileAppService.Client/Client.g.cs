@@ -1071,7 +1071,8 @@ namespace App1.MobileAppService.Client
         public string Email { get; set; }
     
         [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(8)]
         public string Password { get; set; }
     
     

@@ -11,9 +11,11 @@ namespace App1.MobileAppService.ViewModels
         public string LastName { get; set; }
 
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
+        [StringLength(8)]
         public string Password { get; set; }
     }
 }

@@ -36,9 +36,11 @@ namespace App1.MobileAppService.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
