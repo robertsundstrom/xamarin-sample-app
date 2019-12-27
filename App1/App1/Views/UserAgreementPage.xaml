@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App1.Views.UserAgreementPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
+    Title="{x:Static resources:AppResources.SectionUserAgreementTitle}"
+    mc:Ignorable="d">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding CloseCommand}"
+            Order="Primary"
+            Priority="0"
+            Text="{x:Static resources:AppResources.SectionUserAgreementCloseButton}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Label
+                Padding="20,0"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding Text}"
+                VerticalOptions="CenterAndExpand" />
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

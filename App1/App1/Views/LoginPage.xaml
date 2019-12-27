@@ -18,31 +18,37 @@
                 Padding="50"
                 Spacing="20"
                 VerticalOptions="Center">
-                <Label
-                    Margin="0,0,0,60"
-                    FontSize="Title"
-                    HorizontalTextAlignment="Center"
-                    Text="{x:Static resources:AppResources.AppName}" />
+                <StackLayout Margin="0,0,0,20" Spacing="20">
+                    <Label
+                        Margin="0,0,0,60"
+                        FontSize="Title"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.AppName}" />
 
-                <Label IsVisible="{Binding ShowLoginNoticeVisible}" Text="{x:Static resources:AppResources.LoginPageLoginNotice}" />
-                <Label Text="{x:Static resources:AppResources.Email}" />
-                <Entry
-                    x:Name="emailEntry"
-                    Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
-                    Text="{Binding Email, Mode=TwoWay}" />
-                <Label Text="{x:Static resources:AppResources.Password}" />
-                <Entry
-                    x:Name="passwordEntry"
-                    IsPassword="true"
-                    Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
-                    Text="{Binding Password, Mode=TwoWay}" />
+                    <Label IsVisible="{Binding ShowLoginNoticeVisible}" Text="{x:Static resources:AppResources.LoginPageLoginNotice}" />
+                    <Label Text="{x:Static resources:AppResources.Email}" />
+                    <Entry
+                        x:Name="emailEntry"
+                        Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                        Text="{Binding Email, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <validation:InputViewValidationBehavior PropertyName="Email" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{x:Static resources:AppResources.Password}" />
+                    <Entry
+                        x:Name="passwordEntry"
+                        IsPassword="true"
+                        Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
+                        Text="{Binding Password, Mode=TwoWay}" />
+                </StackLayout>
                 <Button
                     Command="{Binding LoginCommand}"
                     Style="{DynamicResource PrimaryButton}"
                     Text="{x:Static resources:AppResources.LoginPageLoginButton}" />
                 <Button
-                    Style="{DynamicResource SecondaryButton}"
                     Command="{Binding NavigateToRegistrationPageCommand}"
+                    Style="{DynamicResource SecondaryButton}"
                     Text="{x:Static resources:AppResources.LoginPageTitleSignUpButton}" />
                 <Label HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
                     <Label.FormattedText>

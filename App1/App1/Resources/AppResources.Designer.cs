@@ -133,6 +133,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I accept the .
+        /// </summary>
+        public static string IAcceptTheUserAgreement {
+            get {
+                return ResourceManager.GetString("IAcceptTheUserAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
         public static string LastName {
@@ -246,6 +255,15 @@ namespace App1.Resources {
         public static string SectionAboutLearnMoreButton {
             get {
                 return ResourceManager.GetString("SectionAboutLearnMoreButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Agreement.
+        /// </summary>
+        public static string SectionAboutShowUserAgreementButton {
+            get {
+                return ResourceManager.GetString("SectionAboutShowUserAgreementButton", resourceCulture);
             }
         }
         
@@ -403,11 +421,38 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string SectionUserAgreementCloseButton {
+            get {
+                return ResourceManager.GetString("SectionUserAgreementCloseButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Agreement.
+        /// </summary>
+        public static string SectionUserAgreementTitle {
+            get {
+                return ResourceManager.GetString("SectionUserAgreementTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Text.
         /// </summary>
         public static string Text {
             get {
                 return ResourceManager.GetString("Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Agreement.
+        /// </summary>
+        public static string UserAgreement {
+            get {
+                return ResourceManager.GetString("UserAgreement", resourceCulture);
             }
         }
     }

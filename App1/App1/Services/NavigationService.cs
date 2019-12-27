@@ -44,7 +44,7 @@ namespace App1.Services
 
         public async Task PopModalAsync()
         {
-            await app.MainPage.Navigation.PopAsync();
+            await app.MainPage.Navigation.PopModalAsync();
         }
 
         public async Task PopToRootAsync()
@@ -65,13 +65,13 @@ namespace App1.Services
         public async Task PushModalAsync<TViewModel>() where TViewModel : ViewModelBase
         {
             var page = await InitializePageAsync<TViewModel>(null);
-            await app.MainPage.Navigation.PushModalAsync(page);
+            await app.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
         }
 
         public async Task PushModalAsync<TViewModel, TArg>(TArg arg) where TViewModel : ViewModelBase<TArg>
         {
             var page = await InitializePageAsync<TViewModel>(arg);
-            await app.MainPage.Navigation.PushModalAsync(page);
+            await app.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
         }
 
         private async Task PushCoreAsync<TViewModel>(object? arg) where TViewModel : ViewModelBase
@@ -80,15 +80,15 @@ namespace App1.Services
 
             if (page is AppShell)
             {
-                app.MainPage = page;
 
+                app.MainPage = page;
             }
             else
             {
                 if (page is LoginPage)
                 {
-                    app.MainPage = new CustomNavigationView(page);
 
+                    app.MainPage = new CustomNavigationView(page);
                 }
                 else
                 {

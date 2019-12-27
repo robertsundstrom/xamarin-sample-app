@@ -23,6 +23,7 @@ namespace App1.ViewModels
         private string? firstName;
         private string? lastName;
         private string? confirmPassword;
+        private bool isAcceptingTheUserAgreement;
 
         public RegistrationViewModel(IIdentityService identityService, INavigationService navigationService, INativeCalls nativeCalls)
         {
@@ -30,6 +31,7 @@ namespace App1.ViewModels
             _navigationService = navigationService;
             this.nativeCalls = nativeCalls;
             RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => CanSubmit);
+            ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
         }
 
         private async Task ExecuteRegisterCommand()
@@ -80,6 +82,8 @@ namespace App1.ViewModels
         }
 
         public Command RegisterCommand { get; }
+
+        public Command ShowUserAgreementCommand { get; }
 
 
         [Required]
@@ -148,7 +152,19 @@ namespace App1.ViewModels
             }
         }
 
+        [Required]
+        public bool IsAcceptingTheUserAgreement
+        {
+            get => isAcceptingTheUserAgreement;
+            set
+            {
+                ValidateProperty(value);
+                isClean = false;
+                SetProperty(ref isAcceptingTheUserAgreement, value);
+                RegisterCommand.ChangeCanExecute();
+            }
+        }
 
-        private bool CanSubmit => !isClean && !HasErrors;
+        private bool CanSubmit => !isClean && Validate();
     }
 }

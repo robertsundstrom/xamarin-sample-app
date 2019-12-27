@@ -90,6 +90,22 @@
                     Command="{Binding OpenWebCommand}"
                     Text="{x:Static resources:AppResources.SectionAboutLearnMoreButton}"
                     TextColor="White" />
+                <Label
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="{x:Static resources:AppResources.SectionAboutShowUserAgreementButton}"
+                                TextColor="{DynamicResource PrimaryTextColor}"
+                                TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowUserAgreementCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
             </StackLayout>
         </ScrollView>
     </Grid>

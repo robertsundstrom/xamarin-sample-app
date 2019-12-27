@@ -141,6 +141,9 @@
   <data name="FirstNamePlaceholder" xml:space="preserve">
     <value>John</value>
   </data>
+  <data name="IAcceptTheUserAgreement" xml:space="preserve">
+    <value>I accept the </value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Last Name</value>
   </data>
@@ -179,6 +182,9 @@
   </data>
   <data name="SectionAboutLearnMoreButton" xml:space="preserve">
     <value>Learn more</value>
+  </data>
+  <data name="SectionAboutShowUserAgreementButton" xml:space="preserve">
+    <value>User Agreement</value>
   </data>
   <data name="SectionAboutTitle" xml:space="preserve">
     <value>About</value>
@@ -231,7 +237,16 @@
   <data name="SectionNewItemTitle" xml:space="preserve">
     <value>New Item</value>
   </data>
+  <data name="SectionUserAgreementCloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SectionUserAgreementTitle" xml:space="preserve">
+    <value>User Agreement</value>
+  </data>
   <data name="Text" xml:space="preserve">
     <value>Text</value>
+  </data>
+  <data name="UserAgreement" xml:space="preserve">
+    <value>User Agreement</value>
   </data>
 </root>

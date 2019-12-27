@@ -104,12 +104,12 @@ namespace App1.ViewModels
             }
         }
 
-        private bool CanSubmit => !isClean && !HasErrors;
-
         public bool ShowLoginNoticeVisible
         {
             get => showLoginNoticeVisible;
             set => SetProperty(ref showLoginNoticeVisible, value);
         }
+
+        private bool CanSubmit => !isClean && Validate();
     }
 }

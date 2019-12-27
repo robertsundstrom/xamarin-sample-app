@@ -76,10 +76,12 @@ namespace App1
             services.AddTransient<ViewModels.RegistrationViewModel>();
 
             services.AddTransient<ItemsViewModel>();
+            services.AddTransient<UserAgreementViewModel>();
             services.AddTransient<AboutViewModel>();
 
             services.AddTransient<LoginPage>();
             services.AddTransient<RegistrationPage>();
+            services.AddTransient<UserAgreementPage>();
             services.AddTransient<AboutPage>();
 
             services.AddTransient<AppShell>();
