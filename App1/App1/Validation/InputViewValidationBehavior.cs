@@ -76,10 +76,24 @@ namespace App1.Validation
                     _associatedObject.Effects.Remove(borderEffect);
                 }
 
-                _associatedObject.TextColor = Color.Black;
+                SetTextColor();
 
                 validationLabel.Text = string.Empty;
                 validationLabel.IsVisible = false;
+            }
+        }
+
+        private void SetTextColor()
+        {
+            if (App.Current.Resources is ResourceDictionary resourceDictionary)
+            {
+                if (resourceDictionary.TryGetValue("PrimaryTextColor", out object value))
+                {
+                    if (_associatedObject != null)
+                    {
+                        _associatedObject.TextColor = (Color)value;
+                    }
+                }
             }
         }
 
