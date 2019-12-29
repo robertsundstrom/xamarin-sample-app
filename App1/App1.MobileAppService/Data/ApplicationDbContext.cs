@@ -14,5 +14,10 @@ namespace App1.MobileAppService.Data
         }
 
         public DbSet<Item> Items { get; set; }
+
+        public DbSet<Conversation> Conversations { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
+
     }
 }

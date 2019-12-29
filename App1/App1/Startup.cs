@@ -95,7 +95,6 @@ namespace App1
                 {
                     return true;
                 }
-
                 return sslPolicyErrors == System.Net.Security.SslPolicyErrors.None;
             };
 #endif
@@ -156,6 +155,24 @@ namespace App1
 
                 return new ItemsHubClient(hubConnection);
             });
+
+            services.AddSingleton<IChatNotifier, ChatNotifier>(sp =>
+            {
+                var conf = sp.GetService<IConfiguration>();
+                var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
+
+                var hubConnection = new HubConnectionBuilder().WithUrl($"{appServiceConfig.ServiceEndpoint}/hubs/chat", opt =>
+                {
+                    //opt.Transports = HttpTransportType.WebSockets;
+                    opt.AccessTokenProvider = () => Task.FromResult(sp.GetRequiredService<ISettingsService>().AuthAccessToken);
+                })
+                        .WithAutomaticReconnect()
+                        .Build();
+
+                hubConnection.StartAsync();
+
+                return new ChatNotifier(hubConnection);
+            });
         }
 
         private static void AddHttpClients(IServiceCollection services)
@@ -179,6 +196,24 @@ namespace App1
                 }));
 
             services.AddHttpClient<IItemsClient, ItemsClient>(CreateClientDelegate)
+                .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                }));
+
+            services.AddHttpClient<IConversationsClient, ConversationsClient>(CreateClientDelegate)
+                .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                }));
+
+            services.AddHttpClient<IMessagesClient, MessagesClient>(CreateClientDelegate)
                 .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
                 .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
                 {
@@ -227,7 +262,10 @@ namespace App1
             var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
 
             client.BaseAddress = new Uri($"{appServiceConfig.ServiceEndpoint}/");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sp.GetRequiredService<ISettingsService>().AuthAccessToken);
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(
+                    "Bearer",
+                    sp.GetRequiredService<ISettingsService>().AuthAccessToken);
         }
 
         public static HttpClientHandler GetClientHandler()

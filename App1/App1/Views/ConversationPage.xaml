@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App1.Views.ConversationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
+    Title="{Binding Title}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <CollectionView
+                x:Name="MessagesListView"
+                Grid.Row="0"
+                ItemsSource="{Binding Messages}"
+                ItemsUpdatingScrollMode="KeepLastItemInView"
+                VerticalOptions="Fill">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label
+                                d:Text="Item description"
+                                FontSize="13"
+                                LineBreakMode="TailTruncation"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                Text="{Binding Sender.Name}"
+                                TextColor="White" />
+                            <StackLayout Orientation="Horizontal">
+                                <Frame
+                                    BackgroundColor="Gray"
+                                    CornerRadius="25"
+                                    HeightRequest="20"
+                                    WidthRequest="20" />
+                                <Frame BackgroundColor="Blue" CornerRadius="5">
+                                    <Label
+                                        d:Text="{Binding .}"
+                                        FontSize="16"
+                                        LineBreakMode="CharacterWrap"
+                                        Style="{DynamicResource ListItemTextStyle}"
+                                        Text="{Binding Text}"
+                                        TextColor="White" />
+                                </Frame>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    d:Text="Item description"
+                                    FontSize="13"
+                                    HorizontalOptions="EndAndExpand"
+                                    LineBreakMode="TailTruncation"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    Text="{Binding SendDate}"
+                                    TextColor="White" />
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <StackLayout Grid.Row="1" Margin="0,0,0,20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Editor
+                        Grid.Column="0"
+                        AutoSize="TextChanges"
+                        IsSpellCheckEnabled="True"
+                        Placeholder="Message"
+                        Text="{Binding Text}" />
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding PostMessageCommand}"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        Text="&#xf0190;" />
+                </Grid>
+            </StackLayout>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

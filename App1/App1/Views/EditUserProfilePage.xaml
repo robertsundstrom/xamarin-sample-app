@@ -42,6 +42,38 @@
                         </Entry.Behaviors>
                     </Entry>
                 </StackLayout>
+                <!--<StackLayout Margin="0,30" Spacing="20">
+                    <Label Text="{x:Static resources:AppResources.Email}" />
+                    <Entry
+                        x:Name="emailEntry"
+                        Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                        Text="{Binding Email, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:InputValidationBehavior PropertyName="Email" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{x:Static resources:AppResources.Password}" />
+                    <Entry
+                        x:Name="passwordEntry"
+                        IsPassword="true"
+                        Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
+                        Text="{Binding Password, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:InputValidationBehavior PropertyName="Password" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{x:Static resources:AppResources.ConfirmPassword}" />
+                    <Entry
+                        x:Name="confirmPasswordEntry"
+                        IsPassword="true"
+                        Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
+                        Text="{Binding ConfirmPassword, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:InputValidationBehavior PropertyName="ConfirmPassword" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>-->
+
                 <Button
                     Command="{Binding UpdateUserProfileCommand}"
                     Style="{DynamicResource PrimaryButton}"

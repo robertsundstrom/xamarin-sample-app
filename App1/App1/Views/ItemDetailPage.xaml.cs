@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 
+using App1.Resources;
 using App1.Services;
 using App1.ViewModels;
 
@@ -29,10 +30,10 @@ namespace App1.Views
         private async void Delete_Clicked(object sender, System.EventArgs e)
         {
             if (await DisplayAlert(
-                localizationService.GetString("SectionItemDetailsDeleteConfirmationText"),
+                localizationService.GetString(nameof(AppResources.SectionItemDetailsDeleteConfirmationText)),
                 string.Empty,
-                localizationService.GetString("SectionItemDetailsDeleteConfirmationTextYes"),
-                localizationService.GetString("SectionItemDetailsDeleteConfirmationTextNo")))
+                localizationService.GetString(nameof(AppResources.SectionItemDetailsDeleteConfirmationTextYes)),
+                localizationService.GetString(nameof(AppResources.SectionItemDetailsDeleteConfirmationTextNo))))
             {
                 MessagingCenter.Send(this, "DeleteItem", viewModel.Item);
                 await Navigation.PopAsync();

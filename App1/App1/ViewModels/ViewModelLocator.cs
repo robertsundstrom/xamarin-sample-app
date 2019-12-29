@@ -13,5 +13,7 @@ namespace App1.ViewModels
         public static AboutViewModel About => ServiceProvider.GetRequiredService<AboutViewModel>();
 
         public static UserProfileViewModel UserProfile => ServiceProvider.GetRequiredService<UserProfileViewModel>();
+
+        public static ConversationsViewModel Conversations => ServiceProvider.GetRequiredService<ConversationsViewModel>();
     }
 }

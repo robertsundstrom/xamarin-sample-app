@@ -12,11 +12,18 @@
     MenuItemTemplate="{DynamicResource FlyoutTemplates}"
     mc:Ignorable="d">
 
-    <FlyoutItem Title="{x:Static resources:AppResources.SectionBrowseTitle}" FlyoutIcon="tab_feed.png">
-        <Tab Title="{x:Static resources:AppResources.SectionBrowseTitle}" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+    <FlyoutItem Title="{x:Static resources:AppResources.SectionConversationsTitle}" FlyoutIcon="tab_feed.png">
+        <Tab Title="{x:Static resources:AppResources.SectionConversationsTitle}" Icon="tab_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:ConversationsPage}" />
         </Tab>
     </FlyoutItem>
+
+    <ShellContent Title="{x:Static resources:AppResources.SectionUserProfileTitle}" ContentTemplate="{DataTemplate local:UserProfilePage}" />
+
+    <ShellContent
+        Title="{x:Static resources:AppResources.SectionBrowseTitle}"
+        ContentTemplate="{DataTemplate local:ItemsPage}"
+        Icon="tab_feed.png" />
 
     <ShellContent Title="{x:Static resources:AppResources.SectionUserProfileTitle}" ContentTemplate="{DataTemplate local:UserProfilePage}" />
 

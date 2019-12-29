@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -126,6 +129,19 @@ namespace App1.MobileAppService
             services.AddTransient<IJwtTokenService, JwtTokenService>();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
+            
+            services.AddSingleton<IProfileImageUploader>(sp =>
+            {
+                var azureConfig = Configuration.GetSection("Azure").Get<AzureConfiguration>();
+                string storageConnectionString = azureConfig?.BlobStorage?.ConnectionString;
+                CloudStorageAccount storageAccount;
+                if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
+                {
+                    return new ProfileImageUploader(storageAccount.CreateCloudBlobClient());
+                }
+
+                throw new Exception();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -145,6 +161,7 @@ namespace App1.MobileAppService
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ItemsHub>("/itemsHub");
+                endpoints.MapHub<ChatHub>("/hubs/chat");
             });
 
             app.UseOpenApi();

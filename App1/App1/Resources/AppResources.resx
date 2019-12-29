@@ -240,6 +240,27 @@
   <data name="SectionBrowseTitle" xml:space="preserve">
     <value>Browse</value>
   </data>
+  <data name="SectionConversationsModalStartConversationButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationButtonStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationDescription" xml:space="preserve">
+    <value>Enter a name for the new conversation.</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationNamePlaceholder" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationTitle" xml:space="preserve">
+    <value>Start conversation</value>
+  </data>
+  <data name="SectionConversationsNewConversationButton" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="SectionConversationsTitle" xml:space="preserve">
+    <value>Conversations</value>
+  </data>
   <data name="SectionItemDetailsDeleteButton" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -301,7 +322,7 @@
     <value>User Agreement</value>
   </data>
   <data name="UserProfileUpdatedMessage" xml:space="preserve">
-    <value>User Profile was updated.</value>
+    <value>User Profile has been updated.</value>
   </data>
   <data name="SavePasswordButton" xml:space="preserve">
     <value>Save</value>

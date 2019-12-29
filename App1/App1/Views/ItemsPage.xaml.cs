@@ -2,6 +2,7 @@
 using System.ComponentModel;
 
 using App1.MobileAppService.Client;
+using App1.Resources;
 using App1.Services;
 using App1.ViewModels;
 
@@ -61,10 +62,10 @@ namespace App1.Views
             var mi = ((MenuItem)sender);
 
             if (await DisplayAlert(
-                localizationService.GetString("SectionItemDetailsDeleteConfirmationText"),
+                localizationService.GetString(nameof(AppResources.SectionItemDetailsDeleteConfirmationText)),
                 string.Empty,
-                localizationService.GetString("SectionItemDetailsDeleteConfirmationTextYes"),
-                localizationService.GetString("SectionItemDetailsDeleteConfirmationTextNo")))
+                localizationService.GetString(nameof(AppResources.SectionItemDetailsDeleteConfirmationTextYes)),
+                localizationService.GetString(nameof(AppResources.SectionItemDetailsDeleteConfirmationTextNo))))
             {
                 MessagingCenter.Send(this, "DeleteItem", (Item)mi.CommandParameter);
             }

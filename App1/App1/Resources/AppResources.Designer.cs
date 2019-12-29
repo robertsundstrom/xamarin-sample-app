@@ -475,6 +475,69 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string SectionConversationsModalStartConversationButtonCancel {
+            get {
+                return ResourceManager.GetString("SectionConversationsModalStartConversationButtonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string SectionConversationsModalStartConversationButtonStart {
+            get {
+                return ResourceManager.GetString("SectionConversationsModalStartConversationButtonStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a name for the new conversation..
+        /// </summary>
+        public static string SectionConversationsModalStartConversationDescription {
+            get {
+                return ResourceManager.GetString("SectionConversationsModalStartConversationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string SectionConversationsModalStartConversationNamePlaceholder {
+            get {
+                return ResourceManager.GetString("SectionConversationsModalStartConversationNamePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start conversation.
+        /// </summary>
+        public static string SectionConversationsModalStartConversationTitle {
+            get {
+                return ResourceManager.GetString("SectionConversationsModalStartConversationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string SectionConversationsNewConversationButton {
+            get {
+                return ResourceManager.GetString("SectionConversationsNewConversationButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conversations.
+        /// </summary>
+        public static string SectionConversationsTitle {
+            get {
+                return ResourceManager.GetString("SectionConversationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string SectionItemDetailsDeleteButton {
@@ -637,7 +700,7 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User Profile was updated..
+        ///   Looks up a localized string similar to User Profile has been updated..
         /// </summary>
         public static string UserProfileUpdatedMessage {
             get {

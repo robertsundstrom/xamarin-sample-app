@@ -37,7 +37,7 @@ namespace App1.MobileAppService.Controllers
                 UserName = vm.Email,
                 Email = vm.Email,
                 RegistrationDate = DateTime.Now
-            }, vm.Password); ;
+            }, vm.Password);
 
             if (!result.Succeeded)
             {

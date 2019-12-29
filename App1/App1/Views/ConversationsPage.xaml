@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App1.Views.ConversationsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:App1.Behaviors"
+    xmlns:converters="clr-namespace:App1.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
+    xmlns:vm="clr-namespace:App1.ViewModels"
+    Title="{x:Static resources:AppResources.SectionConversationsTitle}"
+    BindingContext="{Binding ., Source={x:Static vm:ViewModelLocator.Conversations}}"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding StartConversationCommand}" Text="{x:Static resources:AppResources.SectionConversationsNewConversationButton}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ListView
+            x:Name="ConversationsListView"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="true"
+            IsPullToRefreshEnabled="true"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+            ItemsSource="{Binding Conversations}"
+            RefreshCommand="{Binding RefreshConversationsListsCommand}"
+            SelectedItem="{Binding SelectedConversation}"
+            VerticalOptions="FillAndExpand">
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    Command="{Binding ViewConversationCommand}"
+                    Converter="{StaticResource SelectedItemConverter}"
+                    EventName="ItemSelected" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label
+                                d:Text="{Binding .}"
+                                FontSize="16"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemTextStyle}"
+                                Text="{Binding Title}" />
+                            <Label
+                                d:Text="Item description"
+                                FontSize="13"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                Text="{Binding StartedBy.Name}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

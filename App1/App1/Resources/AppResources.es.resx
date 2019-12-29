@@ -157,7 +157,7 @@
     <value>{2}-{1} caracteres</value>
   </data>
   <data name="FieldMustAcceptUserAgreement" xml:space="preserve">
-    <value>Debes que aceptar el Acuerdo de Usuario.</value>
+    <value>Debes aceptar el Acuerdo de Usuario.</value>
   </data>
   <data name="FieldRequiredMessage" xml:space="preserve">
     <value>Obligatorio</value>
@@ -169,7 +169,7 @@
     <value>Juan</value>
   </data>
   <data name="InvalidEmailOrPassword" xml:space="preserve">
-    <value>Email o Contraseña invalida</value>
+    <value>Email o Contraseña invalidas</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Apellido</value>
@@ -214,7 +214,7 @@
     <value>Acepto el </value>
   </data>
   <data name="RegistrationDate" xml:space="preserve">
-    <value>Fecha de registración</value>
+    <value>Fecha de Registración</value>
   </data>
   <data name="RegistrationPageButton" xml:space="preserve">
     <value>Registrar</value>
@@ -239,6 +239,27 @@
   </data>
   <data name="SectionBrowseTitle" xml:space="preserve">
     <value>Navegar</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationButtonCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationButtonStart" xml:space="preserve">
+    <value>Iniciar</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationDescription" xml:space="preserve">
+    <value>Dar nombre a esta conversación.</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationNamePlaceholder" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="SectionConversationsModalStartConversationTitle" xml:space="preserve">
+    <value>Iniciar conversación</value>
+  </data>
+  <data name="SectionConversationsNewConversationButton" xml:space="preserve">
+    <value>Iniciar</value>
+  </data>
+  <data name="SectionConversationsTitle" xml:space="preserve">
+    <value>Conversaciones</value>
   </data>
   <data name="SectionItemDetailsDeleteButton" xml:space="preserve">
     <value>Eliminar</value>
@@ -293,6 +314,9 @@
   </data>
   <data name="EditUserProfileButton" xml:space="preserve">
     <value>Actualizar</value>
+  </data>
+  <data name="UpdateUserProfileButton" xml:space="preserve">
+    <value>Editar</value>
   </data>
   <data name="EditUserProfilePageTitle" xml:space="preserve">
     <value>Editar Perfil</value>

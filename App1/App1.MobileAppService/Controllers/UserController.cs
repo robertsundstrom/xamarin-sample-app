@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using App1.MobileAppService.Models;
 
 using AutoMapper;
+using App1.MobileAppService.Services;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,10 +21,12 @@ namespace App1.MobileAppService.Controllers
     {
         private readonly UserManager<Models.User> userManager;
         private readonly IMapper mapper;
+        private readonly IProfileImageUploader profileImageUploader;
 
-        public UserController(UserManager<Models.User> userManager, IMapper mapper)
+        public UserController(UserManager<User> userManager, IProfileImageUploader profileImageUploader, IMapper mapper)
         {
             this.userManager = userManager;
+            this.profileImageUploader = profileImageUploader;
             this.mapper = mapper;
         }
 
@@ -76,6 +79,16 @@ namespace App1.MobileAppService.Controllers
             }
 
             return Ok();
+        }
+
+        [Route("UpdateProfileImage")]
+        [HttpPost]
+        public async Task UpdateProfileImage(IFormFile file)
+        {
+            using (var stream = file.OpenReadStream())
+            {
+                await profileImageUploader.UploadImageAsync(User.Identity.Name, stream);
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ namespace App1.MobileAppService.Models
 
         public string Email { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
+        public string ProfileImage { get; set; }
+
+        public DateTime? RegistrationDate { get; set; }
     }
 }
