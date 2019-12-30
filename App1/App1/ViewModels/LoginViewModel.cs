@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+using App1.Resources;
 using App1.Services;
 
 using Xamarin.Forms;
-
-using RequiredAttribute = App1.Validation.RequiredAttribute;
 
 namespace App1.ViewModels
 {
@@ -81,7 +80,7 @@ namespace App1.ViewModels
         public Command NavigateToAboutPageCommand { get; }
 
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessageResourceName = nameof(AppResources.EmailIsInvalid), ErrorMessageResourceType = typeof(AppResources))]
         public string? Email
         {
             get => email;
@@ -94,7 +93,7 @@ namespace App1.ViewModels
             }
         }
 
-        [Required]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? Password
         {
             get => password;

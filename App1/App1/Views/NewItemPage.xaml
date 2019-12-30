@@ -6,7 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:App1.Resources"
-    xmlns:validation="clr-namespace:App1.Validation"
+    xmlns:behaviors="clr-namespace:App1.Behaviors"
     Title="{x:Static resources:AppResources.SectionNewItemTitle}"
     mc:Ignorable="d">
 
@@ -33,7 +33,7 @@
                 Placeholder="{x:Static resources:AppResources.SectionNewItemTextPlaceholder}"
                 Text="{Binding Text}">
                 <Entry.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="Text" />
+                    <behaviors:InputViewValidationBehavior PropertyName="Text" />
                 </Entry.Behaviors>
             </Entry>
             <Label FontSize="Medium" Text="{x:Static resources:AppResources.SectionNewItemDescriptionLabel}" />
@@ -44,7 +44,7 @@
                 Placeholder="{x:Static resources:AppResources.SectionNewItemDescriptionPlaceholder}"
                 Text="{Binding Description}">
                 <Editor.Behaviors>
-                    <validation:InputViewValidationBehavior PropertyName="Description" />
+                    <behaviors:InputViewValidationBehavior PropertyName="Description" />
                 </Editor.Behaviors>
             </Editor>
         </StackLayout>

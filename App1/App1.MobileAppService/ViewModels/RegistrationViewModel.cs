@@ -15,7 +15,10 @@ namespace App1.MobileAppService.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(8)]
+        [StringLength(20, MinimumLength = 8)]
         public string Password { get; set; }
+
+        [Compare(nameof(Password))]
+        public string ConfirmPassword { get; set; }
     }
 }

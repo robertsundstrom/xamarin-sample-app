@@ -8,14 +8,13 @@ using App1.Services;
 
 using Xamarin.Forms;
 
-using RequiredAttribute = App1.Validation.RequiredAttribute;
-
 namespace App1.ViewModels
 {
     public class RegistrationViewModel : ViewModelBase
     {
         private readonly IIdentityService _identityService;
         private readonly INavigationService _navigationService;
+        private readonly ILocalizationService localizationService;
         private readonly INativeCalls nativeCalls;
         private bool isClean = true;
         private string? email;
@@ -25,10 +24,15 @@ namespace App1.ViewModels
         private string? confirmPassword;
         private bool? isAcceptingTheUserAgreement;
 
-        public RegistrationViewModel(IIdentityService identityService, INavigationService navigationService, INativeCalls nativeCalls)
+        public RegistrationViewModel(
+            IIdentityService identityService,
+            INavigationService navigationService,
+            ILocalizationService localizationService,
+            INativeCalls nativeCalls)
         {
             _identityService = identityService;
             _navigationService = navigationService;
+            this.localizationService = localizationService;
             this.nativeCalls = nativeCalls;
             RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => CanSubmit);
             ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
@@ -71,7 +75,7 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    nativeCalls.OpenToast("Invalid email address or password.");
+                    nativeCalls.OpenToast(localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)));
                 }
             }
             catch (HttpRequestException exc)
@@ -86,7 +90,7 @@ namespace App1.ViewModels
         public Command ShowUserAgreementCommand { get; }
 
 
-        [Required]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? FirstName
         {
             get => firstName;
@@ -99,7 +103,7 @@ namespace App1.ViewModels
             }
         }
 
-        [Required]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? LastName
         {
             get => lastName;
@@ -112,8 +116,8 @@ namespace App1.ViewModels
             }
         }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
+        [EmailAddress(ErrorMessageResourceName = nameof(AppResources.EmailIsInvalid), ErrorMessageResourceType = typeof(AppResources))]
         public string? Email
         {
             get => email;
@@ -126,8 +130,8 @@ namespace App1.ViewModels
             }
         }
 
-        [Required]
-        [StringLength(8)]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
+        [MinLength(8)]
         public string? Password
         {
             get => password;

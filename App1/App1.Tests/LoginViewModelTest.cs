@@ -59,6 +59,23 @@ namespace App1.Tests
             Assert.False(loginViewModel.LoginCommand.CanExecute(null));
         }
 
+        [Fact(DisplayName = "Cannot login when email is invalid")]
+        public void CannotLoginWhenEmailIsInvalid()
+        {
+            var loginViewModel = new LoginViewModel(
+                Fixture.NavigationServiceMock.Object,
+                Fixture.IdentityServiceMock.Object,
+                Fixture.NativeCallsMock.Object)
+            {
+                Email = "foo@",
+                Password = "foo"
+            };
+
+            Assert.True(loginViewModel.HasErrors);
+            Assert.False(loginViewModel.LoginCommand.CanExecute(null));
+        }
+
+
         [Fact(DisplayName = "Cannot login when password is not set")]
         public void CannotLoginWhenPasswordIsNotSet()
         {

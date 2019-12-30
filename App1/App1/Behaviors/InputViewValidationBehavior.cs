@@ -5,7 +5,7 @@ using App1.ViewModels;
 
 using Xamarin.Forms;
 
-namespace App1.Validation
+namespace App1.Behaviors
 {
     public class InputViewValidationBehavior : Behavior<InputView>
     {

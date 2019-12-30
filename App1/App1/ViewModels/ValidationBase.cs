@@ -55,7 +55,7 @@ namespace App1.ViewModels
             var validationContext = new ValidationContext(this, null);
 
             var validationResults = new List<ValidationResult>();
-            Validator.TryValidateObject(this, validationContext, validationResults);
+            Validator.TryValidateObject(this, validationContext, validationResults, true);
 
             _errors.Clear();
 
@@ -64,7 +64,7 @@ namespace App1.ViewModels
             return !HasErrors;
         }
 
-        protected virtual void ValidateProperty<T>(T value, [CallerMemberName] string? propertyName = null)
+        protected virtual bool ValidateProperty<T>(T value, [CallerMemberName] string? propertyName = null)
         {
             if (propertyName == null)
             {
@@ -82,6 +82,8 @@ namespace App1.ViewModels
             RemoveErrorsByPropertyName(propertyName);
 
             HandleValidationResults(validationResults);
+
+            return !validationResults.Any();
         }
 
         private void RemoveErrorsByPropertyName(string propertyName)

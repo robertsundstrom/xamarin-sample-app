@@ -1,4 +1,6 @@
-﻿using App1.Validation;
+﻿using System.ComponentModel.DataAnnotations;
+
+using App1.Resources;
 
 namespace App1.ViewModels
 {
@@ -8,7 +10,7 @@ namespace App1.ViewModels
         private string? description;
         private bool isClean = true;
 
-        [Required]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? Text
         {
             get => text;
@@ -21,7 +23,7 @@ namespace App1.ViewModels
             }
         }
 
-        [Required]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? Description
         {
             get => description;

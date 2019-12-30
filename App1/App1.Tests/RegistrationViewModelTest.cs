@@ -22,6 +22,7 @@ namespace App1.Tests
             var registrationViewModel = new RegistrationViewModel(
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
+                Fixture.LocalizationService.Object,
                 Fixture.NativeCallsMock.Object);
 
             Assert.False(registrationViewModel.HasErrors);
@@ -43,6 +44,7 @@ namespace App1.Tests
             var registrationViewModel = new RegistrationViewModel(
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
+                Fixture.LocalizationService.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",
@@ -68,6 +70,7 @@ namespace App1.Tests
             var registrationViewModel = new RegistrationViewModel(
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
+                Fixture.LocalizationService.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",

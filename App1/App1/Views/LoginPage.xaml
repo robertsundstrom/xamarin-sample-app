@@ -6,7 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:App1.Resources"
-    xmlns:validation="clr-namespace:App1.Validation"
+    xmlns:behaviors="clr-namespace:App1.Behaviors"
     Title="{x:Static resources:AppResources.LoginPageTitle}"
     BackgroundColor="{DynamicResource NavigationBarColor}"
     NavigationPage.HasNavigationBar="False"
@@ -32,7 +32,7 @@
                         Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
                         Text="{Binding Email, Mode=TwoWay}">
                         <Entry.Behaviors>
-                            <validation:InputViewValidationBehavior PropertyName="Email" />
+                            <behaviors:InputViewValidationBehavior PropertyName="Email" />
                         </Entry.Behaviors>
                     </Entry>
                     <Label Text="{x:Static resources:AppResources.Password}" />

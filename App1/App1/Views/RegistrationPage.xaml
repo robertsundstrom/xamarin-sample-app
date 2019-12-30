@@ -6,7 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:App1.Resources"
-    xmlns:validation="clr-namespace:App1.Validation"
+    xmlns:behaviors="clr-namespace:App1.Behaviors"
     Title="{x:Static resources:AppResources.RegistrationPageTitle}"
     mc:Ignorable="d">
 
@@ -20,7 +20,7 @@
                         Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
                         Text="{Binding FirstName, Mode=TwoWay}">
                         <Entry.Behaviors>
-                            <validation:InputViewValidationBehavior PropertyName="FirstName" />
+                            <behaviors:InputViewValidationBehavior PropertyName="FirstName" />
                         </Entry.Behaviors>
                     </Entry>
                     <Label Text="{x:Static resources:AppResources.LastName}" />
@@ -29,7 +29,7 @@
                         Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
                         Text="{Binding LastName, Mode=TwoWay}">
                         <Entry.Behaviors>
-                            <validation:InputViewValidationBehavior PropertyName="LastName" />
+                            <behaviors:InputViewValidationBehavior PropertyName="LastName" />
                         </Entry.Behaviors>
                     </Entry>
                 </StackLayout>
@@ -40,7 +40,7 @@
                         Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
                         Text="{Binding Email, Mode=TwoWay}">
                         <Entry.Behaviors>
-                            <validation:InputViewValidationBehavior PropertyName="Email" />
+                            <behaviors:InputViewValidationBehavior PropertyName="Email" />
                         </Entry.Behaviors>
                     </Entry>
                     <Label Text="{x:Static resources:AppResources.Password}" />
@@ -50,7 +50,7 @@
                         Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
                         Text="{Binding Password, Mode=TwoWay}">
                         <Entry.Behaviors>
-                            <validation:InputViewValidationBehavior PropertyName="Password" />
+                            <behaviors:InputViewValidationBehavior PropertyName="Password" />
                         </Entry.Behaviors>
                     </Entry>
                     <Label Text="{x:Static resources:AppResources.ConfirmPassword}" />
@@ -60,7 +60,7 @@
                         Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
                         Text="{Binding ConfirmPassword, Mode=TwoWay}">
                         <Entry.Behaviors>
-                            <validation:InputViewValidationBehavior PropertyName="ConfirmPassword" />
+                            <behaviors:InputViewValidationBehavior PropertyName="ConfirmPassword" />
                         </Entry.Behaviors>
                     </Entry>
                 </StackLayout>

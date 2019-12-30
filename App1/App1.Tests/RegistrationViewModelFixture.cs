@@ -15,11 +15,14 @@ namespace App1.Tests
                 .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(true);
 
+            LocalizationService = new Mock<ILocalizationService>();
+
             NativeCallsMock = new Mock<INativeCalls>();
         }
 
         public Mock<INavigationService> NavigationServiceMock { get; }
         public Mock<IIdentityService> IdentityServiceMock { get; }
+        public Mock<ILocalizationService> LocalizationService { get; }
         public Mock<INativeCalls> NativeCallsMock { get; private set; }
     }
 }
