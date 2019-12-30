@@ -133,15 +133,6 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I accept the .
-        /// </summary>
-        public static string IAcceptTheUserAgreement {
-            get {
-                return ResourceManager.GetString("IAcceptTheUserAgreement", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
         public static string LastName {
@@ -228,6 +219,24 @@ namespace App1.Resources {
         public static string PasswordsAreNotEqual {
             get {
                 return ResourceManager.GetString("PasswordsAreNotEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..
+        /// </summary>
+        public static string PostAcceptUserAgreement {
+            get {
+                return ResourceManager.GetString("PostAcceptUserAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I accept the .
+        /// </summary>
+        public static string PreAcceptUserAgreement {
+            get {
+                return ResourceManager.GetString("PreAcceptUserAgreement", resourceCulture);
             }
         }
         

@@ -141,9 +141,6 @@
   <data name="FirstNamePlaceholder" xml:space="preserve">
     <value>Juan</value>
   </data>
-  <data name="IAcceptTheUserAgreement" xml:space="preserve">
-    <value>Acepto el </value>
-  </data>
   <data name="LastName" xml:space="preserve">
     <value>Last Name</value>
   </data>
@@ -173,6 +170,12 @@
   </data>
   <data name="PasswordsAreNotEqual" xml:space="preserve">
     <value>No es iqual de Contraseña</value>
+  </data>
+  <data name="PostAcceptUserAgreement" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="PreAcceptUserAgreement" xml:space="preserve">
+    <value>Acepto el </value>
   </data>
   <data name="RegistrationPageButton" xml:space="preserve">
     <value>Registrar</value>

@@ -35,16 +35,19 @@ namespace App1.ViewModels
             NavigateToAboutPageCommand = new Command(async () => await _navigationService.PushAsync<AboutViewModel>());
         }
 
-        public override Task InitializeAsync(LoginViewModelArgs? arg)
+        public override async Task InitializeAsync(LoginViewModelArgs? arg)
         {
-            if (arg == null)
+            ShowLoginNoticeVisible = false;
+
+            if (arg != null)
             {
-                return Task.CompletedTask;
+                ShowLoginNoticeVisible = arg.HasSessionExpired;
+
+                if (ShowLoginNoticeVisible)
+                {
+                    await identityService.LogOutAsync();
+                }
             }
-
-            ShowLoginNoticeVisible = arg.HasSessionExpired;
-
-            return Task.CompletedTask;
         }
 
         private async Task ExecuteLoginCommand()

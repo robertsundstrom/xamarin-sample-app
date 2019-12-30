@@ -23,7 +23,7 @@ namespace App1.ViewModels
         private string? firstName;
         private string? lastName;
         private string? confirmPassword;
-        private bool isAcceptingTheUserAgreement;
+        private bool? isAcceptingTheUserAgreement;
 
         public RegistrationViewModel(IIdentityService identityService, INavigationService navigationService, INativeCalls nativeCalls)
         {
@@ -154,11 +154,15 @@ namespace App1.ViewModels
         }
 
         [Required]
-        public bool IsAcceptingTheUserAgreement
+        public bool? IsAcceptingUserAgreement
         {
             get => isAcceptingTheUserAgreement;
             set
             {
+                if (!value.GetValueOrDefault())
+                {
+                    value = null;
+                }
                 ValidateProperty(value);
                 isClean = false;
                 SetProperty(ref isAcceptingTheUserAgreement, value);
