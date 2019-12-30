@@ -11,7 +11,7 @@ namespace App1.ViewModels
             LogOutCommand = new Command(async () =>
             {
                 await identityService.LogOutAsync();
-                await navigationService.PushAsync<LoginViewModel, LoginViewModelArgs?>(new LoginViewModelArgs
+                await navigationService.PushAsync<LoginViewModel>(new LoginViewModelArgs
                 {
                     HasLoggedOut = true
                 });

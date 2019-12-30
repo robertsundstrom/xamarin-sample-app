@@ -43,7 +43,7 @@ namespace App1.Tests
 
             appShellViewModel.LogOutCommand.Execute(null);
 
-            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<LoginViewModel, LoginViewModelArgs>(It.IsAny<LoginViewModelArgs>()), Times.Once);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<LoginViewModel>(It.IsAny<LoginViewModelArgs>()), Times.Once);
         }
     }
 }

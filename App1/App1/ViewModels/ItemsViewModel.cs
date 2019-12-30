@@ -97,7 +97,7 @@ namespace App1.ViewModels
             catch (ApiException ex) when (ex.Message.Contains("401"))
             {
 
-                await navigationService.PushAsync<LoginViewModel, LoginViewModelArgs?>(new LoginViewModelArgs()
+                await navigationService.PushAsync<LoginViewModel>(new LoginViewModelArgs()
                 {
                     HasSessionExpired = true,
                 });

@@ -81,7 +81,7 @@ namespace App1.Tests
 
             registrationViewModel.RegisterCommand.Execute(null);
 
-            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<AppShellViewModel>(), Times.Once);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<AppShellViewModel>(null), Times.Once);
         }
     }
 }

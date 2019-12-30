@@ -2,7 +2,7 @@
 
 namespace App1.ViewModels
 {
-    public abstract class ViewModelBase : ValidationBase
+    public abstract class ViewModelBase : ValidationBase, IViewModelBase
     {
         private bool isBusy = false;
         public bool IsBusy
@@ -24,16 +24,26 @@ namespace App1.ViewModels
         }
     }
 
-    public abstract class ViewModelBase<TArg> : ViewModelBase
+    public abstract class ViewModelBase<TArg> : ViewModelBase, IViewModelBase<TArg>
     {
         public override Task InitializeAsync(object? arg)
         {
-            return base.InitializeAsync((TArg)arg!);
+            return ((IViewModelBase<TArg>)this).InitializeAsync((TArg)arg!);
         }
 
         public virtual Task InitializeAsync(TArg arg)
         {
             return Task.CompletedTask;
         }
+    }
+
+    internal interface IViewModelBase
+    {
+        Task InitializeAsync(object? arg);
+    }
+
+    internal interface IViewModelBase<TArg>
+    {
+        Task InitializeAsync(TArg arg);
     }
 }

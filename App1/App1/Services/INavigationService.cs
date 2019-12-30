@@ -10,9 +10,7 @@ namespace App1.Services
         Task PopAsync();
         Task PopModalAsync();
         Task PopToRootAsync();
-        Task PushAsync<TViewModel>() where TViewModel : ViewModelBase;
-        Task PushAsync<TViewModel, TArg>(TArg arg) where TViewModel : ViewModelBase<TArg>;
-        Task PushModalAsync<TViewModel>() where TViewModel : ViewModelBase;
-        Task PushModalAsync<TViewModel, TArg>(TArg arg) where TViewModel : ViewModelBase<TArg>;
+        Task PushAsync<TViewModel>(object? arg = null) where TViewModel : ViewModelBase;
+        Task PushModalAsync<TViewModel>(object? arg = null) where TViewModel : ViewModelBase;
     }
 }

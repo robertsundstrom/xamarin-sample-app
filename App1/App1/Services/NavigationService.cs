@@ -52,29 +52,18 @@ namespace App1.Services
             await app.MainPage.Navigation.PopToRootAsync();
         }
 
-        public async Task PushAsync<TViewModel>() where TViewModel : ViewModelBase
+        public async Task PushAsync<TViewModel>(object? arg = null) where TViewModel : ViewModelBase
         {
-            await PushCoreAsync<TViewModel>(null);
+            await PushCoreAsync<TViewModel>(arg);
         }
 
-        public Task PushAsync<TViewModel, TArg>(TArg arg) where TViewModel : ViewModelBase<TArg>
-        {
-            return PushCoreAsync<TViewModel>(arg);
-        }
-
-        public async Task PushModalAsync<TViewModel>() where TViewModel : ViewModelBase
-        {
-            var page = await InitializePageAsync<TViewModel>(null);
-            await app.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
-        }
-
-        public async Task PushModalAsync<TViewModel, TArg>(TArg arg) where TViewModel : ViewModelBase<TArg>
+        public async Task PushModalAsync<TViewModel>(object? arg = null) where TViewModel : ViewModelBase
         {
             var page = await InitializePageAsync<TViewModel>(arg);
             await app.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
         }
 
-        private async Task PushCoreAsync<TViewModel>(object? arg) where TViewModel : ViewModelBase
+        private async Task PushCoreAsync<TViewModel>(object? arg = null) where TViewModel : ViewModelBase
         {
             var page = await InitializePageAsync<TViewModel>(arg);
 

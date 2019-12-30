@@ -154,7 +154,7 @@ namespace App1.Tests
 
             loginViewModel.LoginCommand.Execute(null);
 
-            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<AppShellViewModel>(), Times.Once);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<AppShellViewModel>(null), Times.Once);
         }
 
         [Fact(DisplayName = "Is showing toast on unsuccessful login")]
@@ -202,7 +202,7 @@ namespace App1.Tests
 
             loginViewModel.NavigateToRegistrationPageCommand.Execute(null);
 
-            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<RegistrationViewModel>(), Times.Once);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<RegistrationViewModel>(null), Times.Once);
         }
     }
 }
