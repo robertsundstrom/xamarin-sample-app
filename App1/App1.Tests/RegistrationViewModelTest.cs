@@ -25,6 +25,7 @@ namespace App1.Tests
                 Fixture.LocalizationService.Object,
                 Fixture.NativeCallsMock.Object);
 
+            Assert.True(registrationViewModel.IsPristine);
             Assert.False(registrationViewModel.HasErrors);
             Assert.False(registrationViewModel.RegisterCommand.CanExecute(null));
         }
@@ -80,6 +81,8 @@ namespace App1.Tests
             };
 
             registrationViewModel.RegisterCommand.Execute(null);
+
+            Assert.False(registrationViewModel.IsPristine);
 
             Fixture.NavigationServiceMock.Verify(x => x.PushAsync<AppShellViewModel>(null), Times.Once);
         }

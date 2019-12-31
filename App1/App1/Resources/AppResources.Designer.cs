@@ -115,6 +115,24 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must have a lenght of minimum {2} and maximum {1} characters.
+        /// </summary>
+        public static string FieldMinMaxLengthMessage {
+            get {
+                return ResourceManager.GetString("FieldMinMaxLengthMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must accept the User Agreement..
+        /// </summary>
+        public static string FieldMustAcceptUserAgreement {
+            get {
+                return ResourceManager.GetString("FieldMustAcceptUserAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Required.
         /// </summary>
         public static string FieldRequiredMessage {

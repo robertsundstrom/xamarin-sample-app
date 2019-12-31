@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace App1.Behaviors
 {
+
     public class InputViewValidationBehavior : Behavior<InputView>
     {
         private InputView? _associatedObject;

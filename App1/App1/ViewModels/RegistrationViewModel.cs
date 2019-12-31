@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using App1.Resources;
@@ -16,7 +17,7 @@ namespace App1.ViewModels
         private readonly INavigationService _navigationService;
         private readonly ILocalizationService localizationService;
         private readonly INativeCalls nativeCalls;
-        private bool isClean = true;
+        private bool isPristine = true;
         private string? email;
         private string? password;
         private string? firstName;
@@ -34,7 +35,7 @@ namespace App1.ViewModels
             _navigationService = navigationService;
             this.localizationService = localizationService;
             this.nativeCalls = nativeCalls;
-            RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => CanSubmit);
+            RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine && Validate());
             ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
         }
 
@@ -94,26 +95,14 @@ namespace App1.ViewModels
         public string? FirstName
         {
             get => firstName;
-            set
-            {
-                ValidateProperty(value);
-                isClean = false;
-                SetProperty(ref firstName, value);
-                RegisterCommand.ChangeCanExecute();
-            }
+            set => SetProperty(ref firstName, value);
         }
 
         [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? LastName
         {
             get => lastName;
-            set
-            {
-                ValidateProperty(value);
-                isClean = false;
-                SetProperty(ref lastName, value);
-                RegisterCommand.ChangeCanExecute();
-            }
+            set => SetProperty(ref lastName, value);
         }
 
         [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
@@ -121,43 +110,25 @@ namespace App1.ViewModels
         public string? Email
         {
             get => email;
-            set
-            {
-                ValidateProperty(value);
-                isClean = false;
-                SetProperty(ref email, value);
-                RegisterCommand.ChangeCanExecute();
-            }
+            set => SetProperty(ref email, value);
         }
 
         [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
-        [MinLength(8)]
+        [StringLength(20, MinimumLength = 8, ErrorMessageResourceName = nameof(AppResources.FieldMinMaxLengthMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? Password
         {
             get => password;
-            set
-            {
-                ValidateProperty(value);
-                isClean = false;
-                SetProperty(ref password, value);
-                RegisterCommand.ChangeCanExecute();
-            }
+            set => SetProperty(ref password, value);
         }
 
         [Compare(nameof(Password), ErrorMessageResourceName = nameof(AppResources.ConfirmPassword), ErrorMessageResourceType = typeof(AppResources))]
         public string? ConfirmPassword
         {
             get => confirmPassword;
-            set
-            {
-                ValidateProperty(value);
-                isClean = false;
-                SetProperty(ref confirmPassword, value);
-                RegisterCommand.ChangeCanExecute();
-            }
+            set => SetProperty(ref confirmPassword, value);
         }
 
-        [Required]
+        [Required(ErrorMessageResourceName = nameof(AppResources.FieldMustAcceptUserAgreement), ErrorMessageResourceType = typeof(AppResources))]
         public bool? IsAcceptingUserAgreement
         {
             get => isAcceptingTheUserAgreement;
@@ -167,13 +138,25 @@ namespace App1.ViewModels
                 {
                     value = null;
                 }
-                ValidateProperty(value);
-                isClean = false;
                 SetProperty(ref isAcceptingTheUserAgreement, value);
-                RegisterCommand.ChangeCanExecute();
             }
         }
 
-        private bool CanSubmit => !isClean && Validate();
+        public bool IsPristine
+        {
+            get => isPristine;
+            protected set => base.SetProperty(ref isPristine, value);
+        }
+
+        protected override bool SetProperty<T>(ref T backingStore, T value,
+                [CallerMemberName] string propertyName = "",
+                Action? onChanged = null)
+        {
+            ValidateProperty(value, propertyName);
+            IsPristine = false;
+            bool result = base.SetProperty(ref backingStore, value, propertyName, onChanged);
+            RegisterCommand.ChangeCanExecute();
+            return result;
+        }
     }
 }

@@ -135,6 +135,12 @@
   <data name="EmailPlaceholder" xml:space="preserve">
     <value>foo@somewhere.com</value>
   </data>
+  <data name="FieldMinMaxLengthMessage" xml:space="preserve">
+    <value>Must have a lenght of minimum {2} and maximum {1} characters</value>
+  </data>
+  <data name="FieldMustAcceptUserAgreement" xml:space="preserve">
+    <value>You must accept the User Agreement.</value>
+  </data>
   <data name="FieldRequiredMessage" xml:space="preserve">
     <value>Required</value>
   </data>
