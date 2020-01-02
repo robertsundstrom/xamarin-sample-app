@@ -64,7 +64,7 @@ namespace App1.ViewModels
             return !HasErrors;
         }
 
-        protected virtual bool ValidateProperty<T>(T value, [CallerMemberName] string? propertyName = null)
+        protected virtual bool ValidateProperty<T>(T value, bool updateErrors = true, [CallerMemberName] string propertyName = "")
         {
             if (propertyName == null)
             {
@@ -79,14 +79,17 @@ namespace App1.ViewModels
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateProperty(value, validationContext, validationResults);
 
-            RemoveErrorsByPropertyName(propertyName);
+            if (updateErrors)
+            {
+                RemoveErrors(propertyName);
 
-            HandleValidationResults(validationResults);
+                HandleValidationResults(validationResults);
+            }
 
             return !validationResults.Any();
         }
 
-        private void RemoveErrorsByPropertyName(string propertyName)
+        protected void RemoveErrors([CallerMemberName] string propertyName = "")
         {
             if (_errors.ContainsKey(propertyName))
             {

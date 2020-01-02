@@ -2,7 +2,9 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
+using App1.Configuration;
 using App1.Helpers;
 using App1.MobileAppService.Client;
 using App1.Resources;
@@ -10,6 +12,7 @@ using App1.Services;
 using App1.ViewModels;
 using App1.Views;
 
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -124,6 +127,26 @@ namespace App1
                     }));
 
                 services.AddSingleton<IDataStore<Item>, AzureDataStore>();
+
+
+                services.AddSingleton<IItemsHubClient, ItemsHubClient>(sp =>
+                {
+                    var conf = sp.GetService<IConfiguration>();
+                    var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
+
+                    var hubConnection = new HubConnectionBuilder().WithUrl($"{appServiceConfig.ServiceEndpoint}/itemsHub", opt =>
+                    {
+                        //opt.Transports = HttpTransportType.WebSockets;
+                        opt.AccessTokenProvider = () => Task.FromResult(sp.GetRequiredService<ISettingsService>().AuthAccessToken);
+                    })
+                            .WithAutomaticReconnect()
+                            .Build();
+
+                    hubConnection.StartAsync();
+
+                    return new ItemsHubClient(hubConnection);
+                });
+
             }
 
 #if DEBUG
@@ -142,9 +165,9 @@ namespace App1
         private static void CreateClientDelegate(IServiceProvider sp, HttpClient client)
         {
             var conf = sp.GetService<IConfiguration>();
-            string mobileAppServiceEndpoint = conf["MobileAppServiceEndpoint"];
+            var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
 
-            client.BaseAddress = new Uri($"{mobileAppServiceEndpoint}/");
+            client.BaseAddress = new Uri($"{appServiceConfig.ServiceEndpoint}/");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sp.GetRequiredService<ISettingsService>().AuthAccessToken);
         }
 

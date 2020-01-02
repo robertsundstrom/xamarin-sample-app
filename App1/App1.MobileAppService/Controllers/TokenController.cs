@@ -33,7 +33,7 @@ namespace App1.MobileAppService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<TokenResult>> Auth([FromForm] string email, [FromForm] string password)
+        public async Task<ActionResult<TokenResult>> Authenticate([FromForm] string email, [FromForm] string password)
         {
             if (!ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace App1.MobileAppService.Controllers
                 return BadRequest("Username or password is incorrect");
             }
 
-            string newJwtToken = GenerateToken(email);
+            string newJwtToken = GenerateToken(user);
             string newRefreshToken = GenerateRefreshToken();
 
             user.RefreshToken = newRefreshToken;
@@ -77,7 +77,7 @@ namespace App1.MobileAppService.Controllers
                 throw new SecurityTokenException("Invalid refresh token");
             }
 
-            string newJwtToken = GenerateToken(email);
+            string newJwtToken = GenerateToken(user);
             string newRefreshToken = GenerateRefreshToken();
 
             user.RefreshToken = newRefreshToken;
@@ -96,9 +96,9 @@ namespace App1.MobileAppService.Controllers
             return claimsIdentity.FindFirst(ClaimTypes.Email).Value;
         }
 
-        private string GenerateToken(string email)
+        private string GenerateToken(User user)
         {
-            return _tokenService.BuildToken(email);
+            return _tokenService.BuildToken(user);
         }
 
         private string GenerateRefreshToken()

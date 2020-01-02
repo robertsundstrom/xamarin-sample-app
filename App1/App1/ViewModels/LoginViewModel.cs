@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using App1.Resources;
@@ -15,21 +16,24 @@ namespace App1.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IIdentityService identityService;
+        private readonly ILocalizationService localizationService;
         private readonly INativeCalls nativeCalls;
         private string? email;
         private string? password;
         private bool showLoginNoticeVisible;
-        private bool isClean = true;
+        private bool isPristine = false;
 
         public LoginViewModel(
             INavigationService navigationService,
             IIdentityService identityService,
+            ILocalizationService localizationService,
             INativeCalls nativeCalls)
         {
             _navigationService = navigationService;
             this.identityService = identityService;
+            this.localizationService = localizationService;
             this.nativeCalls = nativeCalls;
-            LoginCommand = new Command(async () => await ExecuteLoginCommand(), () => CanSubmit);
+            LoginCommand = new Command(async () => await ExecuteLoginCommand(), () => !IsPristine);
             NavigateToRegistrationPageCommand = new Command(async () => await navigationService.PushAsync<ViewModels.RegistrationViewModel>());
             NavigateToAboutPageCommand = new Command(async () => await _navigationService.PushAsync<AboutViewModel>());
         }
@@ -51,6 +55,12 @@ namespace App1.ViewModels
 
         private async Task ExecuteLoginCommand()
         {
+            if (!Validate())
+            {
+                nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                return;
+            }
+
             try
             {
                 bool response = await identityService.AuthenticateAsync(email!, password!);
@@ -60,16 +70,16 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    nativeCalls.OpenToast("Invalid email address or password.");
+                    nativeCalls.OpenToast(string.Empty, "Invalid email address or password.");
                 }
             }
             catch (HttpRequestException exc)
             {
-                nativeCalls.OpenToast(exc.Message);
+                nativeCalls.OpenToast(string.Empty, exc.Message);
             }
             catch (Exception exc)
             {
-                nativeCalls.OpenToast(exc.Message);
+                nativeCalls.OpenToast(string.Empty, exc.Message);
             }
         }
 
@@ -86,10 +96,7 @@ namespace App1.ViewModels
             get => email;
             set
             {
-                ValidateProperty(value);
-                isClean = false;
                 SetProperty(ref email, value);
-                LoginCommand.ChangeCanExecute();
             }
         }
 
@@ -99,10 +106,7 @@ namespace App1.ViewModels
             get => password;
             set
             {
-                ValidateProperty(value);
-                isClean = false;
                 SetProperty(ref password, value);
-                LoginCommand.ChangeCanExecute();
             }
         }
 
@@ -112,6 +116,24 @@ namespace App1.ViewModels
             set => SetProperty(ref showLoginNoticeVisible, value);
         }
 
-        private bool CanSubmit => !isClean && Validate();
+        public bool IsPristine
+        {
+            get => isPristine;
+            protected set => base.SetProperty(ref isPristine, value);
+        }
+
+        protected override bool SetProperty<T>(ref T backingStore, T value,
+                [CallerMemberName] string propertyName = "",
+                Action? onChanged = null)
+        {
+            if (ValidateProperty(value, false, propertyName))
+            {
+                RemoveErrors(propertyName);
+            }
+            IsPristine = false;
+            bool result = base.SetProperty(ref backingStore, value, propertyName, onChanged);
+            LoginCommand.ChangeCanExecute();
+            return result;
+        }
     }
 }

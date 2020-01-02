@@ -25,7 +25,7 @@ namespace App1.Services
         {
             try
             {
-                var result = await tokenClient.AuthAsync(email, password);
+                var result = await tokenClient.AuthenticateAsync(email, password);
                 settingService.AuthAccessToken = result.Token;
 
                 return true;

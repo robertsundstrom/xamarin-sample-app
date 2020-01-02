@@ -35,12 +35,18 @@ namespace App1.ViewModels
             _navigationService = navigationService;
             this.localizationService = localizationService;
             this.nativeCalls = nativeCalls;
-            RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine && Validate());
+            RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine);
             ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
         }
 
         private async Task ExecuteRegisterCommand()
         {
+            if (!Validate())
+            {
+                nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                return;
+            }
+
             try
             {
                 var model = new RegistrationModel()
@@ -57,11 +63,11 @@ namespace App1.ViewModels
             }
             catch (HttpRequestException exc)
             {
-                nativeCalls.OpenToast(exc.Message);
+                nativeCalls.OpenToast(string.Empty, exc.Message);
             }
             catch (Exception exc)
             {
-                nativeCalls.OpenToast(exc.Message);
+                nativeCalls.OpenToast(string.Empty, exc.Message);
             }
         }
 
@@ -76,12 +82,12 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    nativeCalls.OpenToast(localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)));
+                    nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)));
                 }
             }
             catch (HttpRequestException exc)
             {
-                nativeCalls.OpenToast(exc.Message);
+                nativeCalls.OpenToast(string.Empty, exc.Message);
                 await _navigationService.PopAsync();
             }
         }
@@ -152,7 +158,10 @@ namespace App1.ViewModels
                 [CallerMemberName] string propertyName = "",
                 Action? onChanged = null)
         {
-            ValidateProperty(value, propertyName);
+            if (ValidateProperty(value, false, propertyName))
+            {
+                RemoveErrors(propertyName);
+            }
             IsPristine = false;
             bool result = base.SetProperty(ref backingStore, value, propertyName, onChanged);
             RegisterCommand.ChangeCanExecute();

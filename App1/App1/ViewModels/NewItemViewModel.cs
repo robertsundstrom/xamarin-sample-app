@@ -16,7 +16,10 @@ namespace App1.ViewModels
             get => text;
             set
             {
-                ValidateProperty(value);
+                if (ValidateProperty(value, false))
+                {
+                    RemoveErrors();
+                }
                 SetProperty(ref text, value);
                 isClean = false;
                 OnPropertyChanged(nameof(CanSubmit));
@@ -29,7 +32,10 @@ namespace App1.ViewModels
             get => description;
             set
             {
-                ValidateProperty(value);
+                if (ValidateProperty(value, false))
+                {
+                    RemoveErrors();
+                }
                 SetProperty(ref description, value);
                 isClean = false;
                 OnPropertyChanged(nameof(CanSubmit));

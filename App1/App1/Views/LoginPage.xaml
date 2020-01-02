@@ -32,7 +32,7 @@
                         Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
                         Text="{Binding Email, Mode=TwoWay}">
                         <Entry.Behaviors>
-                            <behaviors:InputViewValidationBehavior PropertyName="Email" />
+                            <behaviors:InputValidationBehavior PropertyName="Email" />
                         </Entry.Behaviors>
                     </Entry>
                     <Label Text="{x:Static resources:AppResources.Password}" />

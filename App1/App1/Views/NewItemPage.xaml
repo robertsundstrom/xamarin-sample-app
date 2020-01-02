@@ -3,10 +3,10 @@
     x:Class="App1.Views.NewItemPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:App1.Behaviors"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:App1.Resources"
-    xmlns:behaviors="clr-namespace:App1.Behaviors"
     Title="{x:Static resources:AppResources.SectionNewItemTitle}"
     mc:Ignorable="d">
 
@@ -33,7 +33,7 @@
                 Placeholder="{x:Static resources:AppResources.SectionNewItemTextPlaceholder}"
                 Text="{Binding Text}">
                 <Entry.Behaviors>
-                    <behaviors:InputViewValidationBehavior PropertyName="Text" />
+                    <behaviors:InputValidationBehavior PropertyName="Text" />
                 </Entry.Behaviors>
             </Entry>
             <Label FontSize="Medium" Text="{x:Static resources:AppResources.SectionNewItemDescriptionLabel}" />
@@ -44,7 +44,7 @@
                 Placeholder="{x:Static resources:AppResources.SectionNewItemDescriptionPlaceholder}"
                 Text="{Binding Description}">
                 <Editor.Behaviors>
-                    <behaviors:InputViewValidationBehavior PropertyName="Description" />
+                    <behaviors:InputValidationBehavior PropertyName="Description" />
                 </Editor.Behaviors>
             </Editor>
         </StackLayout>

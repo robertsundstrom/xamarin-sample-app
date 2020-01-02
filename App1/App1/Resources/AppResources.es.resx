@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Sample App</value>
   </data>
+  <data name="CheckFieldsMessage" xml:space="preserve">
+    <value>Por favor, verifique las entradas.</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirma contraseña</value>
   </data>

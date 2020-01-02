@@ -16,13 +16,15 @@ namespace App1.Tests
             Fixture = fixture;
         }
 
-        [Fact(DisplayName = "Cannot register when values are default")]
-        public void CannotRegisterWhenValuesAreDefault()
+        [Fact(DisplayName = "Cannot register when form is pristine")]
+        public void CannotRegisterWhenFormIsPristine()
         {
+            Fixture.Reset();
+
             var registrationViewModel = new RegistrationViewModel(
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
-                Fixture.LocalizationService.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object);
 
             Assert.True(registrationViewModel.IsPristine);
@@ -34,9 +36,7 @@ namespace App1.Tests
         [Fact(DisplayName = "Is showing toast on exception")]
         public void IsShowingToastOnException()
         {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
-            Fixture.NativeCallsMock.Invocations.Clear();
+            Fixture.Reset();
 
             Fixture.IdentityServiceMock
                 .Setup(x => x.RegisterAsync(It.IsAny<RegistrationModel>()))
@@ -45,25 +45,26 @@ namespace App1.Tests
             var registrationViewModel = new RegistrationViewModel(
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
-                Fixture.LocalizationService.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",
-                Password = "foo",
+                Password = "Abc123!?",
+                ConfirmPassword = "Abc123!?",
                 FirstName = "Anders",
-                LastName = "Andersson"
+                LastName = "Andersson",
+                IsAcceptingUserAgreement = true
             };
 
             registrationViewModel.RegisterCommand.Execute(null);
 
-            Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>()), Times.Once);
+            Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact(DisplayName = "Is navigating to AppShell on successful registration")]
         public void IsNavigatingToAppShellOnSuccessfulRegistration()
         {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
+            Fixture.Reset();
 
             Fixture.IdentityServiceMock
                 .Setup(x => x.RegisterAsync(It.IsAny<RegistrationModel>()));
@@ -71,13 +72,15 @@ namespace App1.Tests
             var registrationViewModel = new RegistrationViewModel(
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
-                Fixture.LocalizationService.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",
-                Password = "foo",
+                Password = "Abc123!?",
+                ConfirmPassword = "Abc123!?",
                 FirstName = "Anders",
-                LastName = "Andersson"
+                LastName = "Andersson",
+                IsAcceptingUserAgreement = true
             };
 
             registrationViewModel.RegisterCommand.Execute(null);

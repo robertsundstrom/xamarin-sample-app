@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 using App1.MobileAppService.Client;
@@ -16,11 +17,12 @@ namespace App1.ViewModels
         private readonly IDataStore<Item> dataStore;
         private readonly INativeCalls nativeCalls;
         private readonly INavigationService navigationService;
+        private readonly IItemsHubClient itemsHubClient;
 
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel(IDataStore<Item> dataStore, INativeCalls nativeCalls, INavigationService navigationService)
+        public ItemsViewModel(IDataStore<Item> dataStore, INativeCalls nativeCalls, INavigationService navigationService, IItemsHubClient itemsHubClient)
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
@@ -29,6 +31,7 @@ namespace App1.ViewModels
             this.dataStore = dataStore;
             this.nativeCalls = nativeCalls;
             this.navigationService = navigationService;
+            this.itemsHubClient = itemsHubClient;
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Item;
@@ -42,7 +45,7 @@ namespace App1.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    nativeCalls.OpenToast(ex.Message);
+                    nativeCalls.OpenToast(string.Empty, ex.Message);
                 }
             });
 
@@ -54,6 +57,32 @@ namespace App1.ViewModels
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", async (obj, item) =>
             {
                 await DeleteItem(dataStore, nativeCalls, item);
+            });
+
+            itemsHubClient.WhenItemAdded.Subscribe((item) =>
+            {
+                if (Items.Any(x => x.Text == item.Text))
+                {
+                    return;
+                }
+                Items.Add(item);
+            });
+
+            itemsHubClient.WhenItemDeleted.Subscribe((item) =>
+            {
+                Items.Remove(
+                    Items.FirstOrDefault(x => x.Id == item.Id));
+            });
+
+            itemsHubClient.WhenItemUpdated.Subscribe((item) =>
+            {
+                var index = Items.IndexOf(
+                    Items.FirstOrDefault(x => x.Id == item.Id));
+
+                if (index > -1)
+                {
+                    Items[index] = item;
+                }
             });
         }
 
@@ -71,7 +100,7 @@ namespace App1.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    nativeCalls.OpenToast(ex.Message);
+                    nativeCalls.OpenToast(string.Empty, ex.Message);
                 }
             }
         }
@@ -105,7 +134,7 @@ namespace App1.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                nativeCalls.OpenToast(ex.Message);
+                nativeCalls.OpenToast(string.Empty, ex.Message);
             }
             finally
             {

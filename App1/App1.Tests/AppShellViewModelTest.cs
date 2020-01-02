@@ -19,8 +19,7 @@ namespace App1.Tests
         [Fact(DisplayName = "Is logging out on command executed")]
         public void IsLoggingOutOnCommand()
         {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
+            Fixture.Reset();
 
             var appShellViewModel = new AppShellViewModel(
                 Fixture.IdentityServiceMock.Object,
@@ -34,8 +33,7 @@ namespace App1.Tests
         [Fact(DisplayName = "Is navigating on log out")]
         public void IsNavigatingOnLogOut()
         {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
+            Fixture.Reset();
 
             var appShellViewModel = new AppShellViewModel(
                 Fixture.IdentityServiceMock.Object,

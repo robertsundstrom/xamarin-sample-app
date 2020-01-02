@@ -70,6 +70,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please, check the inputs..
+        /// </summary>
+        public static string CheckFieldsMessage {
+            get {
+                return ResourceManager.GetString("CheckFieldsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string ConfirmPassword {

@@ -15,104 +15,125 @@ namespace App1.Tests
             Fixture = fixture;
         }
 
-        [Fact(DisplayName = "Cannot login when values are default")]
-        public void CannotLoginWhenValuesAreDefault()
+        [Fact(DisplayName = "Does not authenticate when form is pristine")]
+        public void DoesNotAunthenticateWhenFormIsPristine()
         {
+            Fixture.Reset();
+
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object);
 
+            Assert.False(loginViewModel.IsPristine);
             Assert.False(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.LoginCommand.CanExecute(null));
+
+            loginViewModel.LoginCommand.Execute(null);
+
+            Assert.True(loginViewModel.HasErrors);
+
+            Fixture.IdentityServiceMock.Verify(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<RegistrationViewModel>(null), Times.Never);
         }
 
         [Fact(DisplayName = "Cannot login when inputs are invalid")]
         public void CannotLoginWhenInputsAreInvalid()
         {
+            Fixture.Reset();
+
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
-                Email = "",
+                Email = "ddd@",
                 Password = ""
             };
 
+            loginViewModel.LoginCommand.Execute(null);
+
             Assert.True(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.LoginCommand.CanExecute(null));
+
+            Fixture.IdentityServiceMock.Verify(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<RegistrationViewModel>(null), Times.Never);
         }
 
-        [Fact(DisplayName = "Cannot login when email is not set")]
-        public void CannotLoginWhenEmailIsNotSet()
+        [Fact(DisplayName = "Does not authenticate when email is empty")]
+        public void DoesNotAunthenticateWhenEmailIsEmpty()
         {
+            Fixture.Reset();
+
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "",
                 Password = "foo"
             };
 
+            loginViewModel.LoginCommand.Execute(null);
+
             Assert.True(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.LoginCommand.CanExecute(null));
+
+            Fixture.IdentityServiceMock.Verify(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<RegistrationViewModel>(null), Times.Never);
         }
 
         [Fact(DisplayName = "Cannot login when email is invalid")]
         public void CannotLoginWhenEmailIsInvalid()
         {
+            Fixture.Reset();
+
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "foo@",
                 Password = "foo"
             };
 
+            loginViewModel.LoginCommand.Execute(null);
+
             Assert.True(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.LoginCommand.CanExecute(null));
+
+            Fixture.IdentityServiceMock.Verify(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<RegistrationViewModel>(null), Times.Never);
         }
 
 
-        [Fact(DisplayName = "Cannot login when password is not set")]
-        public void CannotLoginWhenPasswordIsNotSet()
+        [Fact(DisplayName = "Cannot login when password is empty")]
+        public void CannotLoginWhenPasswordIsEmpty()
         {
+            Fixture.Reset();
+
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",
                 Password = ""
             };
 
+            loginViewModel.LoginCommand.Execute(null);
+
             Assert.True(loginViewModel.HasErrors);
-            Assert.False(loginViewModel.LoginCommand.CanExecute(null));
+
+            Fixture.IdentityServiceMock.Verify(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            Fixture.NavigationServiceMock.Verify(x => x.PushAsync<RegistrationViewModel>(null), Times.Never);
         }
 
-        [Fact(DisplayName = "Can login when all inputs are valid")]
-        public void CanLoginWhenAllInputsAreValid()
+        [Fact(DisplayName = "Is authenticating when all values are valid")]
+        public void IsAuthenticatingWhenAllValuesAreValid()
         {
-            var loginViewModel = new LoginViewModel(
-                Fixture.NavigationServiceMock.Object,
-                Fixture.IdentityServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
-            {
-                Email = "test@test.com",
-                Password = "foo"
-            };
-
-            Assert.False(loginViewModel.HasErrors);
-            Assert.True(loginViewModel.LoginCommand.CanExecute(null));
-        }
-
-        [Fact(DisplayName = "Login is successful when all values are valid")]
-        public void LoginIsSuccessfulWhenAllValuesAreValid()
-        {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
+            Fixture.Reset();
 
             Fixture.IdentityServiceMock
                 .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
@@ -121,6 +142,7 @@ namespace App1.Tests
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",
@@ -136,8 +158,7 @@ namespace App1.Tests
         [Fact(DisplayName = "Is navigating to AppShell on successful login")]
         public void IsNavigatingToAppShellOnSuccessfulLogin()
         {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
+            Fixture.Reset();
 
             Fixture.IdentityServiceMock
                 .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
@@ -146,6 +167,7 @@ namespace App1.Tests
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",
@@ -160,8 +182,7 @@ namespace App1.Tests
         [Fact(DisplayName = "Is showing toast on unsuccessful login")]
         public void IsShowingToastOnUnsuccessfulLogin()
         {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
+            Fixture.Reset();
 
             Fixture.IdentityServiceMock
                 .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
@@ -170,6 +191,7 @@ namespace App1.Tests
             var loginViewModel = new LoginViewModel(
                  Fixture.NavigationServiceMock.Object,
                  Fixture.IdentityServiceMock.Object,
+                 Fixture.LocalizationServiceMock.Object,
                  Fixture.NativeCallsMock.Object)
             {
                 Email = "test@test.com",
@@ -178,14 +200,13 @@ namespace App1.Tests
 
             loginViewModel.LoginCommand.Execute(null);
 
-            Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>()), Times.Once);
+            Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact(DisplayName = "Is navigating to registration on command executed")]
         public void IsNavigatingToRegistrationOnCommandExecuted()
         {
-            Fixture.IdentityServiceMock.Invocations.Clear();
-            Fixture.NavigationServiceMock.Invocations.Clear();
+            Fixture.Reset();
 
             Fixture.IdentityServiceMock
                 .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
@@ -194,6 +215,7 @@ namespace App1.Tests
             var loginViewModel = new LoginViewModel(
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
                 Fixture.NativeCallsMock.Object)
             {
                 Email = "",

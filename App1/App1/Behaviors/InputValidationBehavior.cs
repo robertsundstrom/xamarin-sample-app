@@ -8,10 +8,11 @@ using Xamarin.Forms;
 namespace App1.Behaviors
 {
 
-    public class InputViewValidationBehavior : Behavior<InputView>
+    public class InputValidationBehavior : Behavior<InputView>
     {
         private InputView? _associatedObject;
         private Label? validationLabel;
+        private ValidationBase? currentBindingContext = null;
 
         protected override void OnAttachedTo(InputView bindable)
         {
@@ -19,14 +20,27 @@ namespace App1.Behaviors
 
             _associatedObject = bindable;
 
-            _associatedObject.TextChanged += _associatedObject_TextChanged;
+            _associatedObject.BindingContextChanged += _associatedObject_BindingContextChanged;
         }
 
-        private void _associatedObject_TextChanged(object sender, TextChangedEventArgs e)
+        private void _associatedObject_BindingContextChanged(object sender, System.EventArgs e)
         {
-            if (_associatedObject?.BindingContext is ValidationBase source && !string.IsNullOrEmpty(PropertyName))
+            if (currentBindingContext is ValidationBase oldBindingContext)
             {
-                Process(source);
+                oldBindingContext.ErrorsChanged -= Source_ErrorsChanged;
+            }
+            if (_associatedObject?.BindingContext is ValidationBase newBindingContext)
+            {
+                newBindingContext.ErrorsChanged += Source_ErrorsChanged;
+                currentBindingContext = newBindingContext;
+            }
+        }
+
+        private void Source_ErrorsChanged(object sender, System.ComponentModel.DataErrorsChangedEventArgs e)
+        {
+            if (currentBindingContext != null && !string.IsNullOrEmpty(PropertyName))
+            {
+                Process(currentBindingContext);
             }
         }
 
@@ -107,7 +121,12 @@ namespace App1.Behaviors
 
             base.OnDetachingFrom(bindable);
 
-            _associatedObject.TextChanged -= _associatedObject_TextChanged;
+            _associatedObject.BindingContextChanged -= _associatedObject_BindingContextChanged;
+
+            if (currentBindingContext != null)
+            {
+                currentBindingContext.ErrorsChanged -= Source_ErrorsChanged;
+            }
 
             _associatedObject = null;
         }

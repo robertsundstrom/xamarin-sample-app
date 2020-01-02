@@ -9,20 +9,26 @@ namespace App1.Tests
         public RegistrationViewModelFixture()
         {
             NavigationServiceMock = new Mock<INavigationService>();
-
             IdentityServiceMock = new Mock<IIdentityService>();
-            IdentityServiceMock
-                .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(true);
-
-            LocalizationService = new Mock<ILocalizationService>();
-
+            LocalizationServiceMock = new Mock<ILocalizationService>();
             NativeCallsMock = new Mock<INativeCalls>();
         }
 
         public Mock<INavigationService> NavigationServiceMock { get; }
         public Mock<IIdentityService> IdentityServiceMock { get; }
-        public Mock<ILocalizationService> LocalizationService { get; }
-        public Mock<INativeCalls> NativeCallsMock { get; private set; }
+        public Mock<ILocalizationService> LocalizationServiceMock { get; }
+        public Mock<INativeCalls> NativeCallsMock { get; set; }
+
+        public void Reset()
+        {
+            IdentityServiceMock
+                .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(true);
+
+            NavigationServiceMock.Invocations.Clear();
+            IdentityServiceMock.Invocations.Clear();
+            LocalizationServiceMock.Invocations.Clear();
+            NativeCallsMock.Invocations.Clear();
+        }
     }
 }

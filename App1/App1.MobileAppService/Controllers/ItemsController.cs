@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using App1.MobileAppService.Hubs;
 using App1.Models;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace App1.Controllers
 {
@@ -17,10 +19,12 @@ namespace App1.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItemRepository ItemRepository;
+        private readonly IHubContext<ItemsHub, IItemsClient> hubContext;
 
-        public ItemsController(IItemRepository itemRepository)
+        public ItemsController(IItemRepository itemRepository, IHubContext<ItemsHub, IItemsClient> hubContext)
         {
             ItemRepository = itemRepository;
+            this.hubContext = hubContext;
         }
 
         [HttpGet]
@@ -52,6 +56,7 @@ namespace App1.Controllers
         public async Task<ActionResult<Item>> Create([FromBody]Item item)
         {
             await ItemRepository.AddAsync(item);
+            await hubContext.Clients.All.ItemAdded(item);
             return CreatedAtAction(nameof(GetItem), new { item.Id }, item);
         }
 
@@ -63,6 +68,7 @@ namespace App1.Controllers
             try
             {
                 await ItemRepository.UpdateAsync(item);
+                await hubContext.Clients.All.ItemUpdated(item);
             }
             catch (Exception)
             {
@@ -82,6 +88,8 @@ namespace App1.Controllers
             {
                 return NotFound();
             }
+
+            await hubContext.Clients.All.ItemDeleted(item);
 
             return Ok();
         }

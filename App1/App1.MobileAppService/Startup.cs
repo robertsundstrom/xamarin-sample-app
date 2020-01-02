@@ -1,8 +1,11 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
+using App1.MobileAppService.Configuration;
 using App1.MobileAppService.Data;
+using App1.MobileAppService.Hubs;
 using App1.MobileAppService.Models;
 using App1.MobileAppService.Services;
 using App1.Models;
@@ -20,9 +23,21 @@ namespace App1.MobileAppService
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json",
+                             optional: false,
+                             reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -35,7 +50,10 @@ namespace App1.MobileAppService
 
             services.AddDbContext<ApplicationDbContext>
               (options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")))
-                  .AddIdentityCore<User>()
+                  .AddIdentityCore<User>(options =>
+                  {
+                      options.ClaimsIdentity.UserIdClaimType = JwtRegisteredClaimNames.Sub;
+                  })
                  .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
@@ -47,6 +65,8 @@ namespace App1.MobileAppService
                     policy.RequireClaim(ClaimTypes.NameIdentifier);
                 });
             });
+
+            var jwtConfig = Configuration.GetSection("Jwt").Get<JwtConfiguration>();
 
             services.AddAuthentication(options =>
             {
@@ -61,9 +81,9 @@ namespace App1.MobileAppService
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                        ValidIssuer = jwtConfig.Issuer,
+                        ValidAudience = jwtConfig.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Key))
                     };
 
                     options.Events = new JwtBearerEvents
@@ -90,6 +110,8 @@ namespace App1.MobileAppService
                     };
                 });
 
+            services.AddSignalR();
+
             services.AddSwaggerDocument();
 
             services.AddScoped<IItemRepository, ItemRepository>();
@@ -113,6 +135,7 @@ namespace App1.MobileAppService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ItemsHub>("/itemsHub");
             });
 
             app.UseOpenApi();
