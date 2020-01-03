@@ -65,24 +65,29 @@
                     </Entry>
                 </StackLayout>
 
-                <StackLayout Margin="0,0,0,30" Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding IsAcceptingUserAgreement}" />
-                    <Label VerticalTextAlignment="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="{x:Static resources:AppResources.PreAcceptUserAgreement}" />
-                                <Span
-                                    Text="{x:Static resources:AppResources.UserAgreement}"
-                                    TextColor="{DynamicResource PrimaryTextColor}"
-                                    TextDecorations="Underline">
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowUserAgreementCommand}" />
-                                    </Span.GestureRecognizers>
-                                </Span>
-                                <Span Text="{x:Static resources:AppResources.PostAcceptUserAgreement}" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                <StackLayout Margin="0,0,0,30">
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout.Behaviors>
+                            <behaviors:ViewValidationBehavior PropertyName="IsAcceptingUserAgreement" />
+                        </StackLayout.Behaviors>
+                        <CheckBox IsChecked="{Binding IsAcceptingUserAgreement}" />
+                        <Label VerticalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static resources:AppResources.PreAcceptUserAgreement}" />
+                                    <Span
+                                        Text="{x:Static resources:AppResources.UserAgreement}"
+                                        TextColor="{DynamicResource PrimaryTextColor}"
+                                        TextDecorations="Underline">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowUserAgreementCommand}" />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                    <Span Text="{x:Static resources:AppResources.PostAcceptUserAgreement}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
                 </StackLayout>
                 <Button
                     Command="{Binding RegisterCommand}"

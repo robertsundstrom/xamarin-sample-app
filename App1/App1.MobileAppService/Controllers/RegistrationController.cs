@@ -47,7 +47,7 @@ namespace App1.MobileAppService.Controllers
 
             if (!result.Succeeded)
             {
-                return StatusCode(500, result.Errors);
+                return StatusCode(StatusCodes.Status500InternalServerError, result.Errors);
             }
 
             return Ok();

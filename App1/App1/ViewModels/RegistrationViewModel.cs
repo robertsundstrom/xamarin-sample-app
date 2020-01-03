@@ -127,7 +127,8 @@ namespace App1.ViewModels
             set => SetProperty(ref password, value);
         }
 
-        [Compare(nameof(Password), ErrorMessageResourceName = nameof(AppResources.ConfirmPassword), ErrorMessageResourceType = typeof(AppResources))]
+        [Required(ErrorMessageResourceName = nameof(AppResources.ConfirmPasswordMessage), ErrorMessageResourceType = typeof(AppResources))]
+        [DataAnnotations.Compare(nameof(Password), ErrorMessageResourceName = nameof(AppResources.PasswordsAreNotEqual), ErrorMessageResourceType = typeof(AppResources))]
         public string? ConfirmPassword
         {
             get => confirmPassword;

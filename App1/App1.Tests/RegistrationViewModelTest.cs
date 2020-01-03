@@ -33,8 +33,8 @@ namespace App1.Tests
         }
 
 
-        [Fact(DisplayName = "Is showing toast on exception")]
-        public void IsShowingToastOnException()
+        [Fact(DisplayName = "Is showing toast on ApiException")]
+        public void IsShowingToastOnApiException()
         {
             Fixture.Reset();
 
@@ -59,6 +59,28 @@ namespace App1.Tests
             registrationViewModel.RegisterCommand.Execute(null);
 
             Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact(DisplayName = "Password and ConfirmPassword not equal")]
+        public void PasswordAndConfirmPasswordNotEqual()
+        {
+            Fixture.Reset();
+
+            var registrationViewModel = new RegistrationViewModel(
+                Fixture.IdentityServiceMock.Object,
+                Fixture.NavigationServiceMock.Object,
+                Fixture.LocalizationServiceMock.Object,
+                Fixture.NativeCallsMock.Object)
+            {
+                Email = "test@test.com",
+                Password = "Abc123!?",
+                ConfirmPassword = "Hello",
+                FirstName = "Anders",
+                LastName = "Andersson",
+                IsAcceptingUserAgreement = true
+            };
+
+            registrationViewModel.RegisterCommand.Execute(null);
         }
 
         [Fact(DisplayName = "Is navigating to AppShell on successful registration")]

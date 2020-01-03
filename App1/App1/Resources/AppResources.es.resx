@@ -126,6 +126,9 @@
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirma contraseña</value>
   </data>
+  <data name="ConfirmPasswordMessage" xml:space="preserve">
+    <value>Confirma contraseña</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Descripción</value>
   </data>

@@ -111,6 +111,7 @@ namespace App1.ViewModels
                 _errors.Add(property.Key, property.Select(r => r.ErrorMessage).ToList());
                 RaiseErrorsChanged(property.Key);
             }
+
         }
 
         private void RaiseErrorsChanged(string propertyName)

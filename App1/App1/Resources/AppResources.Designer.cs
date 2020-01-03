@@ -88,6 +88,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string ConfirmPasswordMessage {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -124,7 +133,7 @@ namespace App1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Must have a lenght of minimum {2} and maximum {1} characters.
+        ///   Looks up a localized string similar to Must have a length of minimum {2} and maximum {1} characters.
         /// </summary>
         public static string FieldMinMaxLengthMessage {
             get {

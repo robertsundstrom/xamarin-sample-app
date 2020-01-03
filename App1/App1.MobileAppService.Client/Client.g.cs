@@ -1092,9 +1092,6 @@ namespace App1.MobileAppService.Client
         [System.ComponentModel.DataAnnotations.StringLength(20, MinimumLength = 8)]
         public string Password { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("confirmPassword", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ConfirmPassword { get; set; }
-    
     
     }
     
