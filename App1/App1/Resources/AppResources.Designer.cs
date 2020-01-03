@@ -295,6 +295,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registration Date.
+        /// </summary>
+        public static string RegistrationDate {
+            get {
+                return ResourceManager.GetString("RegistrationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string RegistrationPageButton {
@@ -502,6 +511,15 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Profile.
+        /// </summary>
+        public static string SectionUserProfileTitle {
+            get {
+                return ResourceManager.GetString("SectionUserProfileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Text.
         /// </summary>
         public static string Text {
@@ -511,11 +529,38 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string UpdateUserProfileButton {
+            get {
+                return ResourceManager.GetString("UpdateUserProfileButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update User Profile.
+        /// </summary>
+        public static string UpdateUserProfilePageTitle {
+            get {
+                return ResourceManager.GetString("UpdateUserProfilePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Agreement.
         /// </summary>
         public static string UserAgreement {
             get {
                 return ResourceManager.GetString("UserAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Profile was updated..
+        /// </summary>
+        public static string UserProfileUpdatedMessage {
+            get {
+                return ResourceManager.GetString("UserProfileUpdatedMessage", resourceCulture);
             }
         }
     }

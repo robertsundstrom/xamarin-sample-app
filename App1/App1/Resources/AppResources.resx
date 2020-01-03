@@ -195,6 +195,9 @@
   <data name="PreAcceptUserAgreement" xml:space="preserve">
     <value>I accept the </value>
   </data>
+  <data name="RegistrationDate" xml:space="preserve">
+    <value>Registration Date</value>
+  </data>
   <data name="RegistrationPageButton" xml:space="preserve">
     <value>Register</value>
   </data>
@@ -264,10 +267,22 @@
   <data name="SectionUserAgreementTitle" xml:space="preserve">
     <value>User Agreement</value>
   </data>
+  <data name="SectionUserProfileTitle" xml:space="preserve">
+    <value>User Profile</value>
+  </data>
   <data name="Text" xml:space="preserve">
     <value>Text</value>
   </data>
+  <data name="UpdateUserProfileButton" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UpdateUserProfilePageTitle" xml:space="preserve">
+    <value>Update User Profile</value>
+  </data>
   <data name="UserAgreement" xml:space="preserve">
     <value>User Agreement</value>
+  </data>
+  <data name="UserProfileUpdatedMessage" xml:space="preserve">
+    <value>User Profile was updated.</value>
   </data>
 </root>

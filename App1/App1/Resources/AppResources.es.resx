@@ -145,13 +145,13 @@
     <value>{2}-{1} caracteres</value>
   </data>
   <data name="FieldMustAcceptUserAgreement" xml:space="preserve">
-    <value>Debes aceptar el Acuerdo de Usuario.</value>
+    <value>Debes que aceptar el Acuerdo de Usuario.</value>
   </data>
   <data name="FieldRequiredMessage" xml:space="preserve">
     <value>Obligatorio</value>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>First Name</value>
+    <value>Nombre</value>
   </data>
   <data name="FirstNamePlaceholder" xml:space="preserve">
     <value>Juan</value>
@@ -160,7 +160,7 @@
     <value>Email o Contraseña invalida</value>
   </data>
   <data name="LastName" xml:space="preserve">
-    <value>Last Name</value>
+    <value>Apellido</value>
   </data>
   <data name="LastNamePlaceholder" xml:space="preserve">
     <value>Pérez</value>
@@ -194,6 +194,9 @@
   </data>
   <data name="PreAcceptUserAgreement" xml:space="preserve">
     <value>Acepto el </value>
+  </data>
+  <data name="RegistrationDate" xml:space="preserve">
+    <value>Fecha de registración</value>
   </data>
   <data name="RegistrationPageButton" xml:space="preserve">
     <value>Registrar</value>
@@ -264,10 +267,22 @@
   <data name="SectionUserAgreementTitle" xml:space="preserve">
     <value>Acuerdo de Usuario</value>
   </data>
+  <data name="SectionUserProfileTitle" xml:space="preserve">
+    <value>Perfil de Usuario</value>
+  </data>
   <data name="Text" xml:space="preserve">
     <value>Texto</value>
   </data>
+  <data name="UpdateUserProfileButton" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="UpdateUserProfilePageTitle" xml:space="preserve">
+    <value>Editar Perfil</value>
+  </data>
   <data name="UserAgreement" xml:space="preserve">
     <value>Acuerdo de Usuario</value>
+  </data>
+  <data name="UserProfileUpdatedMessage" xml:space="preserve">
+    <value>Perfil es actualizado.</value>
   </data>
 </root>

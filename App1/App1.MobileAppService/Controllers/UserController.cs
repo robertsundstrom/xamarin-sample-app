@@ -1,63 +1,52 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+
+using App1.MobileAppService.Models;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App1.MobileAppService.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IConfigurationRoot configuration;
+        private readonly UserManager<User> userManager;
 
-        public UserController(IConfigurationRoot configuration)
+        public UserController(UserManager<User> userManager)
         {
-            this.configuration = configuration;
+            this.userManager = userManager;
         }
 
-        //// GET: api/User/5
-        //[HttpGet]
-        //public string GetProfilePicture(int id)
-        //{
-        //    BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+        [HttpGet]
+        public async Task<Models.Dtos.User> GetUser()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
+            var user = await userManager.FindByEmailAsync(email);
+            return new Models.Dtos.User()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                RegistrationDate = user.RegistrationDate
+            };
+        }
 
-        //    return "value";
-        //}
 
-        //// POST: api/User
-        //[HttpPost]
-        //public async Task UpdateProfilePicture(IFormFile file)
-        //{
-        //    using (var stream = file.OpenReadStream())
-        //    {
-        //        await UploadFileToStorage(stream);
-        //    }
-        //}
-
-        //public async Task<string> UploadFileToStorage(Stream fileStream)
-        //{
-        //    var blobStorageSection = configuration.GetSection("BlobStorage");
-
-        //    // Create storagecredentials object by reading the values from the configuration (appsettings.json)
-        //    StorageCredentials storageCredentials = new StorageCredentials(blobStorageSection["AccountName"], blobStorageSection["AccountKey"]);
-
-        //    // Create cloudstorage account by passing the storagecredentials
-        //    CloudStorageAccount storageAccount = new CloudStorageAccount(storageCredentials, true);
-
-        //    // Create the blob client.
-        //    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-        //    // Get reference to the blob container by passing the name by reading the value from the configuration (appsettings.json)
-        //    CloudBlobContainer container = blobClient.GetContainerReference(blobStorageSection["ImageContainer"]);
-
-        //    var blobName = Guid.NewGuid().ToString();
-
-        //    // Get the reference to the block blob from the container
-        //    CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobName);
-
-        //    // Upload the file
-        //    await blockBlob.UploadFromStreamAsync(fileStream);
-
-        //    return blobName;
-        //}
+        [HttpPut]
+        public async Task UpdateUser(Models.Dtos.UpdateUser updateUser)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
+            var user = await userManager.FindByEmailAsync(email);
+            user.FirstName = updateUser.FirstName;
+            user.LastName = updateUser.LastName;
+            user.Email = updateUser.Email;
+            await userManager.UpdateAsync(user);
+        }
     }
 }

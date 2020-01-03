@@ -80,9 +80,13 @@ namespace App1
 
             services.AddTransient<ItemsViewModel>();
             services.AddTransient<UserAgreementViewModel>();
+            services.AddTransient<UserProfileViewModel>();
+            services.AddTransient<UpdateUserProfileViewModel>();
             services.AddTransient<AboutViewModel>();
 
             services.AddTransient<LoginPage>();
+            services.AddTransient<UserProfilePage>();
+            services.AddTransient<UpdateUserProfilePage>();
             services.AddTransient<RegistrationPage>();
             services.AddTransient<UserAgreementPage>();
             services.AddTransient<AboutPage>();
@@ -146,6 +150,15 @@ namespace App1
 
                     return new ItemsHubClient(hubConnection);
                 });
+
+                services.AddHttpClient<IUserClient, UserClient>(CreateClientDelegate)
+                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                    {
+                                                            TimeSpan.FromSeconds(1),
+                                                            TimeSpan.FromSeconds(5),
+                                                            TimeSpan.FromSeconds(10)
+                    }));
 
             }
 

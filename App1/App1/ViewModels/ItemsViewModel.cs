@@ -45,7 +45,7 @@ namespace App1.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    nativeCalls.OpenToast(string.Empty, ex.Message);
+                    await nativeCalls.OpenToast(string.Empty, ex.Message);
                 }
             });
 
@@ -100,7 +100,7 @@ namespace App1.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    nativeCalls.OpenToast(string.Empty, ex.Message);
+                    await nativeCalls.OpenToast(string.Empty, ex.Message);
                 }
             }
         }
@@ -134,7 +134,7 @@ namespace App1.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                nativeCalls.OpenToast(string.Empty, ex.Message);
+                await nativeCalls.OpenToast(string.Empty, ex.Message);
             }
             finally
             {

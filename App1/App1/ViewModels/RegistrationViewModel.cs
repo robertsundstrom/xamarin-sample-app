@@ -43,7 +43,7 @@ namespace App1.ViewModels
         {
             if (!Validate())
             {
-                nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
                 return;
             }
 
@@ -63,11 +63,11 @@ namespace App1.ViewModels
             }
             catch (HttpRequestException exc)
             {
-                nativeCalls.OpenToast(string.Empty, exc.Message);
+                await nativeCalls.OpenToast(string.Empty, exc.Message);
             }
             catch (Exception exc)
             {
-                nativeCalls.OpenToast(string.Empty, exc.Message);
+                await nativeCalls.OpenToast(string.Empty, exc.Message);
             }
         }
 
@@ -82,12 +82,12 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)));
+                    await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)));
                 }
             }
             catch (HttpRequestException exc)
             {
-                nativeCalls.OpenToast(string.Empty, exc.Message);
+                await nativeCalls.OpenToast(string.Empty, exc.Message);
                 await _navigationService.PopAsync();
             }
         }

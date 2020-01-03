@@ -76,12 +76,25 @@ namespace App1.Services
             {
                 if (page is LoginPage)
                 {
-
                     app.MainPage = new CustomNavigationView(page);
                 }
                 else
                 {
-                    await app.MainPage.Navigation.PushAsync(page);
+                    if (app.MainPage is AppShell)
+                    {
+                        await app.MainPage.Navigation.PushAsync(page);
+                    }
+                    else
+                    {
+                        if (!(app.MainPage is CustomNavigationView))
+                        {
+                            app.MainPage = new CustomNavigationView(page);
+                        }
+                        else
+                        {
+                            await app.MainPage.Navigation.PushAsync(page);
+                        }
+                    }
                 }
             }
         }

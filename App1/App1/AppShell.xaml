@@ -18,6 +18,8 @@
         </Tab>
     </FlyoutItem>
 
+    <ShellContent Title="{x:Static resources:AppResources.SectionUserProfileTitle}" ContentTemplate="{DataTemplate local:UserProfilePage}" />
+
     <ShellContent
         Title="{x:Static resources:AppResources.SectionAboutTitle}"
         ContentTemplate="{DataTemplate local:AboutPage}"

@@ -57,7 +57,7 @@ namespace App1.ViewModels
         {
             if (!Validate())
             {
-                nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
                 return;
             }
 
@@ -70,16 +70,16 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    nativeCalls.OpenToast(string.Empty, "Invalid email address or password.");
+                    await nativeCalls.OpenToast(string.Empty, "Invalid email address or password.");
                 }
             }
             catch (HttpRequestException exc)
             {
-                nativeCalls.OpenToast(string.Empty, exc.Message);
+                await nativeCalls.OpenToast(string.Empty, exc.Message);
             }
             catch (Exception exc)
             {
-                nativeCalls.OpenToast(string.Empty, exc.Message);
+                await nativeCalls.OpenToast(string.Empty, exc.Message);
             }
         }
 

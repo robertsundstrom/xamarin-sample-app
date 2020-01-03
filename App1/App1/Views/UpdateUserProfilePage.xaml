@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App1.Views.UpdateUserProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:App1.Behaviors"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:App1.Resources"
+    Title="{x:Static resources:AppResources.UpdateUserProfilePageTitle}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" VerticalOptions="Center">
+                <StackLayout Spacing="20">
+                    <Label Text="{x:Static resources:AppResources.FirstName}" />
+                    <Entry
+                        x:Name="firstNameEntry"
+                        Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
+                        Text="{Binding FirstName, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:InputValidationBehavior PropertyName="FirstName" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{x:Static resources:AppResources.LastName}" />
+                    <Entry
+                        x:Name="lastNameEntry"
+                        Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
+                        Text="{Binding LastName, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:InputValidationBehavior PropertyName="LastName" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <Button
+                    Command="{Binding UpdateUserProfileCommand}"
+                    Style="{DynamicResource PrimaryButton}"
+                    Text="{x:Static resources:AppResources.UpdateUserProfileButton}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -13,9 +13,11 @@ namespace App1.Droid
             return App.Current.MainPage.DisplayPromptAsync(title, text, accept, cancel, placeholder);
         }
 
-        public void OpenToast(string title, string text, string accept = "OK")
+        public Task OpenToast(string title, string text, string accept = "OK")
         {
             Toast.MakeText(Application.Context, text, ToastLength.Long).Show();
+
+            return Task.CompletedTask;
         }
     }
 }

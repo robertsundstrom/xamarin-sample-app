@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using App1.MobileAppService.Models;
@@ -43,7 +44,8 @@ namespace App1.MobileAppService.Controllers
                 LastName = vm.LastName,
                 UserName = vm.Email,
                 Email = vm.Email,
-            }, vm.Password);
+                RegistrationDate = DateTime.Now
+            }, vm.Password); ;
 
             if (!result.Succeeded)
             {
