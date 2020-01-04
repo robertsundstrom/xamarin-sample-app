@@ -17,7 +17,7 @@ namespace App1.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IIdentityService identityService;
         private readonly ILocalizationService localizationService;
-        private readonly INativeCalls nativeCalls;
+        private readonly IAlertService alertService;
         private string? email;
         private string? password;
         private bool showLoginNoticeVisible;
@@ -27,12 +27,12 @@ namespace App1.ViewModels
             INavigationService navigationService,
             IIdentityService identityService,
             ILocalizationService localizationService,
-            INativeCalls nativeCalls)
+            IAlertService alertService)
         {
             _navigationService = navigationService;
             this.identityService = identityService;
             this.localizationService = localizationService;
-            this.nativeCalls = nativeCalls;
+            this.alertService = alertService;
             LoginCommand = new Command(async () => await ExecuteLoginCommand(), () => !IsPristine);
             NavigateToRegistrationPageCommand = new Command(async () => await navigationService.PushAsync<ViewModels.RegistrationViewModel>());
             NavigateToAboutPageCommand = new Command(async () => await _navigationService.PushAsync<AboutViewModel>());
@@ -57,7 +57,7 @@ namespace App1.ViewModels
         {
             if (!Validate())
             {
-                await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)), "OK");
                 return;
             }
 
@@ -70,16 +70,16 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    await nativeCalls.OpenToast(string.Empty, "Invalid email address or password.");
+                    await alertService.DisplayAlertAsync(string.Empty, "Invalid email address or password.", "OK");
                 }
             }
             catch (HttpRequestException exc)
             {
-                await nativeCalls.OpenToast(string.Empty, exc.Message);
+                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
             }
             catch (Exception exc)
             {
-                await nativeCalls.OpenToast(string.Empty, exc.Message);
+                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
             }
         }
 

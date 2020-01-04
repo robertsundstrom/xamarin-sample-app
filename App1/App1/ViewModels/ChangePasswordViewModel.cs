@@ -17,7 +17,7 @@ namespace App1.ViewModels
         private readonly IUserClient userClient;
         private readonly INavigationService navigationService;
         private readonly ILocalizationService localizationService;
-        private readonly INativeCalls nativeCalls;
+        private readonly IAlertService alertService;
         private string? confirmNewPassword;
         private bool isPristine;
         private string? currentPassword;
@@ -27,12 +27,12 @@ namespace App1.ViewModels
             IUserClient userClient,
             INavigationService navigationService,
             ILocalizationService localizationService,
-            INativeCalls nativeCalls)
+            IAlertService alertService)
         {
             this.userClient = userClient;
             this.navigationService = navigationService;
             this.localizationService = localizationService;
-            this.nativeCalls = nativeCalls;
+            this.alertService = alertService;
 
             UpdatePasswordCommand = new Command(async () => await ExecuteUpdatePasswordCommand(), () => !IsPristine);
         }
@@ -41,7 +41,7 @@ namespace App1.ViewModels
         {
             if (!Validate())
             {
-                await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)), "OK");
                 return;
             }
 
@@ -55,18 +55,18 @@ namespace App1.ViewModels
 
                 await userClient.ChangePasswordAsync(model);
 
-                await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.UserProfileUpdatedMessage)));
+                await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.UserProfileUpdatedMessage)), "OK");
 
                 await navigationService.PopAsync();
 
             }
             catch (HttpRequestException exc)
             {
-                await nativeCalls.OpenToast(string.Empty, exc.Message);
+                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
             }
             catch (Exception exc)
             {
-                await nativeCalls.OpenToast(string.Empty, exc.Message);
+                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
             }
         }
 

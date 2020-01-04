@@ -44,8 +44,6 @@ namespace App1.ViewModels
             {
 
             }
-
-            //await userClient.UpdateProfileImageAsync()
         }
     }
 }

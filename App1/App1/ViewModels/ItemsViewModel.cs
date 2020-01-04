@@ -15,21 +15,21 @@ namespace App1.ViewModels
     public class ItemsViewModel : ViewModelBase
     {
         private readonly IDataStore<Item> dataStore;
-        private readonly INativeCalls nativeCalls;
+        private readonly IAlertService alertService;
         private readonly INavigationService navigationService;
         private readonly IItemsHubClient itemsHubClient;
 
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel(IDataStore<Item> dataStore, INativeCalls nativeCalls, INavigationService navigationService, IItemsHubClient itemsHubClient)
+        public ItemsViewModel(IDataStore<Item> dataStore, IAlertService alertService, INavigationService navigationService, IItemsHubClient itemsHubClient)
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             this.dataStore = dataStore;
-            this.nativeCalls = nativeCalls;
+            this.alertService = alertService;
             this.navigationService = navigationService;
             this.itemsHubClient = itemsHubClient;
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
@@ -45,18 +45,18 @@ namespace App1.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    await nativeCalls.OpenToast(string.Empty, ex.Message);
+                    await alertService.DisplayAlertAsync(string.Empty, ex.Message, "OK");
                 }
             });
 
             MessagingCenter.Subscribe<ItemsPage, Item>(this, "DeleteItem", async (obj, item) =>
             {
-                await DeleteItem(dataStore, nativeCalls, item);
+                await DeleteItem(item);
             });
 
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", async (obj, item) =>
             {
-                await DeleteItem(dataStore, nativeCalls, item);
+                await DeleteItem(item);
             });
 
             itemsHubClient.WhenItemAdded.Subscribe((item) =>
@@ -86,7 +86,7 @@ namespace App1.ViewModels
             });
         }
 
-        private async Task DeleteItem(IDataStore<Item> dataStore, INativeCalls nativeCalls, Item item)
+        private async Task DeleteItem(Item item)
         {
             if (item is Item newItem)
             {
@@ -100,7 +100,7 @@ namespace App1.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    await nativeCalls.OpenToast(string.Empty, ex.Message);
+                    await alertService.DisplayAlertAsync(string.Empty, ex.Message, "OK");
                 }
             }
         }
@@ -134,7 +134,7 @@ namespace App1.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                await nativeCalls.OpenToast(string.Empty, ex.Message);
+                await alertService.DisplayAlertAsync(string.Empty, ex.Message, "OK");
             }
             finally
             {

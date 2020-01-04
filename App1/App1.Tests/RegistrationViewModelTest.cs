@@ -25,7 +25,7 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object);
+                Fixture.AlertServiceMock.Object);
 
             Assert.True(registrationViewModel.IsPristine);
             Assert.False(registrationViewModel.HasErrors);
@@ -46,7 +46,7 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "test@test.com",
                 Password = "Abc123!?",
@@ -58,7 +58,7 @@ namespace App1.Tests
 
             registrationViewModel.RegisterCommand.Execute(null);
 
-            Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+            Fixture.AlertServiceMock.Verify(x => x.DisplayAlertAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact(DisplayName = "Password and ConfirmPassword not equal")]
@@ -70,7 +70,7 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "test@test.com",
                 Password = "Abc123!?",
@@ -95,7 +95,7 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "test@test.com",
                 Password = "Abc123!?",

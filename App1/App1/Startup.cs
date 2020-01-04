@@ -97,73 +97,68 @@ namespace App1
             services.AddTransient<AppShell>();
             services.AddSingleton<App>();
 
+            services.AddSingleton<IAlertService, AlertService>();
+
             services.AddTransient<IResourceContainer, ResourceContainer>();
             services.AddTransient<ILocalizationService, LocalizationService>();
 
-            if (App.UseMockDataStore)
-            {
-                services.AddTransient<IDataStore<Item>, MockDataStore>();
-            }
-            else
-            {
-                services.AddHttpClient<IRegistrationClient, RegistrationClient>(CreateClientDelegate)
-                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
-                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
-                    {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }));
 
-                services.AddHttpClient<ITokenClient, TokenClient>(CreateClientDelegate)
-                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
-                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
-                    {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }));
-
-                services.AddHttpClient<IItemsClient, ItemsClient>(CreateClientDelegate)
-                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
-                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
-                    {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }));
-
-                services.AddSingleton<IDataStore<Item>, AzureDataStore>();
-
-
-                services.AddSingleton<IItemsHubClient, ItemsHubClient>(sp =>
+            services.AddHttpClient<IRegistrationClient, RegistrationClient>(CreateClientDelegate)
+                .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
                 {
-                    var conf = sp.GetService<IConfiguration>();
-                    var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                }));
 
-                    var hubConnection = new HubConnectionBuilder().WithUrl($"{appServiceConfig.ServiceEndpoint}/itemsHub", opt =>
-                    {
-                        //opt.Transports = HttpTransportType.WebSockets;
-                        opt.AccessTokenProvider = () => Task.FromResult(sp.GetRequiredService<ISettingsService>().AuthAccessToken);
-                    })
-                            .WithAutomaticReconnect()
-                            .Build();
+            services.AddHttpClient<ITokenClient, TokenClient>(CreateClientDelegate)
+                .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                }));
 
-                    hubConnection.StartAsync();
+            services.AddHttpClient<IItemsClient, ItemsClient>(CreateClientDelegate)
+                .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                }));
 
-                    return new ItemsHubClient(hubConnection);
-                });
+            services.AddSingleton<IDataStore<Item>, AzureDataStore>();
 
-                services.AddHttpClient<IUserClient, UserClient>(CreateClientDelegate)
-                    .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
-                    .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
-                    {
-                                                            TimeSpan.FromSeconds(1),
-                                                            TimeSpan.FromSeconds(5),
-                                                            TimeSpan.FromSeconds(10)
-                    }));
 
-            }
+            services.AddSingleton<IItemsHubClient, ItemsHubClient>(sp =>
+            {
+                var conf = sp.GetService<IConfiguration>();
+                var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
+
+                var hubConnection = new HubConnectionBuilder().WithUrl($"{appServiceConfig.ServiceEndpoint}/itemsHub", opt =>
+                {
+                    //opt.Transports = HttpTransportType.WebSockets;
+                    opt.AccessTokenProvider = () => Task.FromResult(sp.GetRequiredService<ISettingsService>().AuthAccessToken);
+                })
+                        .WithAutomaticReconnect()
+                        .Build();
+
+                hubConnection.StartAsync();
+
+                return new ItemsHubClient(hubConnection);
+            });
+
+            services.AddHttpClient<IUserClient, UserClient>(CreateClientDelegate)
+                .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
+                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
+                {
+                        TimeSpan.FromSeconds(1),
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10)
+                }));
 
 #if DEBUG
             System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>

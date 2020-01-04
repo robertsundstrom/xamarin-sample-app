@@ -24,7 +24,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object);
+                Fixture.AlertServiceMock.Object);
 
             Assert.False(loginViewModel.IsPristine);
             Assert.False(loginViewModel.HasErrors);
@@ -46,7 +46,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "ddd@",
                 Password = ""
@@ -69,7 +69,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "",
                 Password = "foo"
@@ -92,7 +92,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "foo@",
                 Password = "foo"
@@ -116,7 +116,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "test@test.com",
                 Password = ""
@@ -143,7 +143,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "test@test.com",
                 Password = "foo"
@@ -168,7 +168,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "test@test.com",
                 Password = "foo"
@@ -192,7 +192,7 @@ namespace App1.Tests
                  Fixture.NavigationServiceMock.Object,
                  Fixture.IdentityServiceMock.Object,
                  Fixture.LocalizationServiceMock.Object,
-                 Fixture.NativeCallsMock.Object)
+                 Fixture.AlertServiceMock.Object)
             {
                 Email = "test@test.com",
                 Password = "foo"
@@ -200,7 +200,7 @@ namespace App1.Tests
 
             loginViewModel.LoginCommand.Execute(null);
 
-            Fixture.NativeCallsMock.Verify(x => x.OpenToast(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+            Fixture.AlertServiceMock.Verify(x => x.DisplayAlertAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact(DisplayName = "Is navigating to registration on command executed")]
@@ -216,7 +216,7 @@ namespace App1.Tests
                 Fixture.NavigationServiceMock.Object,
                 Fixture.IdentityServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.NativeCallsMock.Object)
+                Fixture.AlertServiceMock.Object)
             {
                 Email = "",
                 Password = ""

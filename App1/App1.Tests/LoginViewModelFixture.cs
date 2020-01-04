@@ -11,13 +11,13 @@ namespace App1.Tests
             NavigationServiceMock = new Mock<INavigationService>();
             IdentityServiceMock = new Mock<IIdentityService>();
             LocalizationServiceMock = new Mock<ILocalizationService>();
-            NativeCallsMock = new Mock<INativeCalls>();
+            AlertServiceMock = new Mock<IAlertService>();
         }
 
         public Mock<INavigationService> NavigationServiceMock { get; }
         public Mock<IIdentityService> IdentityServiceMock { get; }
         public Mock<ILocalizationService> LocalizationServiceMock { get; }
-        public Mock<INativeCalls> NativeCallsMock { get; }
+        public Mock<IAlertService> AlertServiceMock { get; }
 
         public void Reset()
         {
@@ -28,7 +28,7 @@ namespace App1.Tests
             NavigationServiceMock.Invocations.Clear();
             IdentityServiceMock.Invocations.Clear();
             LocalizationServiceMock.Invocations.Clear();
-            NativeCallsMock.Invocations.Clear();
+            AlertServiceMock.Invocations.Clear();
         }
     }
 }

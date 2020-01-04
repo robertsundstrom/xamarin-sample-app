@@ -9,8 +9,6 @@ namespace App1
 {
     public partial class App : Application
     {
-        public static bool UseMockDataStore = false;
-
         public static IServiceProvider? ServiceProvider { get; internal set; }
 
         public App()

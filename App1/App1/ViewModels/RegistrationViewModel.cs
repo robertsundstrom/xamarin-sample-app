@@ -16,7 +16,7 @@ namespace App1.ViewModels
         private readonly IIdentityService _identityService;
         private readonly INavigationService _navigationService;
         private readonly ILocalizationService localizationService;
-        private readonly INativeCalls nativeCalls;
+        private readonly IAlertService alertService;
         private bool isPristine = true;
         private string? email;
         private string? password;
@@ -29,12 +29,12 @@ namespace App1.ViewModels
             IIdentityService identityService,
             INavigationService navigationService,
             ILocalizationService localizationService,
-            INativeCalls nativeCalls)
+            IAlertService alertService)
         {
             _identityService = identityService;
             _navigationService = navigationService;
             this.localizationService = localizationService;
-            this.nativeCalls = nativeCalls;
+            this.alertService = alertService;
             RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine);
             ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
         }
@@ -43,7 +43,7 @@ namespace App1.ViewModels
         {
             if (!Validate())
             {
-                await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)), "OK");
                 return;
             }
 
@@ -63,11 +63,11 @@ namespace App1.ViewModels
             }
             catch (HttpRequestException exc)
             {
-                await nativeCalls.OpenToast(string.Empty, exc.Message);
+                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
             }
             catch (Exception exc)
             {
-                await nativeCalls.OpenToast(string.Empty, exc.Message);
+                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
             }
         }
 
@@ -82,12 +82,12 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    await nativeCalls.OpenToast(string.Empty, localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)));
+                    await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)), "OK");
                 }
             }
             catch (HttpRequestException exc)
             {
-                await nativeCalls.OpenToast(string.Empty, exc.Message);
+                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
                 await _navigationService.PopAsync();
             }
         }
