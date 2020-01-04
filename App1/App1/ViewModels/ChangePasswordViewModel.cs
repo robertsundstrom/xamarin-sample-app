@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -59,6 +61,15 @@ namespace App1.ViewModels
 
                 await navigationService.PopAsync();
 
+            }
+            catch (ApiException<ProblemDetails> exc)
+            {
+                await alertService.DisplayAlertAsync(string.Empty, "Invalid password.", "OK");
+
+            }
+            catch (ApiException<ICollection<IdentityError>> exc)
+            {
+                await alertService.DisplayAlertAsync(string.Empty, string.Join(",", exc.Result.Select(x => x.Description)), "OK");
             }
             catch (HttpRequestException exc)
             {
