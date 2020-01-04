@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using App1.MobileAppService.Client;
 using App1.Services;
@@ -15,7 +14,7 @@ namespace App1.ViewModels
         public Command UpdateUserProfileCommand { get; }
         public Command ChangePasswordCommand { get; }
 
-        private User user;
+        private User? user;
 
         public UserProfileViewModel(IUserClient userClient, INavigationService navigationService)
         {
@@ -25,7 +24,7 @@ namespace App1.ViewModels
             ChangePasswordCommand = new Command(async () => await navigationService.PushAsync<ChangePasswordViewModel>());
         }
 
-        public User User
+        public User? User
         {
             get => user;
             private set
@@ -36,14 +35,7 @@ namespace App1.ViewModels
 
         public override async Task InitializeAsync(object? arg)
         {
-            try
-            {
-                User = await userClient.GetUserAsync();
-            }
-            catch (Exception e)
-            {
-
-            }
+            User = await userClient.GetUserAsync();
         }
     }
 }

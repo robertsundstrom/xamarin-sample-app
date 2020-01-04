@@ -62,7 +62,7 @@ namespace App1.ViewModels
                 await navigationService.PopAsync();
 
             }
-            catch (ApiException<ProblemDetails> exc)
+            catch (ApiException<ProblemDetails>)
             {
                 await alertService.DisplayAlertAsync(string.Empty, "Invalid password.", "OK");
 
