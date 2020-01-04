@@ -32,11 +32,14 @@ namespace App1
         {
             string systemDir = FileSystem.CacheDirectory;
 
-            Utils.ExtractSaveResource("App1.appsettings.json", systemDir);
-            Utils.ExtractSaveResource("App1.appsettings.Development.json", systemDir);
+            const string AppSettingsFileName = "App1.appsettings.json";
+            const string AppSettingsDevFileName = "App1.appsettings.Development.json";
 
-            string fullConfig = Path.Combine(systemDir, "App1.appsettings.json");
-            string fullDevConfig = Path.Combine(systemDir, "App1.appsettings.Development.json");
+            Utils.ExtractSaveResource(AppSettingsFileName, systemDir);
+            Utils.ExtractSaveResource(AppSettingsDevFileName, systemDir);
+
+            string fullConfig = Path.Combine(systemDir, AppSettingsFileName);
+            string fullDevConfig = Path.Combine(systemDir, AppSettingsDevFileName);
 
 
             var host = new HostBuilder()
