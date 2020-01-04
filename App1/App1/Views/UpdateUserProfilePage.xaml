@@ -7,12 +7,13 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:App1.Resources"
-    Title="{x:Static resources:AppResources.UpdateUserProfilePageTitle}"
+    Title="{x:Static resources:AppResources.EditUserProfilePageTitle}"
     mc:Ignorable="d">
+
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20" VerticalOptions="Center">
-                <StackLayout Spacing="20">
+            <StackLayout Padding="16">
+                <StackLayout Margin="0,0,0,40" Spacing="20">
                     <Label Text="{x:Static resources:AppResources.FirstName}" />
                     <Entry
                         x:Name="firstNameEntry"
@@ -31,11 +32,20 @@
                             <behaviors:InputValidationBehavior PropertyName="LastName" />
                         </Entry.Behaviors>
                     </Entry>
+                    <Label Text="{x:Static resources:AppResources.Email}" />
+                    <Entry
+                        x:Name="emailEntry"
+                        Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                        Text="{Binding Email, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:InputValidationBehavior PropertyName="Email" />
+                        </Entry.Behaviors>
+                    </Entry>
                 </StackLayout>
                 <Button
                     Command="{Binding UpdateUserProfileCommand}"
                     Style="{DynamicResource PrimaryButton}"
-                    Text="{x:Static resources:AppResources.UpdateUserProfileButton}" />
+                    Text="{x:Static resources:AppResources.SaveUserProfileButton}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

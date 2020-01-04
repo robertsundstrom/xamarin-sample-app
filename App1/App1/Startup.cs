@@ -22,6 +22,7 @@ using Polly;
 
 using Xamarin.Essentials;
 
+using ChangePasswordViewModel = App1.ViewModels.ChangePasswordViewModel;
 
 namespace App1
 {
@@ -82,11 +83,13 @@ namespace App1
             services.AddTransient<UserAgreementViewModel>();
             services.AddTransient<UserProfileViewModel>();
             services.AddTransient<UpdateUserProfileViewModel>();
+            services.AddTransient<ChangePasswordViewModel>();
             services.AddTransient<AboutViewModel>();
 
             services.AddTransient<LoginPage>();
             services.AddTransient<UserProfilePage>();
             services.AddTransient<UpdateUserProfilePage>();
+            services.AddTransient<ChangePasswordPage>();
             services.AddTransient<RegistrationPage>();
             services.AddTransient<UserAgreementPage>();
             services.AddTransient<AboutPage>();

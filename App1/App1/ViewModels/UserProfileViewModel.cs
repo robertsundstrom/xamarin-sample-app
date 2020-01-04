@@ -13,6 +13,7 @@ namespace App1.ViewModels
         private readonly IUserClient userClient;
 
         public Command UpdateUserProfileCommand { get; }
+        public Command ChangePasswordCommand { get; }
 
         private User user;
 
@@ -21,6 +22,7 @@ namespace App1.ViewModels
             this.userClient = userClient;
 
             UpdateUserProfileCommand = new Command(async () => await navigationService.PushAsync<UpdateUserProfileViewModel>(user));
+            ChangePasswordCommand = new Command(async () => await navigationService.PushAsync<ChangePasswordViewModel>());
         }
 
         public User User

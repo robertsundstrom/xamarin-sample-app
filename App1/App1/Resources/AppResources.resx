@@ -123,11 +123,23 @@
   <data name="CheckFieldsMessage" xml:space="preserve">
     <value>Please, check the inputs.</value>
   </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceholder" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
   <data name="ConfirmPasswordMessage" xml:space="preserve">
     <value>Confirm password</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="CurrentPasswordPlaceholder" xml:space="preserve">
+    <value>Current Password</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -179,6 +191,12 @@
   </data>
   <data name="LogoutButton" xml:space="preserve">
     <value>Log out</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="NewPasswordPlaceholder" xml:space="preserve">
+    <value>New Password</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -273,16 +291,22 @@
   <data name="Text" xml:space="preserve">
     <value>Text</value>
   </data>
-  <data name="UpdateUserProfileButton" xml:space="preserve">
-    <value>Update</value>
+  <data name="EditUserProfileButton" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="UpdateUserProfilePageTitle" xml:space="preserve">
-    <value>Update User Profile</value>
+  <data name="EditUserProfilePageTitle" xml:space="preserve">
+    <value>Edit User Profile</value>
   </data>
   <data name="UserAgreement" xml:space="preserve">
     <value>User Agreement</value>
   </data>
   <data name="UserProfileUpdatedMessage" xml:space="preserve">
     <value>User Profile was updated.</value>
+  </data>
+  <data name="SavePasswordButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveUserProfileButton" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>

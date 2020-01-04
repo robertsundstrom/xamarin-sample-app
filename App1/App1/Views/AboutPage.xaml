@@ -90,9 +90,7 @@
                     Command="{Binding OpenWebCommand}"
                     Text="{x:Static resources:AppResources.SectionAboutLearnMoreButton}"
                     TextColor="White" />
-                <Label
-                    HorizontalOptions="Center"
-                    VerticalOptions="CenterAndExpand">
+                <Label HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span

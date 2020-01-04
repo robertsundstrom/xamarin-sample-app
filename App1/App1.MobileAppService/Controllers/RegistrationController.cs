@@ -33,11 +33,6 @@ namespace App1.MobileAppService.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Register([FromBody] RegistrationViewModel vm)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var result = await _userManager.CreateAsync(new User()
             {
                 FirstName = vm.FirstName,

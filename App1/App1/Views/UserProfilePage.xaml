@@ -11,37 +11,46 @@
     BindingContext="{Binding ., Source={x:Static vm:ViewModelLocator.UserProfile}}"
     mc:Ignorable="d">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding UpdateUserProfileCommand}" Text="{x:Static resources:AppResources.UpdateUserProfileButton}" />
+        <ToolbarItem Command="{Binding UpdateUserProfileCommand}" Text="{x:Static resources:AppResources.EditUserProfileButton}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout
-            Padding="15"
-            BindingContext="{Binding User}"
-            Spacing="20">
-            <Label FontSize="Medium" Text="{x:Static resources:AppResources.FirstName}" />
-            <Label
-                d:Text="Item name"
-                FontSize="Small"
-                Text="{Binding FirstName}" />
+        <ScrollView>
+            <StackLayout Padding="16">
+                <StackLayout
+                    Margin="0,0,0,40"
+                    BindingContext="{Binding User}"
+                    Spacing="20">
+                    <Label FontSize="Medium" Text="{x:Static resources:AppResources.FirstName}" />
+                    <Label
+                        d:Text="Item name"
+                        FontSize="Small"
+                        Text="{Binding FirstName}" />
 
-            <Label FontSize="Medium" Text="{x:Static resources:AppResources.LastName}" />
-            <Label
-                d:Text="Item name"
-                FontSize="Small"
-                Text="{Binding LastName}" />
+                    <Label FontSize="Medium" Text="{x:Static resources:AppResources.LastName}" />
+                    <Label
+                        d:Text="Item name"
+                        FontSize="Small"
+                        Text="{Binding LastName}" />
 
-            <Label FontSize="Medium" Text="{x:Static resources:AppResources.Email}" />
-            <Label
-                d:Text="Item name"
-                FontSize="Small"
-                Text="{Binding Email}" />
+                    <Label FontSize="Medium" Text="{x:Static resources:AppResources.Email}" />
+                    <Label
+                        d:Text="Item name"
+                        FontSize="Small"
+                        Text="{Binding Email}" />
 
 
-            <Label FontSize="Medium" Text="{x:Static resources:AppResources.RegistrationDate}" />
-            <Label
-                d:Text="Item name"
-                FontSize="Small"
-                Text="{Binding RegistrationDate}" />
-        </StackLayout>
+                    <Label FontSize="Medium" Text="{x:Static resources:AppResources.RegistrationDate}" />
+                    <Label
+                        d:Text="Item name"
+                        FontSize="Small"
+                        Text="{Binding RegistrationDate}" />
+                </StackLayout>
+                <Button
+                    Command="{Binding ChangePasswordCommand}"
+                    Style="{DynamicResource PrimaryButton}"
+                    Text="Change password" />
+            </StackLayout>
+        </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>

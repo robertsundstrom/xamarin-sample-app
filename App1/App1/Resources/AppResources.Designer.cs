@@ -79,6 +79,24 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string ConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("ConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string ConfirmNewPasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("ConfirmNewPasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string ConfirmPassword {
@@ -97,11 +115,47 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Password.
+        /// </summary>
+        public static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Password.
+        /// </summary>
+        public static string CurrentPasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("CurrentPasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string EditUserProfileButton {
+            get {
+                return ResourceManager.GetString("EditUserProfileButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit User Profile.
+        /// </summary>
+        public static string EditUserProfilePageTitle {
+            get {
+                return ResourceManager.GetString("EditUserProfilePageTitle", resourceCulture);
             }
         }
         
@@ -250,6 +304,24 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        public static string NewPasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("NewPasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -318,6 +390,24 @@ namespace App1.Resources {
         public static string RegistrationPageTitle {
             get {
                 return ResourceManager.GetString("RegistrationPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SavePasswordButton {
+            get {
+                return ResourceManager.GetString("SavePasswordButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveUserProfileButton {
+            get {
+                return ResourceManager.GetString("SaveUserProfileButton", resourceCulture);
             }
         }
         
@@ -525,24 +615,6 @@ namespace App1.Resources {
         public static string Text {
             get {
                 return ResourceManager.GetString("Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update.
-        /// </summary>
-        public static string UpdateUserProfileButton {
-            get {
-                return ResourceManager.GetString("UpdateUserProfileButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update User Profile.
-        /// </summary>
-        public static string UpdateUserProfilePageTitle {
-            get {
-                return ResourceManager.GetString("UpdateUserProfilePageTitle", resourceCulture);
             }
         }
         
