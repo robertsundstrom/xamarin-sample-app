@@ -47,6 +47,9 @@
     <Compile Update="Views\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\EditUserProfilePage.xaml.cs">
+      <DependentUpon>EditUserProfilePage.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Update="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
@@ -63,7 +66,7 @@
     <EmbeddedResource Update="Views\ChangePasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UpdateUserProfilePage.xaml">
+    <EmbeddedResource Update="Views\EditUserProfilePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UserAgreementPage.xaml">

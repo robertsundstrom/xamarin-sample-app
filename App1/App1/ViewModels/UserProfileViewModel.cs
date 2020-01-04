@@ -21,7 +21,7 @@ namespace App1.ViewModels
         {
             this.userClient = userClient;
 
-            UpdateUserProfileCommand = new Command(async () => await navigationService.PushAsync<UpdateUserProfileViewModel>(user));
+            UpdateUserProfileCommand = new Command(async () => await navigationService.PushAsync<EditUserProfileViewModel>(user));
             ChangePasswordCommand = new Command(async () => await navigationService.PushAsync<ChangePasswordViewModel>());
         }
 

@@ -82,13 +82,13 @@ namespace App1
             services.AddTransient<ItemsViewModel>();
             services.AddTransient<UserAgreementViewModel>();
             services.AddTransient<UserProfileViewModel>();
-            services.AddTransient<UpdateUserProfileViewModel>();
+            services.AddTransient<EditUserProfileViewModel>();
             services.AddTransient<ChangePasswordViewModel>();
             services.AddTransient<AboutViewModel>();
 
             services.AddTransient<LoginPage>();
             services.AddTransient<UserProfilePage>();
-            services.AddTransient<UpdateUserProfilePage>();
+            services.AddTransient<EditUserProfilePage>();
             services.AddTransient<ChangePasswordPage>();
             services.AddTransient<RegistrationPage>();
             services.AddTransient<UserAgreementPage>();

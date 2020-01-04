@@ -12,19 +12,18 @@ using Xamarin.Forms;
 
 namespace App1.ViewModels
 {
-    class UpdateUserProfileViewModel : ViewModelBase<User>
+    class EditUserProfileViewModel : ViewModelBase<User>
     {
         private readonly IUserClient userClient;
         private readonly INavigationService navigationService;
         private readonly ILocalizationService localizationService;
         private readonly IAlertService alertService;
-        private User user;
         private string? firstName;
         private string? lastName;
         private string? email;
         private bool isPristine;
 
-        public UpdateUserProfileViewModel(
+        public EditUserProfileViewModel(
             IUserClient userClient,
             INavigationService navigationService,
             ILocalizationService localizationService,
