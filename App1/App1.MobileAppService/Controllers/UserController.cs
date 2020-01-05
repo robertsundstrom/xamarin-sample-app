@@ -25,6 +25,8 @@ namespace App1.MobileAppService.Controllers
         }
 
         [HttpGet]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<Models.Dtos.User> GetUser()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -41,7 +43,9 @@ namespace App1.MobileAppService.Controllers
 
 
         [HttpPut]
-        public async Task UpdateUser(Models.Dtos.UpdateUser updateUser)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateUser(Models.Dtos.UpdateUser updateUser)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
@@ -49,7 +53,14 @@ namespace App1.MobileAppService.Controllers
             user.FirstName = updateUser.FirstName;
             user.LastName = updateUser.LastName;
             user.Email = updateUser.Email;
-            await userManager.UpdateAsync(user);
+            var result = await userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, result.Errors);
+            }
+
+            return Ok();
         }
 
         [HttpPost]
@@ -57,7 +68,6 @@ namespace App1.MobileAppService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        [ProducesDefaultResponseType]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel vm)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;

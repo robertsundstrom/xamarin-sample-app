@@ -32,7 +32,6 @@ namespace App1.MobileAppService.Controllers
         [Route("Auth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesDefaultResponseType]
         public async Task<ActionResult<TokenResult>> Authenticate([FromForm] string email, [FromForm] string password)
         {
             if (!ModelState.IsValid)
@@ -63,6 +62,7 @@ namespace App1.MobileAppService.Controllers
 
         [HttpPost]
         [Route("Refresh")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<TokenResult>> Refresh([FromForm] string token, [FromForm] string refreshToken)
         {
             var principal = _tokenService.GetPrincipalFromExpiredToken(token);

@@ -24,13 +24,11 @@ namespace App1.MobileAppService.Controllers
             _userManager = userManager;
         }
 
-        // Registration method to create new Identity users
         [HttpPost]
         [Route("Register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        [ProducesDefaultResponseType]
         public async Task<IActionResult> Register([FromBody] RegistrationViewModel vm)
         {
             var result = await _userManager.CreateAsync(new User()
