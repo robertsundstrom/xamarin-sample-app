@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -21,8 +22,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 
 using Xamarin.Essentials;
-
-using ChangePasswordViewModel = App1.ViewModels.ChangePasswordViewModel;
+using Xamarin.Forms;
 
 namespace App1
 {
@@ -73,39 +73,68 @@ namespace App1
                 string world = ctx.Configuration["Hello"];
             }
 
-            services.AddSingleton<ISettingsService, SettingsService>();
-            services.AddSingleton<INavigationService, NavigationService>();
-            services.AddSingleton<IIdentityService, IdentityService>();
-
-            services.AddTransient<AppShellViewModel>();
-
-            services.AddTransient<LoginViewModel>();
-            services.AddTransient<ViewModels.RegistrationViewModel>();
-
-            services.AddTransient<ItemsViewModel>();
-            services.AddTransient<UserAgreementViewModel>();
-            services.AddTransient<UserProfileViewModel>();
-            services.AddTransient<EditUserProfileViewModel>();
-            services.AddTransient<ChangePasswordViewModel>();
-            services.AddTransient<AboutViewModel>();
-
-            services.AddTransient<LoginPage>();
-            services.AddTransient<UserProfilePage>();
-            services.AddTransient<EditUserProfilePage>();
-            services.AddTransient<ChangePasswordPage>();
-            services.AddTransient<RegistrationPage>();
-            services.AddTransient<UserAgreementPage>();
-            services.AddTransient<AboutPage>();
-
-            services.AddTransient<AppShell>();
             services.AddSingleton<App>();
 
+            RegisterViewModels(services);
+
+            RegisterPages(services);
+
+            AddServices(services);
+
+            AddHttpClients(services);
+
+            AddSignaĺRClients(services);
+
+#if DEBUG
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>
+            {
+                if (certificate.Issuer.Equals("CN=localhost"))
+                {
+                    return true;
+                }
+
+                return sslPolicyErrors == System.Net.Security.SslPolicyErrors.None;
+            };
+#endif
+        }
+
+        private static void AddServices(IServiceCollection services)
+        {
             services.AddSingleton<IAlertService, AlertService>();
 
             services.AddTransient<IResourceContainer, ResourceContainer>();
             services.AddTransient<ILocalizationService, LocalizationService>();
 
+            services.AddSingleton<ISettingsService, SettingsService>();
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IIdentityService, IdentityService>();
 
+            services.AddSingleton<IDataStore<Item>, AzureDataStore>();
+        }
+
+        private static void AddSignaĺRClients(IServiceCollection services)
+        {
+            services.AddSingleton<IItemsHubClient, ItemsHubClient>(sp =>
+            {
+                var conf = sp.GetService<IConfiguration>();
+                var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
+
+                var hubConnection = new HubConnectionBuilder().WithUrl($"{appServiceConfig.ServiceEndpoint}/itemsHub", opt =>
+                {
+                    //opt.Transports = HttpTransportType.WebSockets;
+                    opt.AccessTokenProvider = () => Task.FromResult(sp.GetRequiredService<ISettingsService>().AuthAccessToken);
+                })
+                        .WithAutomaticReconnect()
+                        .Build();
+
+                hubConnection.StartAsync();
+
+                return new ItemsHubClient(hubConnection);
+            });
+        }
+
+        private static void AddHttpClients(IServiceCollection services)
+        {
             services.AddHttpClient<IRegistrationClient, RegistrationClient>(CreateClientDelegate)
                 .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
                 .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
@@ -133,27 +162,6 @@ namespace App1
                         TimeSpan.FromSeconds(10)
                 }));
 
-            services.AddSingleton<IDataStore<Item>, AzureDataStore>();
-
-
-            services.AddSingleton<IItemsHubClient, ItemsHubClient>(sp =>
-            {
-                var conf = sp.GetService<IConfiguration>();
-                var appServiceConfig = conf.GetSection("MobileAppService").Get<AppServiceConfiguration>();
-
-                var hubConnection = new HubConnectionBuilder().WithUrl($"{appServiceConfig.ServiceEndpoint}/itemsHub", opt =>
-                {
-                    //opt.Transports = HttpTransportType.WebSockets;
-                    opt.AccessTokenProvider = () => Task.FromResult(sp.GetRequiredService<ISettingsService>().AuthAccessToken);
-                })
-                        .WithAutomaticReconnect()
-                        .Build();
-
-                hubConnection.StartAsync();
-
-                return new ItemsHubClient(hubConnection);
-            });
-
             services.AddHttpClient<IUserClient, UserClient>(CreateClientDelegate)
                 .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
                 .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
@@ -162,18 +170,30 @@ namespace App1
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10)
                 }));
+        }
 
-#if DEBUG
-            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>
+        private static void RegisterViewModels(IServiceCollection services)
+        {
+            foreach (var viewModel in typeof(Startup)
+                .Assembly
+                .GetTypes()
+                .Except(new[] { typeof(ViewModelBase), typeof(ViewModelBase<>) })
+                .Where(t => typeof(ViewModelBase).IsAssignableFrom(t)))
             {
-                if (certificate.Issuer.Equals("CN=localhost"))
-                {
-                    return true;
-                }
+                services.AddTransient(viewModel);
+            }
+        }
 
-                return sslPolicyErrors == System.Net.Security.SslPolicyErrors.None;
-            };
-#endif
+        private static void RegisterPages(IServiceCollection services)
+        {
+            foreach (var viewModel in typeof(Startup)
+                .Assembly
+                .GetTypes()
+                .Except(new[] { typeof(CustomNavigationView) })
+                .Where(t => typeof(Page).IsAssignableFrom(t)))
+            {
+                services.AddTransient(viewModel);
+            }
         }
 
         private static void CreateClientDelegate(IServiceProvider sp, HttpClient client)
