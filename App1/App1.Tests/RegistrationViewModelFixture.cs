@@ -35,9 +35,15 @@ namespace App1.Tests
 
         public void Initialize()
         {
+            AlertServiceExtensions.LocalizationService = LocalizationServiceMock.Object;
+
             IdentityServiceMock
                 .Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(true);
+
+            LocalizationServiceMock
+                .Setup(x => x.GetString(It.IsAny<string>()))
+                .Returns(string.Empty);
         }
 
         public void Reset()

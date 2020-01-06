@@ -37,9 +37,11 @@ namespace App1.ViewModels
         {
             _identityService = identityService;
             _navigationService = navigationService;
+
             this.localizationService = localizationService;
             this.alertService = alertService;
             this.mapper = mapper;
+
             RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine);
             ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
         }
