@@ -27,21 +27,13 @@ namespace App1.MobileAppService
 {
     public class Startup
     {
-        public Startup(IWebHostEnvironment env)
+        private IHostEnvironment env;
+
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json",
-                             optional: false,
-                             reloadOnChange: true)
-                .AddEnvironmentVariables();
+            Configuration = configuration;
 
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
-
-            Configuration = builder.Build();
+            this.env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -53,13 +45,15 @@ namespace App1.MobileAppService
                     .AddNewtonsoftJson();
 
             services.AddDbContext<ApplicationDbContext>
-              (options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")))
-                  .AddIdentityCore<User>(options =>
-                  {
-                      options.ClaimsIdentity.UserIdClaimType = JwtRegisteredClaimNames.Sub;
-                  })
-                 .AddEntityFrameworkStores<ApplicationDbContext>();
+                (options => _ = env.IsDevelopment() ?
+                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+                        : options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddIdentityCore<User>(options =>
+            {
+                options.ClaimsIdentity.UserIdClaimType = JwtRegisteredClaimNames.Sub;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthorization(options =>
             {
@@ -121,6 +115,7 @@ namespace App1.MobileAppService
                 x.SchemaType = SchemaType.OpenApi3;
                 x.SchemaNameGenerator = new CustomSchemaNameGenerator();
             });
+
             services.AddScoped<IItemRepository, ItemRepository>();
 
             services.AddTransient<IJwtTokenService, JwtTokenService>();
