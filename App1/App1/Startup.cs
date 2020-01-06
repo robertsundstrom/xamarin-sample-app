@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 using App1.Configuration;
+using App1.Data;
 using App1.Helpers;
 using App1.MobileAppService.Client;
 using App1.Resources;
@@ -13,7 +14,10 @@ using App1.Services;
 using App1.ViewModels;
 using App1.Views;
 
+using AutoMapper;
+
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -40,7 +44,6 @@ namespace App1
 
             string fullConfig = Path.Combine(systemDir, AppSettingsFileName);
             string fullDevConfig = Path.Combine(systemDir, AppSettingsDevFileName);
-
 
             var host = new HostBuilder()
                             .ConfigureHostConfiguration(c =>
@@ -98,8 +101,30 @@ namespace App1
 #endif
         }
 
+        private const string databaseName = "database.db";
+
         private static void AddServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(optionsBuilder =>
+            {
+                String databasePath = "";
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.iOS:
+                        SQLitePCL.Batteries_V2.Init();
+                        databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library", databaseName); ;
+                        break;
+                    case Device.Android:
+                        databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), databaseName);
+                        break;
+                    default:
+                        throw new NotImplementedException("Platform not supported");
+                }
+                optionsBuilder.UseSqlite($"Filename={databasePath}");
+            });
+
+            services.AddAutoMapper(typeof(Startup).Assembly);
+
             services.AddSingleton<IAlertService, AlertService>();
 
             services.AddTransient<IResourceContainer, ResourceContainer>();
@@ -109,7 +134,7 @@ namespace App1
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IIdentityService, IdentityService>();
 
-            services.AddSingleton<IDataStore<Item>, AzureDataStore>();
+            services.AddSingleton<IDataStore<Models.Item>, DataStore>();
         }
 
         private static void AddSignaĺRClients(IServiceCollection services)

@@ -29,7 +29,7 @@ namespace App1.Views
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as Models.Item;
             if (item == null)
             {
                 return;

@@ -23,7 +23,8 @@ namespace App1.Tests
 
             var appShellViewModel = new AppShellViewModel(
                 Fixture.IdentityServiceMock.Object,
-                Fixture.NavigationServiceMock.Object);
+                Fixture.NavigationServiceMock.Object,
+                Fixture.ApplicationDbContext);
 
             appShellViewModel.LogOutCommand.Execute(null);
 
@@ -37,7 +38,8 @@ namespace App1.Tests
 
             var appShellViewModel = new AppShellViewModel(
                 Fixture.IdentityServiceMock.Object,
-                Fixture.NavigationServiceMock.Object);
+                Fixture.NavigationServiceMock.Object,
+                Fixture.ApplicationDbContext);
 
             appShellViewModel.LogOutCommand.Execute(null);
 

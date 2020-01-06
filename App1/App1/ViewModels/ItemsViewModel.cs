@@ -8,33 +8,37 @@ using App1.MobileAppService.Client;
 using App1.Services;
 using App1.Views;
 
+using AutoMapper;
+
 using Xamarin.Forms;
 
 namespace App1.ViewModels
 {
     public class ItemsViewModel : ViewModelBase
     {
-        private readonly IDataStore<Item> dataStore;
+        private readonly IDataStore<Models.Item> dataStore;
         private readonly IAlertService alertService;
+        private readonly IMapper mapper;
         private readonly INavigationService navigationService;
         private readonly IItemsHubClient itemsHubClient;
 
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<Models.Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel(IDataStore<Item> dataStore, IAlertService alertService, INavigationService navigationService, IItemsHubClient itemsHubClient)
+        public ItemsViewModel(IDataStore<Models.Item> dataStore, IAlertService alertService, IMapper mapper, INavigationService navigationService, IItemsHubClient itemsHubClient)
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<Models.Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             this.dataStore = dataStore;
             this.alertService = alertService;
+            this.mapper = mapper;
             this.navigationService = navigationService;
             this.itemsHubClient = itemsHubClient;
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, Models.Item>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as Item;
+                var newItem = item as Models.Item;
                 try
                 {
                     if (await dataStore.AddItemAsync(newItem))
@@ -49,12 +53,12 @@ namespace App1.ViewModels
                 }
             });
 
-            MessagingCenter.Subscribe<ItemsPage, Item>(this, "DeleteItem", async (obj, item) =>
+            MessagingCenter.Subscribe<ItemsPage, Models.Item>(this, "DeleteItem", async (obj, item) =>
             {
                 await DeleteItem(item);
             });
 
-            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", async (obj, item) =>
+            MessagingCenter.Subscribe<ItemDetailPage, Models.Item>(this, "DeleteItem", async (obj, item) =>
             {
                 await DeleteItem(item);
             });
@@ -65,7 +69,7 @@ namespace App1.ViewModels
                 {
                     return;
                 }
-                Items.Add(item);
+                Items.Add(mapper.Map<Models.Item>(item));
             });
 
             itemsHubClient.WhenItemDeleted.Subscribe((item) =>
@@ -81,14 +85,14 @@ namespace App1.ViewModels
 
                 if (index > -1)
                 {
-                    Items[index] = item;
+                    Items[index] = mapper.Map<Models.Item>(item);
                 }
             });
         }
 
-        private async Task DeleteItem(Item item)
+        private async Task DeleteItem(Models.Item item)
         {
-            if (item is Item newItem)
+            if (item is Models.Item newItem)
             {
                 try
                 {

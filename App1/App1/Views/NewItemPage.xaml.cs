@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 
-using App1.MobileAppService.Client;
 using App1.ViewModels;
 
 using Xamarin.Forms;
@@ -26,7 +25,7 @@ namespace App1.Views
         {
             if (ViewModel.CanSubmit)
             {
-                var newItem = new Item()
+                var newItem = new Models.Item()
                 {
                     Text = ViewModel.Text,
                     Description = ViewModel.Description
