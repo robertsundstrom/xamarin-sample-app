@@ -10,6 +10,8 @@ using App1.MobileAppService.Models;
 using App1.MobileAppService.Services;
 using App1.Models;
 
+using AutoMapper;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +20,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+
+using NJsonSchema;
 
 namespace App1.MobileAppService
 {
@@ -112,11 +116,16 @@ namespace App1.MobileAppService
 
             services.AddSignalR();
 
-            services.AddSwaggerDocument();
-
+            services.AddSwaggerDocument(x =>
+            {
+                x.SchemaType = SchemaType.OpenApi3;
+                x.SchemaNameGenerator = new CustomSchemaNameGenerator();
+            });
             services.AddScoped<IItemRepository, ItemRepository>();
 
             services.AddTransient<IJwtTokenService, JwtTokenService>();
+
+            services.AddAutoMapper(typeof(Startup).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

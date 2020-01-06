@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using App1.MobileAppService.Models;
-using App1.MobileAppService.ViewModels;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -16,10 +15,10 @@ namespace App1.MobileAppService.Controllers
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<Models.User> _userManager;
 
         public RegistrationController(
-            UserManager<User> userManager)
+            UserManager<Models.User> userManager)
         {
             _userManager = userManager;
         }
@@ -29,9 +28,9 @@ namespace App1.MobileAppService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register([FromBody] RegistrationViewModel vm)
+        public async Task<IActionResult> Register([FromBody] RegistrationDto vm)
         {
-            var result = await _userManager.CreateAsync(new User()
+            var result = await _userManager.CreateAsync(new Models.User()
             {
                 FirstName = vm.FirstName,
                 LastName = vm.LastName,

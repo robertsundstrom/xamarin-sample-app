@@ -41,7 +41,10 @@ namespace App1.MobileAppService.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
+                    MiddleName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: false),
+                    RegistrationDate = table.Column<DateTime>(nullable: false),
+                    ProfileImage = table.Column<string>(nullable: true),
                     RefreshToken = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

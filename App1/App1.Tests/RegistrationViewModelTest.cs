@@ -25,7 +25,8 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.AlertServiceMock.Object);
+                Fixture.AlertServiceMock.Object,
+                Fixture.Mapper);
 
             Assert.True(registrationViewModel.IsPristine);
             Assert.False(registrationViewModel.HasErrors);
@@ -46,7 +47,8 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.AlertServiceMock.Object)
+                Fixture.AlertServiceMock.Object,
+                Fixture.Mapper)
             {
                 Email = "test@test.com",
                 Password = "Abc123!?",
@@ -70,7 +72,8 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.AlertServiceMock.Object)
+                Fixture.AlertServiceMock.Object,
+                Fixture.Mapper)
             {
                 Email = "test@test.com",
                 Password = "Abc123!?",
@@ -95,7 +98,8 @@ namespace App1.Tests
                 Fixture.IdentityServiceMock.Object,
                 Fixture.NavigationServiceMock.Object,
                 Fixture.LocalizationServiceMock.Object,
-                Fixture.AlertServiceMock.Object)
+                Fixture.AlertServiceMock.Object,
+                Fixture.Mapper)
             {
                 Email = "test@test.com",
                 Password = "Abc123!?",

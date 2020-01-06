@@ -49,7 +49,7 @@ namespace App1.ViewModels
 
             try
             {
-                var model = new MobileAppService.Client.ChangePasswordViewModel()
+                var model = new ChangePassword()
                 {
                     CurrentPassword = CurrentPassword,
                     NewPassword = NewPassword

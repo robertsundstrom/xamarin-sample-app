@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App1.MobileAppService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200103215050_AddRegistrationDate")]
-    partial class AddRegistrationDate
+    [Migration("20200106193219_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,9 @@ namespace App1.MobileAppService.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MiddleName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")

@@ -11,6 +11,8 @@ namespace App1.MobileAppService.Models
         [Required]
         public string FirstName { get; set; }
 
+        public string MiddleName { get; set; }
+
         [Required]
         public string LastName { get; set; }
 

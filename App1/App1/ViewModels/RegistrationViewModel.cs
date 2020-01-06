@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using App1.Resources;
 using App1.Services;
 
+using AutoMapper;
+
 using Xamarin.Forms;
 
 namespace App1.ViewModels
@@ -17,6 +19,7 @@ namespace App1.ViewModels
         private readonly INavigationService _navigationService;
         private readonly ILocalizationService localizationService;
         private readonly IAlertService alertService;
+        private readonly IMapper mapper;
         private bool isPristine = true;
         private string? email;
         private string? password;
@@ -29,12 +32,14 @@ namespace App1.ViewModels
             IIdentityService identityService,
             INavigationService navigationService,
             ILocalizationService localizationService,
-            IAlertService alertService)
+            IAlertService alertService,
+            IMapper mapper)
         {
             _identityService = identityService;
             _navigationService = navigationService;
             this.localizationService = localizationService;
             this.alertService = alertService;
+            this.mapper = mapper;
             RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine);
             ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
         }
@@ -43,19 +48,13 @@ namespace App1.ViewModels
         {
             if (!Validate())
             {
-                await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)), "OK");
+                await alertService.DisplayAlertOkAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
                 return;
             }
 
             try
             {
-                var model = new RegistrationModel()
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    Password = password
-                };
+                var model = mapper.Map<RegistrationViewModel, RegistrationModel>(this);
 
                 await _identityService.RegisterAsync(model);
 
@@ -63,11 +62,11 @@ namespace App1.ViewModels
             }
             catch (HttpRequestException exc)
             {
-                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
+                await alertService.DisplayAlertOkAsync(string.Empty, exc.Message);
             }
             catch (Exception exc)
             {
-                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
+                await alertService.DisplayAlertOkAsync(string.Empty, exc.Message);
             }
         }
 
@@ -82,12 +81,12 @@ namespace App1.ViewModels
                 }
                 else
                 {
-                    await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)), "OK");
+                    await alertService.DisplayAlertOkAsync(string.Empty, localizationService.GetString(nameof(AppResources.InvalidEmailOrPassword)));
                 }
             }
             catch (HttpRequestException exc)
             {
-                await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
+                await alertService.DisplayAlertOkAsync(string.Empty, exc.Message);
                 await _navigationService.PopAsync();
             }
         }

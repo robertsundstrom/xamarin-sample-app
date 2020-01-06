@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace App1.MobileAppService.ViewModels
+namespace App1.MobileAppService.Models
 {
-    public class ChangePasswordViewModel
+    public class ChangePasswordDto
     {
         [Required]
         [StringLength(20, MinimumLength = 8)]

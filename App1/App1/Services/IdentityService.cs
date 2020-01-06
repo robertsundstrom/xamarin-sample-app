@@ -38,7 +38,7 @@ namespace App1.Services
 
         public async Task RegisterAsync(RegistrationModel registrationModel)
         {
-            await registrationClient.RegisterAsync(new RegistrationViewModel()
+            await registrationClient.RegisterAsync(new Registration()
             {
                 FirstName = registrationModel.FirstName,
                 LastName = registrationModel.LastName,

@@ -524,11 +524,11 @@ namespace App1.MobileAppService.Client
     public partial interface IRegistrationClient
     {
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task RegisterAsync(RegistrationViewModel vm);
+        System.Threading.Tasks.Task RegisterAsync(Registration vm);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task RegisterAsync(RegistrationViewModel vm, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task RegisterAsync(Registration vm, System.Threading.CancellationToken cancellationToken);
     
     }
     
@@ -557,14 +557,14 @@ namespace App1.MobileAppService.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task RegisterAsync(RegistrationViewModel vm)
+        public System.Threading.Tasks.Task RegisterAsync(Registration vm)
         {
             return RegisterAsync(vm, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task RegisterAsync(RegistrationViewModel vm, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task RegisterAsync(Registration vm, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Registration/Register");
@@ -1041,11 +1041,11 @@ namespace App1.MobileAppService.Client
         System.Threading.Tasks.Task UpdateUserAsync(UpdateUser updateUser, System.Threading.CancellationToken cancellationToken);
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordViewModel vm);
+        System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordViewModel vm, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm, System.Threading.CancellationToken cancellationToken);
     
     }
     
@@ -1206,14 +1206,14 @@ namespace App1.MobileAppService.Client
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordViewModel vm)
+        public System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm)
         {
             return ChangePasswordAsync(vm, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordViewModel vm, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/User/ChangePassword");
@@ -1428,11 +1428,14 @@ namespace App1.MobileAppService.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class RegistrationViewModel 
+    public partial class Registration 
     {
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public string FirstName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("middleName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string MiddleName { get; set; }
     
         [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -1474,8 +1477,7 @@ namespace App1.MobileAppService.Client
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("registrationDate", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonProperty("registrationDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset RegistrationDate { get; set; }
     
     
@@ -1484,10 +1486,15 @@ namespace App1.MobileAppService.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class UpdateUser 
     {
-        [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
         public string FirstName { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("middleName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string MiddleName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
         public string LastName { get; set; }
     
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1497,7 +1504,7 @@ namespace App1.MobileAppService.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ChangePasswordViewModel 
+    public partial class ChangePassword 
     {
         [Newtonsoft.Json.JsonProperty("currentPassword", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]

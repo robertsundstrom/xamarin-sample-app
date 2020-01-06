@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace App1.MobileAppService.Models.Dtos
+namespace App1.MobileAppService.Models
 {
-    public class User
+    public class UserDto
     {
         public string FirstName { get; set; }
 

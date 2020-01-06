@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace App1.MobileAppService.ViewModels
+namespace App1.MobileAppService.Models
 {
-    public class RegistrationViewModel
+    public class RegistrationDto
     {
         [Required]
         public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
 
         [Required]
         public string LastName { get; set; }

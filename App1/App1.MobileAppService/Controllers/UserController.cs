@@ -3,7 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using App1.MobileAppService.Models;
-using App1.MobileAppService.ViewModels;
+
+using AutoMapper;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,42 +18,36 @@ namespace App1.MobileAppService.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserManager<User> userManager;
+        private readonly UserManager<Models.User> userManager;
+        private readonly IMapper mapper;
 
-        public UserController(UserManager<User> userManager)
+        public UserController(UserManager<Models.User> userManager, IMapper mapper)
         {
             this.userManager = userManager;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<Models.Dtos.User> GetUser()
+        public async Task<UserDto> GetUser()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
             var user = await userManager.FindByEmailAsync(email);
-            return new Models.Dtos.User()
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                RegistrationDate = user.RegistrationDate
-            };
+            return mapper.Map<UserDto>(user);
         }
 
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateUser(Models.Dtos.UpdateUser updateUser)
+        public async Task<IActionResult> UpdateUser(UpdateUserDto updateUser)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
             var user = await userManager.FindByEmailAsync(email);
-            user.FirstName = updateUser.FirstName;
-            user.LastName = updateUser.LastName;
-            user.Email = updateUser.Email;
+            user = mapper.Map(updateUser, user);
             var result = await userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
@@ -68,7 +63,7 @@ namespace App1.MobileAppService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel vm)
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto vm)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;

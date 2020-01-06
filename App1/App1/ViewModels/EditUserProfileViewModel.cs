@@ -8,6 +8,8 @@ using App1.MobileAppService.Client;
 using App1.Resources;
 using App1.Services;
 
+using AutoMapper;
+
 using Xamarin.Forms;
 
 namespace App1.ViewModels
@@ -18,7 +20,9 @@ namespace App1.ViewModels
         private readonly INavigationService navigationService;
         private readonly ILocalizationService localizationService;
         private readonly IAlertService alertService;
+        private readonly IMapper mapper;
         private string? firstName;
+        private string? middleName;
         private string? lastName;
         private string? email;
         private bool isPristine;
@@ -27,13 +31,14 @@ namespace App1.ViewModels
             IUserClient userClient,
             INavigationService navigationService,
             ILocalizationService localizationService,
-            IAlertService alertService)
+            IAlertService alertService,
+            IMapper mapper)
         {
             this.userClient = userClient;
             this.navigationService = navigationService;
             this.localizationService = localizationService;
             this.alertService = alertService;
-
+            this.mapper = mapper;
             UpdateUserProfileCommand = new Command(async () => await ExecuteUpdateUserProfileCommand(), () => !IsPristine);
         }
 
@@ -56,12 +61,7 @@ namespace App1.ViewModels
 
             try
             {
-                var model = new UpdateUser()
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email
-                };
+                var model = mapper.Map<EditUserProfileViewModel, UpdateUser>(this);
 
                 await userClient.UpdateUserAsync(model);
 
@@ -87,6 +87,12 @@ namespace App1.ViewModels
         {
             get => firstName;
             set => SetProperty(ref firstName, value);
+        }
+
+        public string? MiddleName
+        {
+            get => middleName;
+            set => SetProperty(ref middleName, value);
         }
 
         [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
