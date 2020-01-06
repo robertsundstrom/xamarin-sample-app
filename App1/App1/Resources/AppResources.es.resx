@@ -309,4 +309,7 @@
   <data name="SaveUserProfileButton" xml:space="preserve">
     <value>Guardar</value>
   </data>
+  <data name="OkButton" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
 </root>

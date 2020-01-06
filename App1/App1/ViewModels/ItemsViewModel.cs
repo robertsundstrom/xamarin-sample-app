@@ -43,13 +43,16 @@ namespace App1.ViewModels
                 {
                     if (await dataStore.AddItemAsync(newItem))
                     {
-                        Items.Add(newItem);
+                        if (Items.Any(x => x.Text == item.Text))
+                        {
+                            Items.Add(newItem);
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    await alertService.DisplayAlertAsync(string.Empty, ex.Message, "OK");
+                    await alertService.DisplayAlertOkAsync(string.Empty, ex.Message);
                 }
             });
 
@@ -104,7 +107,7 @@ namespace App1.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    await alertService.DisplayAlertAsync(string.Empty, ex.Message, "OK");
+                    await alertService.DisplayAlertOkAsync(string.Empty, ex.Message);
                 }
             }
         }
@@ -138,7 +141,7 @@ namespace App1.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                await alertService.DisplayAlertAsync(string.Empty, ex.Message, "OK");
+                await alertService.DisplayAlertOkAsync(string.Empty, ex.Message);
             }
             finally
             {
