@@ -1,6 +1,7 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+
+using App1.MobileAppService.Services;
 
 using AutoMapper;
 
@@ -12,22 +13,20 @@ namespace App1.MobileAppService.Users
 {
     public class RegisterUserRequestHandler : IRequestHandler<RegisterUserRequest, IdentityResult>
     {
-        private readonly UserManager<Models.User> userManager;
-        private readonly IMapper mediator;
+        private readonly IIdentityService identityService;
+        private readonly IMapper mapper;
 
-        public RegisterUserRequestHandler(UserManager<Models.User> userManager, IMapper mapper)
+        public RegisterUserRequestHandler(IIdentityService identityService, IMapper mapper)
         {
-            this.userManager = userManager;
-            this.mediator = mapper;
+            this.identityService = identityService;
+            this.mapper = mapper;
         }
 
         public async Task<IdentityResult> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
         {
-            var user = mediator.Map<Models.User>(request);
+            var user = mapper.Map<Models.User>(request);
 
-            user.RegistrationDate = DateTime.Now;
-
-            return await userManager.CreateAsync(user, request.Password);
+            return await identityService.CreateUserAsync(user, request.Password);
         }
     }
 }

@@ -13,16 +13,13 @@ namespace App1.MobileAppService.Users
 {
     public class UpdateUserProfileRequestHandler : IRequestHandler<UpdateUserProfileRequest, IdentityResult>
     {
-        private readonly UserManager<Models.User> userManager;
         private readonly IIdentityService identityService;
         private readonly IMapper mapper;
 
         public UpdateUserProfileRequestHandler(
-            UserManager<Models.User> userManager,
             IIdentityService identityService,
             IMapper mapper)
         {
-            this.userManager = userManager;
             this.identityService = identityService;
             this.mapper = mapper;
         }
@@ -31,7 +28,7 @@ namespace App1.MobileAppService.Users
         {
             var user = await identityService.GetCurrentUserAsync();
             user = mapper.Map(request, user);
-            return await userManager.UpdateAsync(user);
+            return await identityService.UpdateUserAsync(user);
         }
     }
 }
