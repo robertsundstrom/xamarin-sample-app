@@ -10,6 +10,7 @@ namespace App1.MobileAppService
         {
             CreateMap<Models.User, Users.User>();
             CreateMap<UpdateUserProfileRequest, Models.User>();
+            CreateMap<RegisterUserRequest, Models.User>();
         }
     }
 }

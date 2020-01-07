@@ -160,15 +160,6 @@ namespace App1
 
         private static void AddHttpClients(IServiceCollection services)
         {
-            services.AddHttpClient<IRegistrationClient, RegistrationClient>(CreateClientDelegate)
-                .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
-                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
-                {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                }));
-
             services.AddHttpClient<ITokenClient, TokenClient>(CreateClientDelegate)
                 .ConfigurePrimaryHttpMessageHandler(h => GetClientHandler())
                 .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]

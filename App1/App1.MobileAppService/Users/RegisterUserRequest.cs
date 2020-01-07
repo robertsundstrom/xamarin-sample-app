@@ -1,8 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace App1.MobileAppService.Models
+using MediatR;
+
+using Microsoft.AspNetCore.Identity;
+
+namespace App1.MobileAppService.Users
 {
-    public class RegistrationDto
+    public class RegisterUserRequest : IRequest<IdentityResult>
     {
         [Required]
         public string FirstName { get; set; }

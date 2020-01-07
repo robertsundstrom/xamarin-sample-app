@@ -34,6 +34,7 @@ namespace App1.MobileAppService.Controllers
 
 
         [HttpPut]
+        [Route("UpdateUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateUser(UpdateUserProfileRequest request)
@@ -53,9 +54,9 @@ namespace App1.MobileAppService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest vm)
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
         {
-            var result = await mediator.Send(vm);
+            var result = await mediator.Send(request);
 
             if (!result.Succeeded)
             {
@@ -64,5 +65,23 @@ namespace App1.MobileAppService.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("Register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
+        {
+            var result = await mediator.Send(request);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, result.Errors);
+            }
+
+            return Ok();
+        }
+
     }
 }

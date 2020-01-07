@@ -10,15 +10,15 @@ namespace App1.Services
     {
         private readonly ISettingsService settingService;
         private readonly ITokenClient tokenClient;
-        private readonly IRegistrationClient registrationClient;
+        private readonly IUserClient userClient;
 
         public event EventHandler<EventArgs>? LoggedOut;
 
-        public IdentityService(ISettingsService settingService, ITokenClient tokenClient, IRegistrationClient registrationClient)
+        public IdentityService(ISettingsService settingService, ITokenClient tokenClient, IUserClient userClient)
         {
             this.settingService = settingService;
             this.tokenClient = tokenClient;
-            this.registrationClient = registrationClient;
+            this.userClient = userClient;
         }
 
         public async Task<bool> AuthenticateAsync(string email, string password)
@@ -38,7 +38,7 @@ namespace App1.Services
 
         public async Task RegisterAsync(RegistrationModel registrationModel)
         {
-            await registrationClient.RegisterAsync(new Registration()
+            await userClient.RegisterAsync(new RegisterUserRequest()
             {
                 FirstName = registrationModel.FirstName,
                 LastName = registrationModel.LastName,
