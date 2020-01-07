@@ -45,7 +45,11 @@
                             x:Name="passwordEntry"
                             IsPassword="true"
                             Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
-                            Text="{Binding Password, Mode=TwoWay}" />
+                            Text="{Binding Password, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="Password" />
+                            </Entry.Behaviors>
+                        </Entry>
                     </StackLayout>
                     <Button
                         Command="{Binding LoginCommand}"
