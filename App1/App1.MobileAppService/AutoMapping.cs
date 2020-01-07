@@ -1,5 +1,4 @@
-﻿
-using App1.MobileAppService.Models;
+﻿using App1.MobileAppService.Users;
 
 using AutoMapper;
 
@@ -9,10 +8,8 @@ namespace App1.MobileAppService
     {
         public AutoMapping()
         {
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
-
-            CreateMap<UpdateUserDto, User>();
+            CreateMap<Models.User, Users.User>();
+            CreateMap<UpdateUserProfileRequest, Models.User>();
         }
     }
 }

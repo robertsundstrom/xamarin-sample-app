@@ -14,7 +14,8 @@ namespace App1
             CreateMap<Item, Models.Item>();
 
             CreateMap<RegistrationViewModel, RegistrationModel>();
-            CreateMap<EditUserProfileViewModel, UpdateUser>();
+            CreateMap<EditUserProfileViewModel, UpdateUserProfileRequest>();
+            CreateMap<ChangePasswordViewModel, ChangePasswordRequest>();
         }
     }
 }

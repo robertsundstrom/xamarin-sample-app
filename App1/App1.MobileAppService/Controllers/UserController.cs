@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
-using App1.MobileAppService.Models;
+using App1.MobileAppService.Users;
 
-using AutoMapper;
+using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -18,37 +17,28 @@ namespace App1.MobileAppService.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserManager<Models.User> userManager;
-        private readonly IMapper mapper;
+        private readonly IMediator mediator;
 
-        public UserController(UserManager<Models.User> userManager, IMapper mapper)
+        public UserController(IMediator mediator)
         {
-            this.userManager = userManager;
-            this.mapper = mapper;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<UserDto> GetUser()
+        public async Task<Users.User> GetUser()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
-            var user = await userManager.FindByEmailAsync(email);
-            return mapper.Map<UserDto>(user);
+            return await mediator.Send(new GetUserRequest());
         }
 
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateUser(UpdateUserDto updateUser)
+        public async Task<IActionResult> UpdateUser(UpdateUserProfileRequest request)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
-            var user = await userManager.FindByEmailAsync(email);
-            user = mapper.Map(updateUser, user);
-            var result = await userManager.UpdateAsync(user);
+            var result = await mediator.Send(request);
 
             if (!result.Succeeded)
             {
@@ -63,12 +53,9 @@ namespace App1.MobileAppService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto vm)
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest vm)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
-            var user = await userManager.FindByEmailAsync(email);
-            var result = await userManager.ChangePasswordAsync(user, vm.CurrentPassword, vm.NewPassword); ;
+            var result = await mediator.Send(vm);
 
             if (!result.Succeeded)
             {

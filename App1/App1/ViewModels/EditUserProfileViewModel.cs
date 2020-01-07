@@ -64,7 +64,7 @@ namespace App1.ViewModels
 
             try
             {
-                var model = mapper.Map<EditUserProfileViewModel, UpdateUser>(this);
+                var model = mapper.Map<EditUserProfileViewModel, UpdateUserProfileRequest>(this);
 
                 await userClient.UpdateUserAsync(model);
 

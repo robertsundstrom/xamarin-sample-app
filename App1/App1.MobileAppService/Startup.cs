@@ -12,6 +12,8 @@ using App1.Models;
 
 using AutoMapper;
 
+using MediatR;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -116,11 +118,14 @@ namespace App1.MobileAppService
                 x.SchemaNameGenerator = new CustomSchemaNameGenerator();
             });
 
-            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddHttpContextAccessor();
 
+            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddTransient<IJwtTokenService, JwtTokenService>();
+            services.AddTransient<IIdentityService, IdentityService>();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
+            services.AddMediatR(typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

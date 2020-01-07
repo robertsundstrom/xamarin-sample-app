@@ -27,10 +27,7 @@ namespace App1.ViewModels
         public User? User
         {
             get => user;
-            private set
-            {
-                SetProperty(ref user, value);
-            }
+            private set => SetProperty(ref user, value);
         }
 
         public override async Task InitializeAsync(object? arg)

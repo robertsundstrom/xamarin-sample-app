@@ -1034,18 +1034,18 @@ namespace App1.MobileAppService.Client
         System.Threading.Tasks.Task<User> GetUserAsync(System.Threading.CancellationToken cancellationToken);
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateUserAsync(UpdateUser updateUser);
+        System.Threading.Tasks.Task UpdateUserAsync(UpdateUserProfileRequest request);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateUserAsync(UpdateUser updateUser, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task UpdateUserAsync(UpdateUserProfileRequest request, System.Threading.CancellationToken cancellationToken);
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm);
+        System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordRequest vm);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordRequest vm, System.Threading.CancellationToken cancellationToken);
     
     }
     
@@ -1136,14 +1136,14 @@ namespace App1.MobileAppService.Client
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task UpdateUserAsync(UpdateUser updateUser)
+        public System.Threading.Tasks.Task UpdateUserAsync(UpdateUserProfileRequest request)
         {
-            return UpdateUserAsync(updateUser, System.Threading.CancellationToken.None);
+            return UpdateUserAsync(request, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task UpdateUserAsync(UpdateUser updateUser, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task UpdateUserAsync(UpdateUserProfileRequest request, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/User");
@@ -1153,7 +1153,7 @@ namespace App1.MobileAppService.Client
             {
                 using (var request_ = await CreateHttpRequestMessageAsync(cancellationToken).ConfigureAwait(false))
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(updateUser, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(request, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
@@ -1206,14 +1206,14 @@ namespace App1.MobileAppService.Client
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm)
+        public System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordRequest vm)
         {
             return ChangePasswordAsync(vm, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ChangePasswordAsync(ChangePassword vm, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordRequest vm, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/User/ChangePassword");
@@ -1487,7 +1487,7 @@ namespace App1.MobileAppService.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class UpdateUser 
+    public partial class UpdateUserProfileRequest 
     {
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -1507,7 +1507,7 @@ namespace App1.MobileAppService.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ChangePassword 
+    public partial class ChangePasswordRequest 
     {
         [Newtonsoft.Json.JsonProperty("currentPassword", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]

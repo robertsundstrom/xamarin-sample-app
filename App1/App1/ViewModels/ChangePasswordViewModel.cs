@@ -10,6 +10,8 @@ using App1.MobileAppService.Client;
 using App1.Resources;
 using App1.Services;
 
+using AutoMapper;
+
 using Xamarin.Forms;
 
 namespace App1.ViewModels
@@ -20,6 +22,7 @@ namespace App1.ViewModels
         private readonly INavigationService navigationService;
         private readonly ILocalizationService localizationService;
         private readonly IAlertService alertService;
+        private readonly IMapper mapper;
         private string? confirmNewPassword;
         private bool isPristine;
         private string? currentPassword;
@@ -29,12 +32,14 @@ namespace App1.ViewModels
             IUserClient userClient,
             INavigationService navigationService,
             ILocalizationService localizationService,
-            IAlertService alertService)
+            IAlertService alertService,
+            IMapper mapper)
         {
             this.userClient = userClient;
             this.navigationService = navigationService;
             this.localizationService = localizationService;
             this.alertService = alertService;
+            this.mapper = mapper;
 
             UpdatePasswordCommand = new Command(async () => await ExecuteUpdatePasswordCommand(), () => !IsPristine);
         }
@@ -51,11 +56,7 @@ namespace App1.ViewModels
 
             try
             {
-                var model = new ChangePassword()
-                {
-                    CurrentPassword = CurrentPassword,
-                    NewPassword = NewPassword
-                };
+                var model = mapper.Map<ChangePasswordViewModel, ChangePasswordRequest>(this);
 
                 await userClient.ChangePasswordAsync(model);
 
