@@ -12,88 +12,94 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20" VerticalOptions="Center">
-                <StackLayout Spacing="20">
-                    <Label Text="{x:Static resources:AppResources.FirstName}" />
-                    <Entry
-                        x:Name="firstNameEntry"
-                        Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
-                        Text="{Binding FirstName, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="FirstName" />
-                        </Entry.Behaviors>
-                    </Entry>
-                    <Label Text="{x:Static resources:AppResources.LastName}" />
-                    <Entry
-                        x:Name="lastNameEntry"
-                        Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
-                        Text="{Binding LastName, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="LastName" />
-                        </Entry.Behaviors>
-                    </Entry>
-                </StackLayout>
-                <StackLayout Margin="0,30" Spacing="20">
-                    <Label Text="{x:Static resources:AppResources.Email}" />
-                    <Entry
-                        x:Name="emailEntry"
-                        Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
-                        Text="{Binding Email, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="Email" />
-                        </Entry.Behaviors>
-                    </Entry>
-                    <Label Text="{x:Static resources:AppResources.Password}" />
-                    <Entry
-                        x:Name="passwordEntry"
-                        IsPassword="true"
-                        Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
-                        Text="{Binding Password, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="Password" />
-                        </Entry.Behaviors>
-                    </Entry>
-                    <Label Text="{x:Static resources:AppResources.ConfirmPassword}" />
-                    <Entry
-                        x:Name="confirmPasswordEntry"
-                        IsPassword="true"
-                        Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
-                        Text="{Binding ConfirmPassword, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="ConfirmPassword" />
-                        </Entry.Behaviors>
-                    </Entry>
-                </StackLayout>
-
-                <StackLayout Margin="0,0,0,30">
-                    <StackLayout Orientation="Horizontal">
-                        <StackLayout.Behaviors>
-                            <behaviors:ViewValidationBehavior PropertyName="IsAcceptingUserAgreement" />
-                        </StackLayout.Behaviors>
-                        <CheckBox IsChecked="{Binding IsAcceptingUserAgreement}" />
-                        <Label VerticalTextAlignment="Center">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{x:Static resources:AppResources.PreAcceptUserAgreement}" />
-                                    <Span
-                                        Text="{x:Static resources:AppResources.UserAgreement}"
-                                        TextColor="{DynamicResource PrimaryTextColor}"
-                                        TextDecorations="Underline">
-                                        <Span.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowUserAgreementCommand}" />
-                                        </Span.GestureRecognizers>
-                                    </Span>
-                                    <Span Text="{x:Static resources:AppResources.PostAcceptUserAgreement}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+            <Grid>
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding}"
+                    VerticalOptions="Center" />
+                <StackLayout Padding="20" VerticalOptions="Center">
+                    <StackLayout Spacing="20">
+                        <Label Text="{x:Static resources:AppResources.FirstName}" />
+                        <Entry
+                            x:Name="firstNameEntry"
+                            Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
+                            Text="{Binding FirstName, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="FirstName" />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="{x:Static resources:AppResources.LastName}" />
+                        <Entry
+                            x:Name="lastNameEntry"
+                            Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
+                            Text="{Binding LastName, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="LastName" />
+                            </Entry.Behaviors>
+                        </Entry>
                     </StackLayout>
+                    <StackLayout Margin="0,30" Spacing="20">
+                        <Label Text="{x:Static resources:AppResources.Email}" />
+                        <Entry
+                            x:Name="emailEntry"
+                            Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                            Text="{Binding Email, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="Email" />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="{x:Static resources:AppResources.Password}" />
+                        <Entry
+                            x:Name="passwordEntry"
+                            IsPassword="true"
+                            Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}"
+                            Text="{Binding Password, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="Password" />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="{x:Static resources:AppResources.ConfirmPassword}" />
+                        <Entry
+                            x:Name="confirmPasswordEntry"
+                            IsPassword="true"
+                            Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
+                            Text="{Binding ConfirmPassword, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="ConfirmPassword" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
+
+                    <StackLayout Margin="0,0,0,30">
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout.Behaviors>
+                                <behaviors:ViewValidationBehavior PropertyName="IsAcceptingUserAgreement" />
+                            </StackLayout.Behaviors>
+                            <CheckBox IsChecked="{Binding IsAcceptingUserAgreement}" />
+                            <Label VerticalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static resources:AppResources.PreAcceptUserAgreement}" />
+                                        <Span
+                                            Text="{x:Static resources:AppResources.UserAgreement}"
+                                            TextColor="{DynamicResource PrimaryTextColor}"
+                                            TextDecorations="Underline">
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowUserAgreementCommand}" />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+                                        <Span Text="{x:Static resources:AppResources.PostAcceptUserAgreement}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <Button
+                        Command="{Binding RegisterCommand}"
+                        Style="{DynamicResource PrimaryButton}"
+                        Text="{x:Static resources:AppResources.RegistrationPageButton}" />
                 </StackLayout>
-                <Button
-                    Command="{Binding RegisterCommand}"
-                    Style="{DynamicResource PrimaryButton}"
-                    Text="{x:Static resources:AppResources.RegistrationPageButton}" />
-            </StackLayout>
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

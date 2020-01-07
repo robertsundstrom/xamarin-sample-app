@@ -1,4 +1,5 @@
 ﻿using App1.MobileAppService.Client;
+using App1.Services;
 using App1.ViewModels;
 
 using AutoMapper;
@@ -12,7 +13,7 @@ namespace App1
             CreateMap<Models.Item, Item>();
             CreateMap<Item, Models.Item>();
 
-            CreateMap<RegistrationClient, RegistrationClient>();
+            CreateMap<RegistrationViewModel, RegistrationModel>();
             CreateMap<EditUserProfileViewModel, UpdateUser>();
         }
     }

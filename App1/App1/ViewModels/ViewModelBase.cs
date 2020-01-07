@@ -8,8 +8,14 @@ namespace App1.ViewModels
         public bool IsBusy
         {
             get => isBusy;
-            set => SetProperty(ref isBusy, value);
+            set
+            {
+                SetProperty(ref isBusy, value);
+                OnPropertyChanged(nameof(IsNotBusy));
+            }
         }
+
+        public bool IsNotBusy => !isBusy;
 
         private string? title = string.Empty;
         public string? Title

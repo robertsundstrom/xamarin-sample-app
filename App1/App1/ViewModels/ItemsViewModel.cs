@@ -41,13 +41,7 @@ namespace App1.ViewModels
                 var newItem = item as Models.Item;
                 try
                 {
-                    if (await dataStore.AddItemAsync(newItem))
-                    {
-                        if (Items.Any(x => x.Text == item.Text))
-                        {
-                            Items.Add(newItem);
-                        }
-                    }
+                    await dataStore.AddItemAsync(newItem);
                 }
                 catch (Exception ex)
                 {

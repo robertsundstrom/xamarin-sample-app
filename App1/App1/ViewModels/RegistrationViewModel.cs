@@ -13,6 +13,7 @@ using Xamarin.Forms;
 
 namespace App1.ViewModels
 {
+    [System.Runtime.InteropServices.Guid("44B6C891-5DAD-4932-9E5A-7D2E2CE34F2A")]
     public class RegistrationViewModel : ViewModelBase
     {
         private readonly IIdentityService _identityService;
@@ -42,8 +43,8 @@ namespace App1.ViewModels
             this.alertService = alertService;
             this.mapper = mapper;
 
-            RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine);
-            ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>());
+            RegisterCommand = new Command(async () => await ExecuteRegisterCommand(), () => !IsPristine && !IsBusy);
+            ShowUserAgreementCommand = new Command(async () => await navigationService.PushModalAsync<UserAgreementViewModel>(), () => !IsBusy);
         }
 
         private async Task ExecuteRegisterCommand()
@@ -51,8 +52,11 @@ namespace App1.ViewModels
             if (!Validate())
             {
                 await alertService.DisplayAlertOkAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)));
+                IsBusy = false;
                 return;
             }
+
+            IsBusy = true;
 
             try
             {
@@ -69,6 +73,10 @@ namespace App1.ViewModels
             catch (Exception exc)
             {
                 await alertService.DisplayAlertOkAsync(string.Empty, exc.Message);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -91,6 +99,7 @@ namespace App1.ViewModels
                 await alertService.DisplayAlertOkAsync(string.Empty, exc.Message);
                 await _navigationService.PopAsync();
             }
+
         }
 
         public Command RegisterCommand { get; }

@@ -33,9 +33,9 @@ namespace App1.ViewModels
             this.identityService = identityService;
             this.localizationService = localizationService;
             this.alertService = alertService;
-            LoginCommand = new Command(async () => await ExecuteLoginCommand(), () => !IsPristine);
-            NavigateToRegistrationPageCommand = new Command(async () => await navigationService.PushAsync<ViewModels.RegistrationViewModel>());
-            NavigateToAboutPageCommand = new Command(async () => await _navigationService.PushAsync<AboutViewModel>());
+            LoginCommand = new Command(async () => await ExecuteLoginCommand(), () => !IsPristine && !IsBusy);
+            NavigateToRegistrationPageCommand = new Command(async () => await navigationService.PushAsync<ViewModels.RegistrationViewModel>(), () => !IsBusy);
+            NavigateToAboutPageCommand = new Command(async () => await _navigationService.PushAsync<AboutViewModel>(), () => !IsBusy);
         }
 
         public override async Task InitializeAsync(LoginViewModelArgs? arg)
@@ -55,11 +55,14 @@ namespace App1.ViewModels
 
         private async Task ExecuteLoginCommand()
         {
+
             if (!Validate())
             {
                 await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)), "OK");
                 return;
             }
+
+            IsBusy = true;
 
             try
             {
@@ -80,6 +83,10 @@ namespace App1.ViewModels
             catch (Exception exc)
             {
                 await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
