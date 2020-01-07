@@ -25,20 +25,21 @@
                         d:Text="Item name"
                         FontSize="Small"
                         Text="{Binding FirstName}" />
-
+                    <Label FontSize="Medium" Text="{x:Static resources:AppResources.MiddleName}" />
+                    <Label
+                        d:Text="Item name"
+                        FontSize="Small"
+                        Text="{Binding MiddleName}" />
                     <Label FontSize="Medium" Text="{x:Static resources:AppResources.LastName}" />
                     <Label
                         d:Text="Item name"
                         FontSize="Small"
                         Text="{Binding LastName}" />
-
                     <Label FontSize="Medium" Text="{x:Static resources:AppResources.Email}" />
                     <Label
                         d:Text="Item name"
                         FontSize="Small"
                         Text="{Binding Email}" />
-
-
                     <Label FontSize="Medium" Text="{x:Static resources:AppResources.RegistrationDate}" />
                     <Label
                         d:Text="Item name"

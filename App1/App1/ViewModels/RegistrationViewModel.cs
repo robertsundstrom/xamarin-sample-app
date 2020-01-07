@@ -28,6 +28,7 @@ namespace App1.ViewModels
         private string? lastName;
         private string? confirmPassword;
         private bool? isAcceptingTheUserAgreement;
+        private string? middleName;
 
         public RegistrationViewModel(
             IIdentityService identityService,
@@ -106,12 +107,17 @@ namespace App1.ViewModels
 
         public Command ShowUserAgreementCommand { get; }
 
-
         [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]
         public string? FirstName
         {
             get => firstName;
             set => SetProperty(ref firstName, value);
+        }
+
+        public string? MiddleName
+        {
+            get => middleName;
+            set => SetProperty(ref middleName, value);
         }
 
         [Required(ErrorMessageResourceName = nameof(AppResources.FieldRequiredMessage), ErrorMessageResourceType = typeof(AppResources))]

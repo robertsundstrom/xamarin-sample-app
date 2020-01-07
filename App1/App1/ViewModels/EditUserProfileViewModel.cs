@@ -45,6 +45,7 @@ namespace App1.ViewModels
         public override Task InitializeAsync(User arg)
         {
             FirstName = arg.FirstName;
+            MiddleName = arg.MiddleName;
             LastName = arg.LastName;
             Email = arg.Email;
 
@@ -58,6 +59,8 @@ namespace App1.ViewModels
                 await alertService.DisplayAlertAsync(string.Empty, localizationService.GetString(nameof(AppResources.CheckFieldsMessage)), "OK");
                 return;
             }
+
+            IsBusy = true;
 
             try
             {
@@ -77,6 +80,10 @@ namespace App1.ViewModels
             catch (Exception exc)
             {
                 await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

@@ -28,6 +28,15 @@
                                 <behaviors:InputValidationBehavior PropertyName="FirstName" />
                             </Entry.Behaviors>
                         </Entry>
+                        <Label Text="{x:Static resources:AppResources.MiddleName}" />
+                        <Entry
+                            x:Name="middleNameEntry"
+                            Placeholder="{x:Static resources:AppResources.MiddleNamePlaceholder}"
+                            Text="{Binding MiddleName, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="MiddleName" />
+                            </Entry.Behaviors>
+                        </Entry>
                         <Label Text="{x:Static resources:AppResources.LastName}" />
                         <Entry
                             x:Name="lastNameEntry"

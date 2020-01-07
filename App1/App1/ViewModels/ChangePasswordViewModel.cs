@@ -47,6 +47,8 @@ namespace App1.ViewModels
                 return;
             }
 
+            IsBusy = true;
+
             try
             {
                 var model = new ChangePassword()
@@ -78,6 +80,10 @@ namespace App1.ViewModels
             catch (Exception exc)
             {
                 await alertService.DisplayAlertAsync(string.Empty, exc.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

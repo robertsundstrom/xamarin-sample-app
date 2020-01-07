@@ -312,4 +312,10 @@
   <data name="OkButton" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle Name</value>
+  </data>
+  <data name="MiddleNamePlaceholder" xml:space="preserve">
+    <value>Middle Name</value>
+  </data>
 </root>

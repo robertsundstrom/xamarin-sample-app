@@ -12,41 +12,56 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="16">
-                <StackLayout Margin="0,0,0,40" Spacing="20">
-                    <Label Text="{x:Static resources:AppResources.FirstName}" />
-                    <Entry
-                        x:Name="firstNameEntry"
-                        Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
-                        Text="{Binding FirstName, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="FirstName" />
-                        </Entry.Behaviors>
-                    </Entry>
-                    <Label Text="{x:Static resources:AppResources.LastName}" />
-                    <Entry
-                        x:Name="lastNameEntry"
-                        Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
-                        Text="{Binding LastName, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="LastName" />
-                        </Entry.Behaviors>
-                    </Entry>
-                    <Label Text="{x:Static resources:AppResources.Email}" />
-                    <Entry
-                        x:Name="emailEntry"
-                        Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
-                        Text="{Binding Email, Mode=TwoWay}">
-                        <Entry.Behaviors>
-                            <behaviors:InputValidationBehavior PropertyName="Email" />
-                        </Entry.Behaviors>
-                    </Entry>
+            <Grid>
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding}"
+                    VerticalOptions="Center" />
+                <StackLayout Padding="16">
+                    <StackLayout Margin="0,0,0,40" Spacing="20">
+                        <Label Text="{x:Static resources:AppResources.FirstName}" />
+                        <Entry
+                            x:Name="firstNameEntry"
+                            Placeholder="{x:Static resources:AppResources.FirstNamePlaceholder}"
+                            Text="{Binding FirstName, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="FirstName" />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="{x:Static resources:AppResources.MiddleName}" />
+                        <Entry
+                            x:Name="middleNameEntry"
+                            Placeholder="{x:Static resources:AppResources.MiddleNamePlaceholder}"
+                            Text="{Binding MiddleName, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="MiddleName" />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="{x:Static resources:AppResources.LastName}" />
+                        <Entry
+                            x:Name="lastNameEntry"
+                            Placeholder="{x:Static resources:AppResources.LastNamePlaceholder}"
+                            Text="{Binding LastName, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="LastName" />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="{x:Static resources:AppResources.Email}" />
+                        <Entry
+                            x:Name="emailEntry"
+                            Placeholder="{x:Static resources:AppResources.EmailPlaceholder}"
+                            Text="{Binding Email, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:InputValidationBehavior PropertyName="Email" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
+                    <Button
+                        Command="{Binding UpdateUserProfileCommand}"
+                        Style="{DynamicResource PrimaryButton}"
+                        Text="{x:Static resources:AppResources.SaveUserProfileButton}" />
                 </StackLayout>
-                <Button
-                    Command="{Binding UpdateUserProfileCommand}"
-                    Style="{DynamicResource PrimaryButton}"
-                    Text="{x:Static resources:AppResources.SaveUserProfileButton}" />
-            </StackLayout>
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

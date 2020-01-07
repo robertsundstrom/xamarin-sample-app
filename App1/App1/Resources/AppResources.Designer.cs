@@ -304,6 +304,24 @@ namespace App1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Middle Name.
+        /// </summary>
+        public static string MiddleName {
+            get {
+                return ResourceManager.GetString("MiddleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle Name.
+        /// </summary>
+        public static string MiddleNamePlaceholder {
+            get {
+                return ResourceManager.GetString("MiddleNamePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Password.
         /// </summary>
         public static string NewPassword {
