@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
 using NJsonSchema;
+
+using NSwag;
+using NSwag.Generation.Processors.Security;
 
 namespace App1.MobileAppService
 {
@@ -112,10 +116,22 @@ namespace App1.MobileAppService
 
             services.AddSignalR();
 
-            services.AddSwaggerDocument(x =>
+            services.AddSwaggerDocument(document =>
             {
-                x.SchemaType = SchemaType.OpenApi3;
-                x.SchemaNameGenerator = new CustomSchemaNameGenerator();
+                document.SchemaType = SchemaType.OpenApi3;
+                document.SchemaNameGenerator = new CustomSchemaNameGenerator();
+
+                document.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                {
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Description = "Type into the textbox: Bearer {your JWT token}."
+                });
+
+                document.OperationProcessors.Add(
+                    new AspNetCoreOperationSecurityScopeProcessor("bearer"));
+                //      new OperationSecurityScopeProcessor("bearer"));
             });
 
             services.AddHttpContextAccessor();
@@ -141,14 +157,14 @@ namespace App1.MobileAppService
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ItemsHub>("/itemsHub");
             });
-
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
         }
     }
 }

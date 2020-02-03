@@ -11,7 +11,7 @@ namespace App1.MobileAppService.Services
 {
     public sealed class IdentityService : IIdentityService
     {
-        private IHttpContextAccessor httpContextAccessor;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly UserManager<User> userManager;
 
         public IdentityService(UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
@@ -20,11 +20,11 @@ namespace App1.MobileAppService.Services
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<User> GetCurrentUserAsync()
+        public async Task<User> GetUserAsync()
         {
             var claimsIdentity = (ClaimsIdentity)httpContextAccessor.HttpContext.User.Identity;
-            var email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
-            return (User)await userManager.FindByEmailAsync(email);
+            string email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
+            return await userManager.FindByEmailAsync(email);
         }
 
         public async Task<IdentityResult> CreateUserAsync(User user, string password)

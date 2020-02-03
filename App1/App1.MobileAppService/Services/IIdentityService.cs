@@ -8,7 +8,7 @@ namespace App1.MobileAppService.Services
 {
     public interface IIdentityService
     {
-        Task<User> GetCurrentUserAsync();
+        Task<User> GetUserAsync();
 
         Task<IdentityResult> CreateUserAsync(User user, string password);
 

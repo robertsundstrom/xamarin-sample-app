@@ -24,7 +24,7 @@ namespace App1.MobileAppService.Users
 
         public async Task<User> Handle(GetUserRequest request, CancellationToken cancellationToken)
         {
-            var user = await identityService.GetCurrentUserAsync();
+            var user = await identityService.GetUserAsync();
             return mapper.Map<User>(user);
         }
     }

@@ -20,7 +20,7 @@ namespace App1.MobileAppService.Users
 
         public async Task<IdentityResult> Handle(ChangePasswordRequest request, CancellationToken cancellationToken)
         {
-            var user = await identityService.GetCurrentUserAsync();
+            var user = await identityService.GetUserAsync();
             return await identityService.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
         }
     }
