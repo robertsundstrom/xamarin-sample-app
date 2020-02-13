@@ -34,7 +34,6 @@ namespace App1.MobileAppService.Controllers
 
 
         [HttpPut]
-        [Route("UpdateUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateUser(UpdateUserProfileRequest request)
@@ -49,8 +48,7 @@ namespace App1.MobileAppService.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [Route("ChangePassword")]
+        [HttpPost("ChangePassword")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]
@@ -66,8 +64,7 @@ namespace App1.MobileAppService.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [Route("Register")]
+        [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<IdentityError>), StatusCodes.Status500InternalServerError)]

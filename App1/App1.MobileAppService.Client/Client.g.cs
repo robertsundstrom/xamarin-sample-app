@@ -954,7 +954,7 @@ namespace App1.MobileAppService.Client
         public async System.Threading.Tasks.Task UpdateUserAsync(UpdateUserProfileRequest request, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/User/UpdateUser");
+            urlBuilder_.Append("api/User");
     
             var client_ = _httpClient;
             try

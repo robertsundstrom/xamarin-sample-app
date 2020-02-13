@@ -2,7 +2,7 @@
 
 namespace App1.Services
 {
-    sealed class AlertService : IAlertService
+    internal sealed class AlertService : IAlertService
     {
         public Task DisplayAlertAsync(string title, string message, string cancel)
         {
@@ -11,7 +11,7 @@ namespace App1.Services
 
         public Task<string> DisplayPromptAsync(string title, string message, string accept = "OK", string cancel = "Cancel", string? placeholder = null, int maxLength = -1)
         {
-            return App.Current.MainPage.DisplayPromptAsync(title, message, accept, cancel, placeholder, maxLength, null, string.Empty);
+            return App.Current.MainPage.DisplayPromptAsync(title, message, accept, cancel, placeholder, maxLength);
         }
     }
 }

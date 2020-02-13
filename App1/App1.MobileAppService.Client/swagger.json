@@ -325,9 +325,7 @@
             "bearer": []
           }
         ]
-      }
-    },
-    "/api/User/UpdateUser": {
+      },
       "put": {
         "tags": [
           "User"
